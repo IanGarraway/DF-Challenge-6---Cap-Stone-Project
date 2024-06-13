@@ -1,5 +1,7 @@
 # Challenge 6 Proposal
 
+miro board: https://miro.com/app/board/uXjVK8oDUFI=/?share_link_id=932710563692
+
 ## Title
 
 Salvage Engineer
