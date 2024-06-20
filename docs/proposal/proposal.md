@@ -92,7 +92,7 @@ A list of the RESTful routes that my project will have
 - payload: { username, password}
 - response: 201 - logged in and AWT token, 401 - incorrect username/password, 500 - server unavailable
 
-### update
+### data
 
 - method: get
 - header: AWT token

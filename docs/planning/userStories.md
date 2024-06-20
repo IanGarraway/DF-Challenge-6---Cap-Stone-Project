@@ -1,5 +1,7 @@
 # User Stories
 
+![Kanban](.\Images\KanbanBoardStart.png)
+
 ## Core features
 
 ### User story 1
