@@ -64,7 +64,7 @@ only available to admin users
 
 displays all user accounts, with the option to delete accounts.
 
-![Admin page](./images/accountManagement.png)
+![Admin page](./images/admin.png)
 
 ## Architecture
 
@@ -101,24 +101,24 @@ A list of the RESTful routes that my project will have
 
 ### changepart
 
-- method: post
+- method: patch
 - header: AWT token
 - payload: {slot, componentID}
 - response: 200 - part changed, 400 - bad request, 401 - unauthorised, 500 - server unavailable
 
 ### changejob
 
-- method: post
+- method: patch
 - header: AWT token
 - payload: {job}
 - response: 200 - job changed, 400 - bad request, 401 - unauthorised, 500 - server unavailable
 
 ### upgrade
 
-- method: post
+- method: patch
 - header: AWT token
-- payload: {job}
-- response: 200 - job changed, 400 - bad request, 401 - unauthorised, 500 - server unavailable
+- payload: {upgrade}
+- response: 200 - upgrade complete, 400 - bad request, 401 - unauthorised, 500 - server unavailable
 
 ## Technologies
 
@@ -162,4 +162,4 @@ A list of the technologies that you will be used in this project, including exte
 
 Initial plans for deployment are to use Netlify to host the front end of the app, and Render for the NodeJs back end part. With the database being hosted on Mongo's Atlas service.
 
-For environment variables, the front end will need to know where the back end is. The back end will need to store the database location and the key for accessing it. Since the free services I am intending to use will need to have my project stored in at least one public repo, any other passwords or authorisations may also be needed to be saved. 
+For environment variables, the front end will need to know where the back end is. The back end will need to store the database location and the key for accessing it. Since the free services I am intending to use will need to have my project stored in at least one public repo, any other passwords or authorisations may also be needed to be saved.
