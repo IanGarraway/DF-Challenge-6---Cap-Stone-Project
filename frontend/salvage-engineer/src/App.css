@@ -1,0 +1,26 @@
+#root{
+  width: 100%;
+}
+.salvageEngineer{
+  width: 100%;
+  display: flex;
+  align-items: top;
+  padding-top: 40px;
+  justify-content: center;
+  height: 100vh;
+
+}
+
+.loginScreen{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid black;
+  box-shadow: 0 0 20px black;
+  
+}
+
+.loginBoxes{
+  justify-self: center;
+}
