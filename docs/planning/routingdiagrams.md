@@ -1,6 +1,6 @@
 # Routing Diagrams
 
-## Account
+## Account related Actions
 
 ### new user
 
@@ -18,7 +18,7 @@
 
 ![delete account](./Images/routing%20delete%20account.png)
 
-## Admin
+## Admin Actions
 
 ### get admin data
 
@@ -32,7 +32,7 @@
 
 ![admin delete account](./Images/routing%20admin%20delete%20account.png)
 
-## player actions
+## Player Actions
 
 ### get data
 
@@ -49,3 +49,7 @@
 ### upgrade
 
 ![upgrade](./Images/routing%20upgrade.png)
+
+### scrap
+
+![scrap](./Images/routing%20scrap.png)
