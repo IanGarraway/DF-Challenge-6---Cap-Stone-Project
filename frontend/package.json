@@ -1,0 +1,19 @@
+{
+  "name": "salvageengineerfrontend",
+  "version": "1.0.0",
+  "description": "Front end of the salvage engineer game",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/digital-futures-academy-se-2404-a/challenge-6-full-stack-capstone-project-IanGarraway.git"
+  },
+  "author": "Ian Garraway",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/digital-futures-academy-se-2404-a/challenge-6-full-stack-capstone-project-IanGarraway/issues"
+  },
+  "homepage": "https://github.com/digital-futures-academy-se-2404-a/challenge-6-full-stack-capstone-project-IanGarraway#readme"
+}
