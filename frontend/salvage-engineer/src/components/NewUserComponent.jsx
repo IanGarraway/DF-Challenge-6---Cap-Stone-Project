@@ -6,6 +6,8 @@ import { InputGroup, Alert } from 'react-bootstrap';
 import * as formik from 'formik';
 import * as Yup from 'yup'
 
+import AccountService from '../service/AccountService';
+
 
 
 
@@ -29,20 +31,20 @@ const NewUserComponent = () => {
 return (
     <Formik
         validationSchema={schema}
-        // onSubmit={async (values, { setSubmitting, resetForm }) => {
+        onSubmit={async (values, { setSubmitting, resetForm }) => {
             
-        //     try {
-        //         const response = await AccountService.newAccount(values.username, values.name, values.email, values.password)
+            try {
+                const response = await AccountService.newUser(values.username, values.name, values.email, values.password)
 
-        //         if (response.status === 201) {
-        //             setSuccess(true);
-        //             resetForm();
-        //         }                
-        //     } catch (e) {
-        //         console.error("There was an error creating the account", e);
-        //     }
-        //     setSubmitting(false);
-        // }}
+                if (response.status === 201) {
+                    setSuccess(true);
+                    resetForm();
+                }                
+            } catch (e) {
+                console.error("There was an error creating the account", e);
+            }
+            setSubmitting(false);
+        }}
         initialValues={{
             username: '',
             name: '',
