@@ -8,16 +8,24 @@ import dotenv from 'dotenv';
 import Login from './pages/Login';
 
 import './App.css'
+import AccountManagement from './pages/AccountManagement';
 
 
-function App() {
 
-  dotenv.config;
+
+function App() {  
 
   const [user, setUser] = useState();
-  console.log(process.env.REACT_APP_API_URL,`<--React`);
-  console.log(process.env.VITE_API_URL, `<--VITE`);
-  console.log(import.meta.env.VITE_API_URL, `<--metavite`);
+  const [cookies, setCookie, removeCookie] = useCookies(['user']);
+  
+
+  useEffect(() => {
+    const cookie = cookies.user;
+    if (cookie != undefined) {
+      setUser(cookie);
+      console.log(user, `cookieEffect`);
+    }
+  }, [cookies.user]);
 
   return (
     <>
@@ -27,11 +35,19 @@ function App() {
           <Routes>
             <Route
               path="/Login"
-              element={<Login setUser={setUser} />}
+              element={<Login user={user} setUser={setUser} />}
+            />
+            <Route
+              path="/"
+              element={<AccountManagement />}            
+            />
+            <Route
+              path="/accountManagement"
+              element={<AccountManagement />}            
             />
 
           </Routes>
-          {user==null&&<Navigate to="/Login" />}
+          {!user&&<Navigate to="/Login" />}
 
         </div>
 

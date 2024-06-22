@@ -6,6 +6,7 @@ const AccountManagement = ({ user }) => {
 
     return (
         <>
+            Account AccountManagement
             
         </>
     );

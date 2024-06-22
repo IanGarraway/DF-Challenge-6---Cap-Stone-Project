@@ -1,7 +1,8 @@
 import { Container } from 'react-bootstrap';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import { Navigate } from 'react-router-dom';
 
 
 import LoginComponent from '../components/LoginComponent.jsx'
@@ -9,9 +10,15 @@ import NewUserComponent from '../components/NewUserComponent.jsx'
 
 
 
-
-const Login = ({ setUser  }) => {      
+ 
+const Login = ({ user, setUser }) => {      
+    
+    
+    if (user) { return (<Navigate to="/" />); }
         
+//     useEffect(() => {
+       
+//     }, [user])
     
     return (
         <Container fluid>
