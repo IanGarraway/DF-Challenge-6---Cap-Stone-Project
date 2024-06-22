@@ -1,14 +1,14 @@
 import { Router } from "express";
-import AuthController from "../controllers/AuthController.js";
+import AccountController from "../controllers/AccountController.js";
 
 
-export default class AdminRoutes{
+export default class AccountRoutes{
     #origin;
     #controller;
     #router;
     #routeStartPoint;
 
-    constructor(origin = "http://localhost:5173", controller = new AuthController(), routeStartPoint = "/auth") {
+    constructor(origin = "http://localhost:5173", controller = new AccountController(), routeStartPoint = "/auth") {
         this.#controller = controller;
         this.#routeStartPoint = routeStartPoint;
         this.#router = Router();
