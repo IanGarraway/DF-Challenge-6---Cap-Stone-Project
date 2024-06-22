@@ -38,9 +38,9 @@ done:
 
 - [x] React login form
 - [x] login service (auth service front end)
-- [ ] /login route (auth service back end)
+- [x] /login route (auth service back end)
 - [x] front end testing
-- [ ] back end testing
+- [x] back end testing
 
 ### User story 3
 

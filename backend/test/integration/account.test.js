@@ -252,19 +252,73 @@ describe("Tests of Account routes", () => {
         describe("Test that submitting the correct password logs you in and sends a token", () => {
             it("will respond with 200 and the users username and token.", async () => {
                 //Arrange
-                const res = await request.post("/auth/newuser").send(newTestUser);
-
-                
+                await request.post("/auth/newuser").send(newTestUser);                
 
                 //Act
-                const response = await request.post("/auth/login").send(newTestLogin);
-                
+                const response = await request.post("/auth/login").send(newTestLogin);                
 
                 //Assert
                 expect(response.status).to.equal(200);
                 expect(response.headers['set-cookie']).to.satisfy(cookies => cookies.some(cookie => cookie.startsWith('token=')));
+
+                
             });
         });
+
+        describe("Test that submitting the incorrect password doesn't log you in and or send a token", () => {
+            it("will respond with 401.", async () => {
+                //Arrange
+                await request.post("/auth/newuser").send(newTestUser); 
+                
+                const testLogin = {
+                    "username": "TestGuy",
+                    "password": "Test!124"}
+
+                //Act
+                const response = await request.post("/auth/login").send(testLogin);                
+
+                //Assert
+                expect(response.status).to.equal(401);                
+                expect(response.headers).to.not.have.property('set-cookie');
+            });
+        });
+
+        describe("Test that submitting the incorrect data doesn't log you in and or send a token - missing password", () => {
+            it("will respond with 422.", async () => {
+                //Arrange
+                await request.post("/auth/newuser").send(newTestUser); 
+                
+                const testLogin = {
+                    "username": "TestGuy",
+                    "password": ""}
+
+                //Act
+                const response = await request.post("/auth/login").send(testLogin);                
+
+                //Assert
+                expect(response.status).to.equal(422);                
+                expect(response.headers).to.not.have.property('set-cookie');
+            });
+        });
+
+        describe("Test that submitting the incorrect data doesn't log you in and or send a token - missing username", () => {
+            it("will respond with 422.", async () => {
+                //Arrange
+                await request.post("/auth/newuser").send(newTestUser); 
+                
+                const testLogin = {
+                    "username": "",
+                    "password": "somepassword"}
+
+                //Act
+                const response = await request.post("/auth/login").send(testLogin);                
+
+                //Assert
+                expect(response.status).to.equal(422);                
+                expect(response.headers).to.not.have.property('set-cookie');
+            });
+        });
+
 
         
     });
