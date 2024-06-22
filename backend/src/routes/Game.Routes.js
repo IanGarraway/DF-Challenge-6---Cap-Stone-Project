@@ -1,14 +1,14 @@
 import { Router } from "express";
-import AccountController from "../controllers/AccountController.js";
+import GameController from "../controllers/Game.Controller.js";
 
 
-export default class AccountRoutes{
+export default class GameRoutes{
     #origin;
     #controller;
     #router;
     #routeStartPoint;
 
-    constructor(origin = "http://localhost:5173", controller = new AccountController(), routeStartPoint = "/auth") {
+    constructor(origin = "http://localhost:5173", controller = new GameController(), routeStartPoint = "/") {
         this.#controller = controller;
         this.#routeStartPoint = routeStartPoint;
         this.#router = Router();
@@ -27,8 +27,9 @@ export default class AccountRoutes{
             next();
         });
 
-        //Auth Routes
-        this.#router.post('/newuser', [], this.#controller.newUser);
+        //Game Routes
+
+        this.#router.get('/data', this.#controller.getData);
         
     };
     getRouter = () => { return this.#router; };

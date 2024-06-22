@@ -1,14 +1,17 @@
 import { Router } from "express";
-import AdminController from "../controllers/AdminController.js";
+import { body, validationResult } from "express-validator";
+import AccountController from "../controllers/Account.Controller.js";
+
+import VerifySignup from "../middleware/VerifySignup.js";
 
 
-export default class AdminRoutes{
+export default class AccountRoutes{
     #origin;
     #controller;
     #router;
     #routeStartPoint;
 
-    constructor(origin = "http://localhost:5173", controller = new AdminController(), routeStartPoint = "/admin") {
+    constructor(origin = "http://localhost:5173", controller = new AccountController(), routeStartPoint = "/auth") {
         this.#controller = controller;
         this.#routeStartPoint = routeStartPoint;
         this.#router = Router();
@@ -27,9 +30,13 @@ export default class AdminRoutes{
             next();
         });
 
-        //Admin Routes
-
-        this.#router.get('/data', this.#controller.getData);
+        //Auth Routes
+        this.#router.post('/newuser', [
+             body(`email`).exists().normalizeEmail().notEmpty().escape().isEmail(),
+            body(`username`).exists().notEmpty().escape(),
+            body('password').exists().notEmpty().escape(),
+            VerifySignup.userUnique
+        ], this.#controller.newUser);
         
     };
     getRouter = () => { return this.#router; };

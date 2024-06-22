@@ -1,8 +1,8 @@
-import AccountRoutes from "./routes/AccountRoutes.js";
-import AdminRoutes from "./routes/AdminRoutes.js";
+import AccountRoutes from "./routes/Account.Routes.js";
+import AdminRoutes from "./routes/Admin.Routes.js";
 import Config from "./config/Config.js";
 import Database from "./db/Database.js";
-import GameRoutes from "./routes/GameRoutes.js";
+import GameRoutes from "./routes/Game.Routes.js";
 import Server from "./server/Server.js";
 
 Config.load();

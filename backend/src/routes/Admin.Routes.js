@@ -1,14 +1,14 @@
 import { Router } from "express";
-import GameController from "../controllers/GameController.js";
+import AdminController from "../controllers/Admin.Controller.js";
 
 
-export default class GameRoutes{
+export default class AdminRoutes{
     #origin;
     #controller;
     #router;
     #routeStartPoint;
 
-    constructor(origin = "http://localhost:5173", controller = new GameController(), routeStartPoint = "/") {
+    constructor(origin = "http://localhost:5173", controller = new AdminController(), routeStartPoint = "/admin") {
         this.#controller = controller;
         this.#routeStartPoint = routeStartPoint;
         this.#router = Router();
@@ -27,7 +27,7 @@ export default class GameRoutes{
             next();
         });
 
-        //Game Routes
+        //Admin Routes
 
         this.#router.get('/data', this.#controller.getData);
         

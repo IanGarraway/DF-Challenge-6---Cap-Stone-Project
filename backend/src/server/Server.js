@@ -7,19 +7,19 @@ export default class Server{
     #host;
     #port;
     #adminRouter;
-    #authRouter;
+    #accountRouter;
     #gameRouter;
     #server;
     #origin
     
-    constructor(port, host, authRouter, adminRouter, gameRouter, origin) {
+    constructor(port, host, accountRoutes, adminRoutes, gameRoutes, origin) {
         this.#app = express();
         this.#port = port;
         this.#host = host;
         this.#server = null;
-        this.#adminRouter = adminRouter;
-        this.#authRouter = authRouter;
-        this.#gameRouter = gameRouter;
+        this.#adminRouter = adminRoutes;
+        this.#accountRouter = accountRoutes;
+        this.#gameRouter = gameRoutes;
         this.#origin = origin;
     }
 
@@ -40,8 +40,8 @@ export default class Server{
         this.#app.use(cookieParser());
         
         this.#app.use(
-            this.#authRouter.getRouteStartPoint(),
-            this.#authRouter.getRouter()
+            this.#accountRouter.getRouteStartPoint(),
+            this.#accountRouter.getRouter()
         );
         this.#app.use(
             this.#adminRouter.getRouteStartPoint(),
