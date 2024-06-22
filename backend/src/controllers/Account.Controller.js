@@ -4,6 +4,8 @@ import AccountService from "../services/Account.Service.js";
 import User from "../models/User.model.js";
 import { validationResult } from "express-validator";
 
+const { SECURE } = process.env;
+
 
 export default class AccountController{
     #accountService;
@@ -35,6 +37,31 @@ export default class AccountController{
 
             return res.status(500).send({ message: error.message || "Some error occurred while attempting to register" });
         }
+    }
+
+    login = async (req, res) => {
+        
+        try {
+            const errors = validationResult(req);            
+            if (!errors.isEmpty()) {
+                return res.status(422).json({ message: 'Validation failed', errors: errors.array() });
+            }
+            
+            let user = await this.#accountService.login(req.body);
+            
+            res.status(200)
+                .cookie('token', user.Token, {
+                    httpOnly: true,
+                    secure: SECURE, //needs to be true if on https
+                    sameSite: 'Strict',
+                    maxAge: 86400000 //24 hours in milliseconds 
+                })
+                .send({ message: "User has logged in", username: user.userName });
+            
+        } catch (error) {
+            res.status(401).json(error);
+        }
+        
     }
     
 }

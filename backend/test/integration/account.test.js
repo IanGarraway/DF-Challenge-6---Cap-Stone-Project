@@ -18,6 +18,7 @@ import GameRoutes from "../../src/routes/Game.Routes.js";
 import GameService from "../../src/services/Game.Service.js";
 
 import User from "../../src/models/User.model.js";
+import { response } from "express";
 
 
 
@@ -31,6 +32,19 @@ describe("Tests of Account routes", () => {
     let gameService;
     let database;
     let request;
+
+    const newTestUser = {
+        "username": "TestGuy",
+        "password": "Test!123",
+        "email": "testguy@test.com",
+        "name": "Test Guy"
+    };
+
+    const newTestLogin = {
+        "username": "TestGuy",
+        "password": "Test!123"
+    }
+    
 
     before(async () => {
         Config.load();
@@ -76,12 +90,7 @@ describe("Tests of Account routes", () => {
     });
 
     describe("New User Tests", () => {
-        const newTestUser = {
-            "username": "TestGuy",
-            "password": "test",
-            "email": "testguy@test.com",
-            "name": "Test Guy"
-        };
+        
 
 
         describe("Post request to /newuser when the user doesn't exist in the database", () => {
@@ -237,6 +246,28 @@ describe("Tests of Account routes", () => {
             })
         })
     })
+
+    describe("Login tests", () => {
+
+        describe("Test that submitting the correct password logs you in and sends a token", () => {
+            it("will respond with 200 and the users username and token.", async () => {
+                //Arrange
+                const res = await request.post("/auth/newuser").send(newTestUser);
+
+                
+
+                //Act
+                const response = await request.post("/auth/login").send(newTestLogin);
+                
+
+                //Assert
+                expect(response.status).to.equal(200);
+                expect(response.headers['set-cookie']).to.satisfy(cookies => cookies.some(cookie => cookie.startsWith('token=')));
+            });
+        });
+
+        
+    });
 
     
 

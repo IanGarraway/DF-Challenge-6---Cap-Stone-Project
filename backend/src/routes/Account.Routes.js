@@ -32,11 +32,17 @@ export default class AccountRoutes{
 
         //Auth Routes
         this.#router.post('/newuser', [
-             body(`email`).exists().normalizeEmail().notEmpty().escape().isEmail(),
+            body(`email`).exists().normalizeEmail().notEmpty().escape().isEmail(),
             body(`username`).exists().notEmpty().escape(),
             body('password').exists().notEmpty().escape(),
+            body('name').exists().notEmpty().escape(),
             VerifySignup.userUnique
         ], this.#controller.newUser);
+
+        this.#router.post('/login', [
+            body(`username`).exists().notEmpty().escape(),
+            body('password').exists().notEmpty().escape(),
+        ], this.#controller.login);
         
     };
     getRouter = () => { return this.#router; };
