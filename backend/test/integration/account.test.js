@@ -89,11 +89,16 @@ describe("Tests of Account routes", () => {
                 //Arrange
 
                 //Act
-                const response = await request.post("/auth/newuser").send(newTestUser);               
+                const response = await request.post("/auth/newuser").send(newTestUser);  
+                
+
 
                 //Assert
                 expect(response.status).to.equal(201);
                 expect(response.body).to.have.property("message").that.includes("User was registered successfully");
+
+                const dbData = await User.find({});                
+                expect(dbData).to.be.an('array').that.has.lengthOf(1);
             });
         });
 

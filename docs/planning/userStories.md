@@ -13,11 +13,10 @@ done:
 - [x] React registration form
 - [x] Formik/yup validation
 - [x] new user service (auth service front end)
-- [ ] /newuser route (auth service back end)
-- [ ] user data stored on mondobd
+- [x] /newuser route (auth service back end)
+- [x] user data stored on mondobd
 - [x] front end testing
-- [ ] back end testing
-
+- [x] back end testing
 
 ### User story 2
 
