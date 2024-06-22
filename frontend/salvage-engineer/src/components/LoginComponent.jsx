@@ -20,16 +20,11 @@ const LoginComponent = ({ setUser }) => {
     
 
     const handleSubmit = async(target) => {
-        target.preventDefault();
-        const formData = {
-            username: username.current.value,
-            password: password.current.value
-        }
+        target.preventDefault();        
         try {
             
         
-        const response = await AccountService.login(formData);
-        
+        const response = await AccountService.login(username.current.value, password.current.value);        
             
             if (response.status === 200) {
                 setErrorMessage("");

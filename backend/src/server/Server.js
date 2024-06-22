@@ -2,6 +2,8 @@ import cookieParser from 'cookie-parser';
 import express from 'express';
 import cors from 'cors';
 
+
+
 export default class Server{
     #app;
     #host;
@@ -10,9 +12,10 @@ export default class Server{
     #accountRouter;
     #gameRouter;
     #server;
-    #origin
+    #allowedOrigin
     
-    constructor(port, host, accountRoutes, adminRoutes, gameRoutes, origin) {
+    
+    constructor(port, host, accountRoutes, adminRoutes, gameRoutes, allowedOrigin) {
         this.#app = express();
         this.#port = port;
         this.#host = host;
@@ -20,7 +23,8 @@ export default class Server{
         this.#adminRouter = adminRoutes;
         this.#accountRouter = accountRoutes;
         this.#gameRouter = gameRoutes;
-        this.#origin = origin;
+        this.#allowedOrigin = allowedOrigin;
+        
     }
 
     getApp = () => {
@@ -28,8 +32,9 @@ export default class Server{
     }
 
     start = () => {
+        
         const corsOptions = {
-            origin: this.#origin, //allow only the react front end to be the origin
+            origin: this.#allowedOrigin, //allow only the react front end to be the origin
             credentials: true, //allow for the use of the auth tokens
             methods: ['GET', 'POST', 'PATCH'], //allowed methods
             allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'x-access-token'], //allowed headers
@@ -60,5 +65,4 @@ export default class Server{
     close = () => {
         this.#server.close();
     }
-
 }

@@ -34,7 +34,7 @@ return (
         onSubmit={async (values, { setSubmitting, resetForm }) => {
             
             try {
-                const response = await AccountService.newUser(values.username, values.name, values.email, values.password)
+                const response = await AccountService.newUser(values.username, values.password, values.name, values.email)
 
                 if (response.status === 201) {
                     setSuccess(true);

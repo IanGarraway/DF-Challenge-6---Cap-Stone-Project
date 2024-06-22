@@ -12,13 +12,17 @@ export default class AccountRoutes{
     #routeStartPoint;
 
     constructor(origin = "http://localhost:5173", controller = new AccountController(), routeStartPoint = "/auth") {
+        this.#origin = origin;
         this.#controller = controller;
         this.#routeStartPoint = routeStartPoint;
         this.#router = Router();
         this.#initialiseRoutes();
+        
+        
     }
 
     #initialiseRoutes = () => {
+        
         
         // CORS middleware to set headers
         this.#router.use((req, res, next) => {
@@ -31,17 +35,16 @@ export default class AccountRoutes{
         });
 
         //Auth Routes
-        this.#router.post('/newuser', [
-            body(`email`).exists().normalizeEmail().notEmpty().escape().isEmail(),
+        this.#router.post('/newuser', [            
             body(`username`).exists().notEmpty().escape(),
             body('password').exists().notEmpty().escape(),
             body('name').exists().notEmpty().escape(),
+            body(`email`).exists().normalizeEmail().notEmpty().escape().isEmail(),
             VerifySignup.userUnique
         ], this.#controller.newUser);
 
         this.#router.post('/login', [
-            body(`username`).exists().notEmpty().escape(),
-            body('password').exists().notEmpty().escape(),
+            
         ], this.#controller.login);
         
     };

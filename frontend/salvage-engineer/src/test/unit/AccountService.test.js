@@ -34,7 +34,7 @@ describe(`Account Service tests`, () => {
             //assert
             expect(response).toStrictEqual(mockResponsePayload);
             expect(axios.post).toHaveBeenCalledWith(
-                'http://localhost:4000/login',
+                'http://localhost:33000/login',
                 mockPayload,
                 { withCredentials: true }
             );
@@ -50,7 +50,7 @@ describe(`Account Service tests`, () => {
 
             //assert
             expect(axios.post).toHaveBeenCalledWith(
-                'http://localhost:4000/login',
+                'http://localhost:3000/login',
                 { username: username, password: password },
                 { withCredentials: true }
             );            
@@ -75,7 +75,7 @@ describe(`Account Service tests`, () => {
             //assert
             expect(response).toStrictEqual(mockResponsePayload);
             expect(axios.post).toHaveBeenCalledWith(
-                'http://localhost:4000/newuser',
+                'http://localhost:3000/newuser',
                 { username: username, password: password, name: name, email: email }
             )
         });
@@ -89,7 +89,7 @@ describe(`Account Service tests`, () => {
 
             //assert
             expect(axios.post).toHaveBeenCalledWith(
-                'http://localhost:4000/newuser',
+                'http://localhost:3000/newuser',
                 { username: username, password: password, name: name, email: email }                
             );       
         })

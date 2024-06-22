@@ -6,14 +6,16 @@ import GameRoutes from "./routes/Game.Routes.js";
 import Server from "./server/Server.js";
 
 Config.load();
-const { PORT, HOST, DB_URI, ORIGIN } = process.env;
+const { PORT, HOST, DB_URI, ALLOWED_ORIGIN } = process.env;
 
-const accountRoutes = new AccountRoutes(ORIGIN);
-const adminRoutes = new AdminRoutes(ORIGIN);
-const gameRoutes = new GameRoutes(ORIGIN);
 
-const server = new Server(PORT, HOST, accountRoutes, adminRoutes, gameRoutes, ORIGIN);
+const accountRoutes = new AccountRoutes(ALLOWED_ORIGIN);
+const adminRoutes = new AdminRoutes(ALLOWED_ORIGIN);
+const gameRoutes = new GameRoutes(ALLOWED_ORIGIN);
+
+const server = new Server(PORT, HOST, accountRoutes, adminRoutes, gameRoutes, ALLOWED_ORIGIN);
 const database = new Database(DB_URI);
 
+
 server.start();
-await database.connect;
+await database.connect();

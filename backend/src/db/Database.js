@@ -5,9 +5,10 @@ export default class Database{
 
     constructor(uri) {
         this.#uri = uri;
+        
     }
 
-    connect = async (attempt = 0) => {
+    connect = async (attempt = 0) => {        
         try {
             await mongoose.connect(this.#uri);
             return console.log(`Database connection ${this.#uri} was successful`);

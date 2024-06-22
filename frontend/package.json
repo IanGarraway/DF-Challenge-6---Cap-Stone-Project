@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Front end of the salvage engineer game",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "test"
   },
