@@ -319,6 +319,31 @@ describe("Tests of Account routes", () => {
             });
         });
 
+        describe("Test that submitting the correct password logs you in and sends a token", () => {
+            it("will respond with 200 and the users username and token.", async () => {
+                //Arrange
+                await request.post("/auth/newuser").send(newTestUser); 
+                
+                let testUser = await User.findOne({ userName: "TestGuy" });                
+                testUser.admin = true;                
+                await testUser.save();
+                
+
+                //Act
+                const response = await request.post("/auth/login").send(newTestLogin);                
+
+                //Assert
+                expect(response.status).to.equal(200);
+                expect(response.headers['set-cookie']).to.satisfy(cookies => cookies.some(cookie => cookie.startsWith('token=')));
+                console.log(response.body, `<--`);
+                expect(response.body).to.have.property('admin').which.is.true;
+
+                
+            });
+        });
+
+        
+
 
         
     });

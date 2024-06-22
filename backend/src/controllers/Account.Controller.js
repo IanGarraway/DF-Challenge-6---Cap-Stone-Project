@@ -47,7 +47,7 @@ export default class AccountController{
                 return res.status(422).json({ message: 'Validation failed', errors: errors.array() });
             }
             
-            let user = await this.#accountService.login(req.body);
+            let user = await this.#accountService.login(req.body);           
             
             res.status(200)
                 .cookie('token', user.Token, {
@@ -56,7 +56,7 @@ export default class AccountController{
                     sameSite: 'Strict',
                     maxAge: 86400000 //24 hours in milliseconds 
                 })
-                .send({ message: "User has logged in", username: user.userName });
+                .send({ message: "User has logged in", username: user.userName, ...(user.admin&&{admin: true}) });
             
         } catch (error) {
             res.status(401).json(error);
