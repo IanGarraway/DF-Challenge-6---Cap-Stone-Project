@@ -8,7 +8,7 @@ import { describe, expect } from "vitest";
 import AccountManagement from "../../pages/AccountManagement";
 
 describe("Account Management page tests", () => {
-    describe("ChangePassword tests", () => {
+    describe("Change Password tests", () => {
         test('it should render original and new password boxes', () => {
             render(
                 <AccountManagement
@@ -216,13 +216,59 @@ describe("Account Management page tests", () => {
                 expect(newPasswordField).toHaveClass("form-control is-invalid");
                 expect(oldPasswordField).toHaveClass("form-control is-invalid");
                 
-            })
+            });
+        
+        });       
 
+    });
+
+    describe('Delete Account Tests', () => {
+        test('it should render a switch a password box and a delete account button', () => {
+            render(
+                <AccountManagement
+                />,
+                { wrapper: MemoryRouter }
+            )
+
+            expect(screen.getByTestId("deleteSwitch")).toBeInTheDocument();
+            expect(screen.getByTestId("deletePassword")).toBeInTheDocument();
+            expect(screen.getByTestId("deleteButton")).toBeInTheDocument();
         
         });
 
+        test('the delete button is disabled if the switch is off', () => {
+            //Arrange
+            render(
+                <AccountManagement
+                />,
+                { wrapper: MemoryRouter }
+            )
+            
 
+            //Act
+
+            //Assert            
+            expect(screen.getByTestId("deleteButton")).toBeDisabled();
         
+        });
 
-    });
+        test('the delete button is not disabled if the switch is on', async () => {
+            //Arrange
+            render(
+                <AccountManagement
+                />,
+                { wrapper: MemoryRouter }
+            )
+            
+            const deleteSwitch = screen.getByTestId("deleteSwitch");
+
+            //Act
+
+            await userEvent.click(deleteSwitch);
+
+            //Assert            
+            expect(screen.getByTestId("deleteButton")).not.toBeDisabled();
+        
+        });
+     })
 })

@@ -48,11 +48,11 @@ done:
 
 done:
 
-- [ ] React account management page (change password section)
-- [ ] change password service (auth service front end)
-- [ ] /changepassword route (auth service back end)
-- [ ] front end testing
-- [ ] back end testing
+- [x] React account management page (change password section)
+- [x] change password service (auth service front end)
+- [x] /changepassword route (auth service back end)
+- [x] front end testing
+- [x] back end testing
 
 ### User story 4
 

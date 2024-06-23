@@ -22,8 +22,7 @@ function App() {
   useEffect(() => {
     const cookie = cookies.user;
     if (cookie != undefined) {
-      setUser(cookie);
-      console.log(user, `cookieEffect`);
+      setUser(cookie);      
     }
   }, [cookies.user]);
 
