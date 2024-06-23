@@ -83,18 +83,20 @@ describe(`Account Service tests`, () => {
             const mockError = new Error('Login failed');
             axios.post.mockRejectedValue(mockError);
             //Act
-            await expect(AccountService.newUser(username, password, name, email)).rejects.toThrow('Login failed');
+            
 
             //assert
+            await expect(AccountService.newUser(username, password, name, email)).rejects.toThrow('Login failed');
             expect(axios.post).toHaveBeenCalledWith(
                 'http://localhost:3000/auth/newuser',
                 { username: username, password: password, name: name, email: email }                
-            );       
+            );
+            expect
         })
     });
 
     describe("Change Password tests", () => {
-        test("Able to change the password post", async() => {
+        test("Able to change the password post", async () => {
             //arrange
             const oldPassword = "Ab!12345";
             const newPassword = "Ab!12346";
@@ -113,10 +115,26 @@ describe(`Account Service tests`, () => {
                 { "oldpassword": oldPassword, "newpassword": newPassword },
                 { withCredentials: true }
             )
+        });
 
+        test("Able to handle and error", async () => {
+            //arrange
+            const mockError = new Error('Change password error');
+            axios.post.mockRejectedValue(mockError);
+            const oldPassword = "Ab!12345";
+            const newPassword = "Ab!12346";
 
+            //Act
 
-        })
+            //Assert
+            await expect(AccountService.changePassword(oldPassword, newPassword,)).rejects.toThrow('Change password error');
+            
+            expect(axios.post).toHaveBeenCalledWith(
+                'http://localhost:3000/auth/changepassword',
+                { "oldpassword": oldPassword, "newpassword": newPassword },
+                { withCredentials: true }
+            )
+        });
     })
 
 });
