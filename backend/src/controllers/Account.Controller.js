@@ -69,5 +69,21 @@ export default class AccountController{
             res.status(401).json(error);
         }
     }
+
+    deleteAccount = async (req, res) => {
+        try {
+            let user = await this.#accountService.deleteAccount(req);
+            return res.status(200)
+                .cookie('token', "", {
+                    httpOnly: true,
+                    secure: SECURE, //needs to be true if on https
+                    sameSite: 'Strict',
+                    maxAge: 0 //revokes existing token cookie
+                })
+                .send({ message: "Account deleted" });
+        } catch (error) {
+            res.status(401).json(error);
+        }
+    }
     
 }

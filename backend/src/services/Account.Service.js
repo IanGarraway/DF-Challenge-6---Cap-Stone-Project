@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 
 import User from '../models/User.model.js';
 
+
 export default class AccountService{
 
     login = async ({ username, password }) => {    
@@ -47,6 +48,27 @@ export default class AccountService{
         } else {
             throw new Error("Error changing password");
         }
+    }
+
+    deleteAccount = async (req) => {
+        const { password } = req.body;
+
+        const user = await User.findOne({ _id: req.userId });
+        
+        if (!user) { throw new Error("Invalid Login details"); }
+        
+        const passwordMatches = await bcrypt.compare(password, user.userPassword);
+        
+        if (passwordMatches) {
+            
+            
+            await user.deleteOne();            
+        
+            return user;
+        } else {
+            throw new Error("Error deleting account");
+        }
+        
     }
 }
     

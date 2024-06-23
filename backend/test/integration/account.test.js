@@ -414,6 +414,46 @@ describe("Tests of Account routes", () => {
         });
     });
 
+    describe('Delete Account tests', () => { 
+        let testPass;
+
+        beforeEach(async () => {
+            await request.post("/auth/newuser").send(newTestUser);
+            
+            const response = await request.post("/auth/login").send(newTestLogin);
+            const tokenCookie = response.headers['set-cookie'].find(cookie => cookie.startsWith('token='));
+            token = tokenCookie.split(';')[0].split('=')[1];
+
+            testPass = "Test!123";
+            
+        });
+
+        it("Should response with 200 - account deleted", async() => {
+            //Arrange
+            const payload = { "password": testPass };
+
+            //Act
+
+            const response = await request.post("/auth/deleteaccount")
+                .set('Cookie', `token=${token}`)
+                .send(payload);
+            
+            const users = await User.find({});
+            console.log(users, `<--`);
+
+            //Assert
+
+            expect(response.status).to.equal(200);
+            expect(response.headers['set-cookie']).to.satisfy(cookies => cookies.some(cookie => cookie.startsWith('token=')));
+            expect(response.body).to.have.property("message").that.includes("Account deleted");
+
+            
+
+            expect(users).to.be.an('array').that.has.lengthOf(0);
+            
+        })
+     })
+
     
 
 

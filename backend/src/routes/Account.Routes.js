@@ -52,7 +52,12 @@ export default class AccountRoutes{
             body(`oldpassword`).exists().notEmpty().escape(),
             body('newpassword').exists().notEmpty().escape(),
             LoginValidator.verifyToken
-        ], this.#controller.changePassword)
+        ], this.#controller.changePassword);
+
+        this.#router.post('/deleteaccount', [
+            body('password').exists().notEmpty().escape(),
+            LoginValidator.verifyToken
+        ],this.#controller.deleteAccount);
         
     };
     getRouter = () => { return this.#router; };
