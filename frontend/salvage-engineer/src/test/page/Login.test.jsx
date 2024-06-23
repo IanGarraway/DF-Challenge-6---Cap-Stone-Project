@@ -9,8 +9,7 @@ import Login from "../../pages/Login";
 // Missing axios mocking tests
 describe('Tests for Login page', () => {
     const mockSetUser = vi.fn();
-    const mockSetLocation = vi.fn();
-    const defaultLocation = "Login"
+    
     
     test('it should render username and password', () => {
         render(

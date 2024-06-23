@@ -1,4 +1,5 @@
 
+import ChangePassword from '../components/ChangePassword.jsx';
 
 
 const AccountManagement = ({ user }) => {
@@ -6,8 +7,8 @@ const AccountManagement = ({ user }) => {
 
     return (
         <>
-            Account AccountManagement
-            
+            <h1>Account Management</h1>
+            <ChangePassword />
         </>
     );
     
