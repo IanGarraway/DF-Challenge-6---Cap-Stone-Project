@@ -438,8 +438,7 @@ describe("Tests of Account routes", () => {
                 .set('Cookie', `token=${token}`)
                 .send(payload);
             
-            const users = await User.find({});
-            console.log(users, `<--`);
+            const users = await User.find({});            
 
             //Assert
 
@@ -450,6 +449,42 @@ describe("Tests of Account routes", () => {
             
 
             expect(users).to.be.an('array').that.has.lengthOf(0);
+            
+        })
+
+        it("Should response with 200 - account deleted, but only delete one account", async() => {
+            //Arrange
+            const anotherAccount = {
+                "username": "TestGal",
+                "password": "Test!123",
+                "email": "testgal@test.com",
+                "name": "Test Gal"
+                
+            };
+            const payload = { "password": testPass };
+
+            await request.post("/auth/newuser").send(anotherAccount);
+
+            const usersPre = await User.find({}); 
+
+
+            //Act
+
+            const response = await request.post("/auth/deleteaccount")
+                .set('Cookie', `token=${token}`)
+                .send(payload);
+            
+            const usersPost = await User.find({});            
+
+            //Assert
+
+            expect(response.status).to.equal(200);
+            expect(response.headers['set-cookie']).to.satisfy(cookies => cookies.some(cookie => cookie.startsWith('token=')));
+            expect(response.body).to.have.property("message").that.includes("Account deleted");
+
+            
+            expect(usersPre).to.be.an('array').that.has.lengthOf(2);
+            expect(usersPost).to.be.an('array').that.has.lengthOf(1);
             
         })
      })
