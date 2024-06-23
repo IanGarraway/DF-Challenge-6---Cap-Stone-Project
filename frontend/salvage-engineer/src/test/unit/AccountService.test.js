@@ -137,4 +137,48 @@ describe(`Account Service tests`, () => {
         });
     })
 
+    describe("Delete Account tests", () => {
+        test("Able to send the delete account post", async () => {
+            //arrange
+            const password = "Ab!12345";
+            
+
+            const mockResponsePayload = { status: 200, data: { message: 'Account deleted' } };
+
+            axios.post.mockResolvedValue(mockResponsePayload);
+
+            //Act
+            const response = await AccountService.deleteAccount(password);
+
+            //Assert
+            expect(response).toStrictEqual(mockResponsePayload);
+            expect(axios.post).toHaveBeenCalledWith(
+                'http://localhost:3000/auth/deleteaccount',
+                { "password": password  },
+                { withCredentials: true }
+            )
+        });
+
+        test("Able to handle errors with the delete account post", async () => {
+            //arrange
+            const password = "Ab!12345";
+            const mockError = new Error('Delete Account error');
+            axios.post.mockRejectedValue(mockError);                        
+
+            //Act
+            
+
+            //Assert
+            await expect(AccountService.deleteAccount(password)).rejects.toThrow('Delete Account error');
+            
+            expect(axios.post).toHaveBeenCalledWith(
+                'http://localhost:3000/auth/deleteaccount',
+                { "password": password  },
+                { withCredentials: true }
+            )
+            
+        });
+        
+    })
+
 });

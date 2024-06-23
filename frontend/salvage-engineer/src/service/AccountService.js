@@ -54,4 +54,18 @@ export default class AccountService{
             throw e;
         }        
     }
+
+    static async deleteAccount(password) {
+        try {
+            const response = await httpService.post(`${apiURL}/auth/deleteaccount`, {
+                "password": password
+            }, {
+                withCredentials: true
+            });
+            return response;
+        } catch (e) {
+            console.error(`Error changing password`, e);
+            throw e;
+        }
+    }
 }
