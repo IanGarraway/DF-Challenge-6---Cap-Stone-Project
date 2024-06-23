@@ -1,5 +1,5 @@
 import { afterEach, describe, expect } from "vitest";
-import AccountService from "../../service/AccountService";
+import AccountService from "../../service/AccountService.js";
 import axios from "axios";
 
 vi.mock('axios');
@@ -68,9 +68,7 @@ describe(`Account Service tests`, () => {
             axios.post.mockResolvedValue(mockResponsePayload);
 
             //act
-            const response = await AccountService.newUser(username, password, name, email);
-
-            console.log(mockResponsePayload, `<---test`);
+            const response = await AccountService.newUser(username, password, name, email);            
 
             //assert
             expect(response).toStrictEqual(mockResponsePayload);
@@ -94,5 +92,31 @@ describe(`Account Service tests`, () => {
             );       
         })
     });
+
+    describe("Change Password tests", () => {
+        test("Able to change the password post", async() => {
+            //arrange
+            const oldPassword = "Ab!12345";
+            const newPassword = "Ab!12346";
+
+            const mockResponsePayload = { status: 200, data: { message: 'password changed' } };
+
+            axios.post.mockResolvedValue(mockResponsePayload);
+
+            //Act
+            const response = await AccountService.changePassword(oldPassword, newPassword);
+
+            //Assert
+            expect(response).toStrictEqual(mockResponsePayload);
+            expect(axios.post).toHaveBeenCalledWith(
+                'http://localhost:3000/auth/changepassword',
+                { "oldpassword": oldPassword, "newpassword": newPassword },
+                { withCredentials: true }
+            )
+
+
+
+        })
+    })
 
 });

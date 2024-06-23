@@ -32,8 +32,7 @@ export default class AccountService{
                 "password": password,
                 "name": name,
                 "email": email
-            } );
-            console.log(response, `<---newuser`);
+            } );            
             return response;
         } catch (e) {
             console.error(`Error creating account`, e);
@@ -41,5 +40,18 @@ export default class AccountService{
         }
     }
 
-
+    static async changePassword(oldPassword, newPassword) {
+        try {
+            const response = await httpService.post(`${apiURL}/auth/changepassword`, {
+                "oldpassword": oldPassword,
+                "newpassword": newPassword
+            }, {
+                withCredentials: true
+            });
+            return response;
+        } catch (e) {
+            console.error(`Error changing password`, e);
+            throw e;
+        }        
+    }
 }
