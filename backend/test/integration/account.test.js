@@ -487,6 +487,29 @@ describe("Tests of Account routes", () => {
             expect(usersPost).to.be.an('array').that.has.lengthOf(1);
             
         })
+
+        it("Should respond with 401 - Unauthorised if the wrong password is supplied", async() => {
+            //Arrange
+            const payload = { "password": "badPass" };
+
+            //Act
+
+            const response = await request.post("/auth/deleteaccount")
+                .set('Cookie', `token=${token}`)
+                .send(payload);
+            
+            const users = await User.find({});            
+
+            //Assert
+
+            expect(response.status).to.equal(401);
+            
+            expect(response.body).to.have.property("message").that.includes("Unauthorised");            
+            
+
+            expect(users).to.be.an('array').that.has.lengthOf(1);
+            
+        })
      })
 
     

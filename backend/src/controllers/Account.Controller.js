@@ -82,7 +82,7 @@ export default class AccountController{
                 })
                 .send({ message: "Account deleted" });
         } catch (error) {
-            res.status(401).json(error);
+            res.status(401).send({message: "Unauthorised"}).json(error);
         }
     }
     
