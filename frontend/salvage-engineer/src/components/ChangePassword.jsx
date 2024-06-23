@@ -92,7 +92,7 @@ const ChangePassword = () => {
                             </Form.Group>
                         </Col>
                         <Col>
-                            <Button variant="primary" type="submit">
+                            <Button variant="primary" type="submit" data-testid={"cpButton"}>
                                 Change Password
                             </Button>
                         </Col>
