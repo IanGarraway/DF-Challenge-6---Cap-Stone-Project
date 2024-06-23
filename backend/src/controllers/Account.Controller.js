@@ -16,8 +16,7 @@ export default class AccountController{
 
 
 
-    newUser = async (req, res) => {     
-        console.log(`New account attempt`);
+    newUser = async (req, res) => {             
         try {
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
@@ -44,7 +43,7 @@ export default class AccountController{
         try {
             
             let user = await this.#accountService.login(req.body);           
-            console.log("log");
+            
             return res.status(200)
                 .cookie('token', user.Token, {
                     httpOnly: true,
@@ -57,8 +56,18 @@ export default class AccountController{
         } catch (error) {
             console.log(error);
             res.status(401).json(error);
-        }
+        }        
+    }
+
+    changePassword = async (req, res) => {
         
+        try {
+            let user = await this.#accountService.changePassword(req);
+            return res.status(200).send({ message: "Password changed" });
+        } catch (error) {
+            console.log(`Error in password change ->`, error);
+            res.status(401).json(error);
+        }
     }
     
 }

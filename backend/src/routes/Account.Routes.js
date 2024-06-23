@@ -2,7 +2,8 @@ import { Router } from "express";
 import { body, validationResult } from "express-validator";
 import AccountController from "../controllers/Account.Controller.js";
 
-import VerifySignup from "../middleware/VerifySignup.js";
+import VerifySignup from "../middleware/VerifySignup.validator.js";
+import LoginValidator from "../middleware/Login.validator.js";
 
 
 export default class AccountRoutes{
@@ -46,6 +47,12 @@ export default class AccountRoutes{
         this.#router.post('/login', [
             
         ], this.#controller.login);
+
+        this.#router.post('/changepassword', [
+            body(`oldpassword`).exists().notEmpty().escape(),
+            body('newpassword').exists().notEmpty().escape(),
+            LoginValidator.verifyToken
+        ], this.#controller.changePassword)
         
     };
     getRouter = () => { return this.#router; };

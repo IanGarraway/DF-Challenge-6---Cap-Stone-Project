@@ -32,6 +32,7 @@ describe("Tests of Account routes", () => {
     let gameService;
     let database;
     let request;
+    let token;
 
     const newTestUser = {
         "username": "TestGuy",
@@ -284,7 +285,7 @@ describe("Tests of Account routes", () => {
         });
 
         describe("Test that submitting the incorrect data doesn't log you in and or send a token - missing password", () => {
-            it("will respond with 422.", async () => {
+            it("will respond with 401.", async () => {
                 //Arrange
                 await request.post("/auth/newuser").send(newTestUser); 
                 
@@ -296,13 +297,13 @@ describe("Tests of Account routes", () => {
                 const response = await request.post("/auth/login").send(testLogin);                
 
                 //Assert
-                expect(response.status).to.equal(422);                
+                expect(response.status).to.equal(401);                
                 expect(response.headers).to.not.have.property('set-cookie');
             });
         });
 
         describe("Test that submitting the incorrect data doesn't log you in and or send a token - missing username", () => {
-            it("will respond with 422.", async () => {
+            it("will respond with 401.", async () => {
                 //Arrange
                 await request.post("/auth/newuser").send(newTestUser); 
                 
@@ -311,10 +312,11 @@ describe("Tests of Account routes", () => {
                     "password": "somepassword"}
 
                 //Act
+                
                 const response = await request.post("/auth/login").send(testLogin);                
 
                 //Assert
-                expect(response.status).to.equal(422);                
+                expect(response.status).to.equal(401);                
                 expect(response.headers).to.not.have.property('set-cookie');
             });
         });
@@ -335,17 +337,52 @@ describe("Tests of Account routes", () => {
                 //Assert
                 expect(response.status).to.equal(200);
                 expect(response.headers['set-cookie']).to.satisfy(cookies => cookies.some(cookie => cookie.startsWith('token=')));
-                console.log(response.body, `<--`);
+                
                 expect(response.body).to.have.property('admin').which.is.true;
 
                 
             });
         });
+    });
 
+    describe("Change password tests", () => {
         
+        beforeEach(async () => {
+            await request.post("/auth/newuser").send(newTestUser);
+            
+            const response = await request.post("/auth/login").send(newTestLogin);
+            const tokenCookie = response.headers['set-cookie'].find(cookie => cookie.startsWith('token='));
+            token = tokenCookie.split(';')[0].split('=')[1];
+            
+        });
+        describe("Test a successful password change ", () => {
+            it("should respond with 200 - password changed", async () => {
+                //Arrange
+                const oldPass = "Test!123";
+                const newPass = "Test!1234"
+                const newLogin = {
+                    "username": "TestGuy",
+                    "password": newPass
+                };
+                const payload = { "oldpassword": oldPass, "newpassword": newPass };
 
+                let users = await User.find();                
+               
+                //Act                
+                const response = await request.post("/auth/changepassword")
+                    .set('Cookie', `token=${token}`)
+                    .send(payload);
+                
+                users = await User.find();                
+                
+                const loginRes = await request.post("/auth/login").send(newLogin);
 
-        
+                //Assert
+                expect(response.status).to.equal(200);
+                expect(loginRes.status).to.equal(200);
+                expect(loginRes.headers['set-cookie']).to.satisfy(cookies => cookies.some(cookie => cookie.startsWith('token=')));
+            });
+        });
     });
 
     
