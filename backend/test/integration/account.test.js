@@ -18,6 +18,8 @@ import GameRoutes from "../../src/routes/Game.Routes.js";
 import GameService from "../../src/services/Game.Service.js";
 
 import User from "../../src/models/User.model.js";
+
+import jwt from "jsonwebtoken";
 import { response } from "express";
 
 
@@ -33,6 +35,7 @@ describe("Tests of Account routes", () => {
     let database;
     let request;
     let token;
+    let expiredToken
 
     const newTestUser = {
         "username": "TestGuy",
@@ -353,6 +356,17 @@ describe("Tests of Account routes", () => {
             const response = await request.post("/auth/login").send(newTestLogin);
             const tokenCookie = response.headers['set-cookie'].find(cookie => cookie.startsWith('token='));
             token = tokenCookie.split(';')[0].split('=')[1];
+
+            const users = await User.find({});
+            const user = users[0];
+
+            expiredToken = jwt.sign({
+                id: user._id,
+                username: user.userName,
+                admin: user.admin
+            }, process.env.SECRET, {
+                expiresIn: 0,
+            });
             
         });
         describe("Test a successful password change ", () => {
@@ -385,7 +399,7 @@ describe("Tests of Account routes", () => {
         });
 
         describe("Test a unsuccessful password change, with wrong original password ", () => {
-            it("should respond with 200 - password changed", async () => {
+            it("should respond with 401 - authorisation fail", async () => {
                 //Arrange
                 const oldPass = "Test!1234";
                 const newPass = "Test!1234"
@@ -412,10 +426,40 @@ describe("Tests of Account routes", () => {
                 
             });
         });
+
+        describe("Testing expired tokens don't allow you to change the password", () => {
+            it("Should respond with 401 authorisation fail ",async () => {
+                //Arrange
+                const oldPass = "Test!123";
+                const newPass = "Test!1234"
+                const newLogin = {
+                    "username": "TestGuy",
+                    "password": newPass
+                };
+                const payload = { "oldpassword": oldPass, "newpassword": newPass };
+
+                let users = await User.find();                
+               
+                //Act                
+                const response = await request.post("/auth/changepassword")
+                    .set('Cookie', `token=${expiredToken}`)
+                    .send(payload);
+                
+                users = await User.find();                
+                
+                const loginRes = await request.post("/auth/login").send(newLogin);
+
+                //Assert
+                expect(response.status).to.equal(401);
+                expect(loginRes.status).to.equal(401);
+                
+            })
+        })
     });
 
     describe('Delete Account tests', () => { 
         let testPass;
+        
 
         beforeEach(async () => {
             await request.post("/auth/newuser").send(newTestUser);
@@ -425,6 +469,18 @@ describe("Tests of Account routes", () => {
             token = tokenCookie.split(';')[0].split('=')[1];
 
             testPass = "Test!123";
+
+            const users = await User.find({});
+            const user = users[0];
+
+            expiredToken = jwt.sign({
+                id: user._id,
+                username: user.userName,
+                admin: user.admin
+            }, process.env.SECRET, {
+                expiresIn: 0,
+            });
+            
             
         });
 
@@ -488,7 +544,7 @@ describe("Tests of Account routes", () => {
             
         })
 
-        it("Should respond with 401 - Unauthorised if the wrong password is supplied", async() => {
+        it("Should respond with 401 - Unauthorised if the wrong password is supplied", async () => {
             //Arrange
             const payload = { "password": "badPass" };
 
@@ -498,18 +554,37 @@ describe("Tests of Account routes", () => {
                 .set('Cookie', `token=${token}`)
                 .send(payload);
             
-            const users = await User.find({});            
+            const users = await User.find({});
 
             //Assert
 
             expect(response.status).to.equal(401);
             
-            expect(response.body).to.have.property("message").that.includes("Unauthorised");            
+            expect(response.body).to.have.property("message").that.includes("Unauthorised");
             
 
             expect(users).to.be.an('array').that.has.lengthOf(1);
             
-        })
+        });
+        it("Should response with 401 - unauthorised if token expired ", async () => {
+            //Arrange
+            const payload = { "password": testPass };
+
+            //Act
+
+            const response = await request.post("/auth/deleteaccount")
+                .set('Cookie', `token=${expiredToken}`)
+                .send(payload);
+            
+            const users = await User.find({});
+
+            //Assert
+
+            expect(response.status).to.equal(401);            
+            expect(response.body).to.have.property("message").that.includes("Unauthorised");
+            expect(users).to.be.an('array').that.has.lengthOf(1);
+            
+        });
      })
 
     
