@@ -383,6 +383,35 @@ describe("Tests of Account routes", () => {
                 expect(loginRes.headers['set-cookie']).to.satisfy(cookies => cookies.some(cookie => cookie.startsWith('token=')));
             });
         });
+
+        describe("Test a unsuccessful password change, with wrong original password ", () => {
+            it("should respond with 200 - password changed", async () => {
+                //Arrange
+                const oldPass = "Test!1234";
+                const newPass = "Test!1234"
+                const newLogin = {
+                    "username": "TestGuy",
+                    "password": newPass
+                };
+                const payload = { "oldpassword": oldPass, "newpassword": newPass };
+
+                let users = await User.find();                
+               
+                //Act                
+                const response = await request.post("/auth/changepassword")
+                    .set('Cookie', `token=${token}`)
+                    .send(payload);
+                
+                users = await User.find();                
+                
+                const loginRes = await request.post("/auth/login").send(newLogin);
+
+                //Assert
+                expect(response.status).to.equal(401);
+                expect(loginRes.status).to.equal(401);
+                
+            });
+        });
     });
 
     

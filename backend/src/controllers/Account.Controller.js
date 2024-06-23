@@ -54,7 +54,7 @@ export default class AccountController{
                 .send({ message: "User has logged in", username: user.userName, ...(user.admin&&{admin: true}) });
             
         } catch (error) {
-            console.log(error);
+            //console.log(error);
             res.status(401).json(error);
         }        
     }
@@ -65,7 +65,7 @@ export default class AccountController{
             let user = await this.#accountService.changePassword(req);
             return res.status(200).send({ message: "Password changed" });
         } catch (error) {
-            console.log(`Error in password change ->`, error);
+            //console.log(`Error in password change ->`, error);
             res.status(401).json(error);
         }
     }
