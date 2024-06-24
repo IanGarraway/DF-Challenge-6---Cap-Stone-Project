@@ -54,3 +54,12 @@
   box-shadow: 0 0 20px black;
   opacity: 1;
 }
+
+
+
+.AdminTableLine{
+  padding :10px;
+  border-radius: 100px;
+  margin: 5px;
+  box-shadow: 0 0 10px whitesmoke;
+}

@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
-import AccountService from '../service/AccountService';
+import AccountService from '../service/Account.Service';
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 

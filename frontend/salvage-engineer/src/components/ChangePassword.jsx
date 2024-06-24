@@ -7,7 +7,7 @@ import Row from 'react-bootstrap/Row';
 import * as formik from 'formik';
 import * as Yup from 'yup'
 
-import AccountService from '../service/AccountService';
+import AccountService from '../service/Account.Service';
 
 
 const ChangePassword = () => {

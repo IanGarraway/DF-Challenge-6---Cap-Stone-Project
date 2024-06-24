@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import { useCookies } from 'react-cookie';
 
 
-import AccountService from '../service/AccountService';
+import AccountService from '../service/Account.Service';
 import { useNavigate } from "react-router-dom";
 
 

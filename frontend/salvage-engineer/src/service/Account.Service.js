@@ -7,8 +7,6 @@ const apiURL = import.meta.env.VITE_API_URL;
 export default class AccountService{    
 
     static async login(username, password) {
-        console.log(password);
-        
         try {            
             const response = await httpService.post(`${apiURL}/auth/login`, {
                 "username":username,
@@ -32,7 +30,8 @@ export default class AccountService{
                 "password": password,
                 "name": name,
                 "email": email
-            } );            
+            }); 
+            console.log(response);
             return response;
         } catch (e) {
             console.error(`Error creating account`, e);

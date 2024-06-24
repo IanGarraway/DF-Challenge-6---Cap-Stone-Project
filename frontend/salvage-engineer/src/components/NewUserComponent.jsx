@@ -8,7 +8,7 @@ import Tooltip  from 'react-bootstrap/Tooltip';
 import * as formik from 'formik';
 import * as Yup from 'yup'
 
-import AccountService from '../service/AccountService';
+import AccountService from '../service/Account.Service';
 import Terms from './Terms';
 
 
@@ -135,22 +135,15 @@ const NewUserComponent = () => {
             
                     <Form.Check
                         required
-                        label=""
+                        label="Agree to the terms and conditions"
                         name="terms"
                         onChange={handleChange}
                         isInvalid={!!errors.terms}
                         feedback="You must agree before submitting."
                         feedbackType="invalid"
                         data-testid={"newTerms"}
-                    >
-                        <Form.Check.Label>
-                            Agree to{' '}
-                            <Link title="terms and conditions" id="t&c" >
-                                terms and conditions
-                            </Link>{' '}
-                        </Form.Check.Label>
+                    />
                         
-                    </Form.Check>
                     <Button variant="primary" type="submit" data-testid={"newButton"}>
                         Submit
                     </Button>
@@ -161,3 +154,28 @@ const NewUserComponent = () => {
 }
 
 export default NewUserComponent;
+
+
+{/* <Form.Group controlId='formTerms'>
+            
+                        <Form.Check
+                            required                            
+                            name="terms"
+                            checked={values.terms}
+                            onChange={handleChange}
+                            isInvalid={touched.terms &&!!errors.terms}                            
+                            data-testid={"newTerms"}
+                        >
+                            <Form.Check.Input type="checkbox" />
+                            <Form.Check.Label>
+                                Agree to{' '}
+                                <OverlayTrigger overlay={<Tooltip id="tooltip-terms"><Terms /></Tooltip>}>
+                                    <a href="#" title="terms and conditions">terms and conditions</a>
+                                </OverlayTrigger>
+                            </Form.Check.Label>
+                            <Form.Control.Feedback type="invalid">
+                                {errors.terms}
+                            </Form.Control.Feedback>
+                        
+                        </Form.Check>
+                    </Form.Group> */}

@@ -9,6 +9,7 @@ import Login from './pages/Login';
 
 import './App.css'
 import AccountManagement from './pages/AccountManagement';
+import Admin from './pages/Admin';
 
 
 
@@ -38,11 +39,15 @@ function App() {
             />
             <Route
               path="/"
-              element={<AccountManagement />}            
+              element={<Admin user ={user} />}            
             />
             <Route
               path="/accountManagement"
               element={<AccountManagement />}            
+            />
+            <Route
+              path="/admin"
+              element={<Admin user ={user} />}
             />
 
           </Routes>
