@@ -8,7 +8,14 @@
   padding-top: 40px;
   justify-content: center;
   height: 100vh;
+  background-image: url("./assets/backgroundEngineer.png");
 
+}
+
+.routesContainer{
+  padding: 10px;
+  
+  
 }
 
 .loginScreen{
@@ -18,9 +25,32 @@
   padding: 10px;
   border: 1px solid black;
   box-shadow: 0 0 20px black;
+  background-color: beige;
+  opacity: .8;
   
 }
 
 .loginBoxes{
   justify-self: center;
+  
+}
+
+.accountManagement{
+  
+  padding : 20px;    
+  box-shadow: 0 0 20px black;
+  background-color: beige;
+  opacity: .8;
+}
+
+.deleteAccount{
+  padding: 10px;
+  box-shadow: 0 0 20px black;
+  opacity: 1;
+}
+
+.changePassword{
+  padding: 10px;
+  box-shadow: 0 0 20px black;
+  opacity: 1;
 }

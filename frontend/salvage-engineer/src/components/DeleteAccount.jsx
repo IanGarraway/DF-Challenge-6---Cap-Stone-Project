@@ -34,53 +34,55 @@ const DeleteAccount = () => {
         
     }
     return (
-        <Form onSubmit={handleSubmit}>
-            <h2>Account Deletion</h2>
-            <Row>
-                <Col></Col>
-                <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                    <Form.Check
-                        type="switch"
-                        label="Confirm you wish to delete your account. This is a permanent decision and can not be undone."
-                        id='confirmDelete'
-                        onChange={handleChange}
-                        data-testid={"deleteSwitch"}
+        <div className="deleteAccount">
+            <Form onSubmit={handleSubmit}>
+                <h2>Account Deletion</h2>
+                <Row>
+                    <Col></Col>
+                    <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                        <Form.Check
+                            type="switch"
+                            label="Confirm you wish to delete your account. This is a permanent decision and can not be undone."
+                            id='confirmDelete'
+                            onChange={handleChange}
+                            data-testid={"deleteSwitch"}
 
-                    />
-                </Form.Group>
-            </Row>
-            <Row>
-                <Col xs={8}>
-                    <Form.Group as={Row} className="mb-3" controlId="formBasicEmail">
-                        <Form.Label column sm={3}>Password</Form.Label>
-                        <Col sm={9}>
-                            <Form.Control
-                                type="password"
-                                placeholder="Enter password to delete"
-                                ref={password}
-                                data-testid={"deletePassword"}
-                            />
-                            <Form.Text className="text-muted">
-                                        enter your password to confirm you wish to delete your account
-                                    </Form.Text>
-                        </Col>
+                        />
                     </Form.Group>
-                </Col>
-                <Col>
-                    <Button
-                        variant="primary"
-                        type="submit"
-                        disabled={confirmDelete}
-                        data-testid={"deleteButton"}
-                    >
-                        Delete Account
-                    </Button>
-                </Col>
+                </Row>
+                <Row>
+                    <Col xs={8}>
+                        <Form.Group as={Row} className="mb-3" controlId="formBasicEmail">
+                            <Form.Label column sm={3}>Password</Form.Label>
+                            <Col sm={9}>
+                                <Form.Control
+                                    type="password"
+                                    placeholder="Enter password to delete"
+                                    ref={password}
+                                    data-testid={"deletePassword"}
+                                />
+                                <Form.Text className="text-muted">
+                                    enter your password to confirm you wish to delete your account
+                                </Form.Text>
+                            </Col>
+                        </Form.Group>
+                    </Col>
+                    <Col>
+                        <Button
+                            variant="primary"
+                            type="submit"
+                            disabled={confirmDelete}
+                            data-testid={"deleteButton"}
+                        >
+                            Delete Account
+                        </Button>
+                    </Col>
                 
-            </Row>
-        </Form>
+                </Row>
+            </Form>
+        </div>
         
-    )
+    );
 }
 
 export default DeleteAccount;

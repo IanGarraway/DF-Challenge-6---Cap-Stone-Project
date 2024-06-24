@@ -62,9 +62,9 @@ done:
 
 - [x] React account management page (Delete account section) with appropriate confirmations
 - [x] delete account service (front end)
-- [ ] /delete route (auth service backend)
+- [x] /delete route (auth service backend)
 - [x] front end testing
-- [ ] back end testing
+- [x] back end testing
 
 ### User story 5
 
