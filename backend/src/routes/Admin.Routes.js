@@ -1,5 +1,6 @@
 import { Router } from "express";
 import AdminController from "../controllers/Admin.Controller.js";
+import LoginValidator from "../middleware/Login.validator.js";
 
 
 export default class AdminRoutes{
@@ -9,10 +10,12 @@ export default class AdminRoutes{
     #routeStartPoint;
 
     constructor(origin = "http://localhost:5173", controller = new AdminController(), routeStartPoint = "/admin") {
+        this.#origin = origin;
         this.#controller = controller;
         this.#routeStartPoint = routeStartPoint;
         this.#router = Router();
         this.#initialiseRoutes();
+        
     }
 
     #initialiseRoutes = () => {
@@ -29,7 +32,9 @@ export default class AdminRoutes{
 
         //Admin Routes
 
-        this.#router.get('/data', this.#controller.getData);
+        this.#router.get('/data', [
+            LoginValidator.verifyToken
+        ], this.#controller.getData);
         
     };
     getRouter = () => { return this.#router; };

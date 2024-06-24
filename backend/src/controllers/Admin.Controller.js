@@ -10,8 +10,15 @@ export default class AdminController{
 
 
 
-    getData = () => {
-        console.log("Admin Controller GetData");
+    getData = async (req, res) => {
+        console.log(`Admin controller getData`);
+        try {
+            const accountData = await this.#adminService.getData();
+            return res.status(200).send(accountData);
+        } catch (e) {
+            return res.status(500).send({ message: e.message });
+        }
+        
     }
     
 }
