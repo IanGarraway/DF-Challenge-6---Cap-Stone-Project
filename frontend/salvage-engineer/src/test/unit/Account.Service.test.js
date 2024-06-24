@@ -1,5 +1,5 @@
 import { afterEach, describe, expect } from "vitest";
-import AccountService from "../../service/AccountService.js";
+import AccountService from "../../service/Account.Service.js";
 import axios from "axios";
 
 vi.mock('axios');
