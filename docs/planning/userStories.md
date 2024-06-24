@@ -72,10 +72,10 @@ done:
 
 done:
 
-- [ ] React Admin page
+- [x] React Admin page
 - [ ] Only accessible by someone with an admin account
-- [ ] get account data service (front end admin service)
-- [ ] account data route (back end)
+- [x] get account data service (front end admin service)
+- [x] account data route (back end)
 - [ ] only admin users can access this route
 - [ ] account data securely fetched from database
 - [ ] front end testing

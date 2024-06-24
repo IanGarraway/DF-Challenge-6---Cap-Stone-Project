@@ -10,9 +10,10 @@ export default class AdminController{
 
 
 
-    getData = async (req, res) => {
-        console.log(`Admin controller getData`);
-        try {
+    getData = async (req, res) => {        
+        try {            
+            if (!(req.admin)) { return res.status(401).send({ message: "Unauthorised" }); }
+            
             const accountData = await this.#adminService.getData();
             return res.status(200).send(accountData);
         } catch (e) {

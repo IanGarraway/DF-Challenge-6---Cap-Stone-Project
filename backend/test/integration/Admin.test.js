@@ -37,6 +37,8 @@ describe("Tests of Admin routes", () => {
     let token;
     let expiredToken
 
+    let nonAdminToken;
+
     const adminTestUser = {
         "username": "TestAdmin",
         "password": "Test!123",
@@ -76,16 +78,16 @@ describe("Tests of Admin routes", () => {
 
         await request.post("/auth/newuser").send(adminTestUser);
 
+        const user = await User.findOne({ userName: "TestAdmin" });        
+        user.admin = true;
+        user.save();
+
         const response = await request.post("/auth/login").send(adminTestLogin);
         const tokenCookie = response.headers['set-cookie'].find(cookie => cookie.startsWith('token='));
         token = tokenCookie.split(';')[0].split('=')[1];
 
         
-        const user = await User.findOne({ userName: "TestAdmin" });
         
-        user.admin = true;
-
-        user.save();
 
         expiredToken = jwt.sign({
             id: user._id,
@@ -99,6 +101,10 @@ describe("Tests of Admin routes", () => {
 
         const users = await User.find({});
         console.log(users.length, ' test accounts in db');
+
+        const notAdminResponse = await request.post("/auth/login").send({"username": "user1","password": "Testpass!1"});
+        const tokenCookie2 = notAdminResponse.headers['set-cookie'].find(cookie => cookie.startsWith('token='));
+        nonAdminToken = tokenCookie2.split(';')[0].split('=')[1];
         
         
     })
@@ -163,12 +169,28 @@ describe("Tests of Admin routes", () => {
         })
 
     })
-    describe("Get Admin data tests without an expired cookie", () => {
+    describe("Get Admin data tests with an expired cookie", () => {
         it("should return 401 unauthorised", async () => {
             //arrange
 
             //act
             const response = await request.get("/admin/data").set('Cookie', `token=${expiredToken}`);
+            //console.log(response);
+
+            //assert
+
+            expect(response.status).to.equal(401);
+            expect(response.body).to.have.property("message").that.includes("Unauthorised");
+        })
+
+    })
+
+    describe("Get Admin data tests with a non admin cookie", () => {
+        it("should return 401 unauthorised", async () => {
+            //arrange
+
+            //act
+            const response = await request.get("/admin/data").set('Cookie', `token=${nonAdminToken}`);
             //console.log(response);
 
             //assert
