@@ -4,7 +4,7 @@ import { FloatingLabel, Form } from 'react-bootstrap'
 function AdminTableInfo({ account }) {
     
     return (
-        <div>
+        <div className='tableInfo'>
             <FloatingLabel
                 controlId="floatingData"
                 label="Email address"

@@ -76,10 +76,10 @@ done:
 - [ ] Only accessible by someone with an admin account
 - [x] get account data service (front end admin service)
 - [x] account data route (back end)
-- [ ] only admin users can access this route
-- [ ] account data securely fetched from database
-- [ ] front end testing
-- [ ] back end testing
+- [x] only admin users can access this route
+- [x] account data securely fetched from database
+- [x] front end testing
+- [x] back end testing
 
 ### User story 6
 
