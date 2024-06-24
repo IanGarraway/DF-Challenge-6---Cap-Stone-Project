@@ -27,7 +27,7 @@ describe("Admin page tests", () => {
 
         test("Displays account data if data is passed in", () => {
             //Arrange
-            console.log(accountData, `<--`);
+            
 
             //Act
             render(<AdminTable accounts={accountData.data} />,
@@ -41,6 +41,98 @@ describe("Admin page tests", () => {
 
             expect(adminEmails).to.be.an('array').that.has.lengthOf(20);
             expect(adminNames).to.be.an('array').that.has.lengthOf(20);
+            
+        })
+
+        test("Displays promote Buttons are being rendered", () => {
+            //Arrange
+            
+
+            //Act
+            render(<AdminTable accounts={accountData.data} />,
+                { wrapper: MemoryRouter }
+                       
+            )
+            //Assert
+
+            const promoteButtons = screen.getAllByTestId("promoteButton");
+            
+
+            expect(promoteButtons).to.be.an('array').that.has.lengthOf(20);
+            
+            
+        })
+
+        test("Displays promote tab disabled if account is admin", () => {
+            //Arrange
+            const testData = [{
+                "_id": 2,
+                "userName": "user2",
+                "email": "user2@example.com",
+                "name": "User 2",
+                "admin": true
+            }];
+
+            //Act
+            render(<AdminTable accounts={testData} />,
+                { wrapper: MemoryRouter }
+                       
+            )
+            //Assert
+
+            expect(screen.getByText("Promote")).toBeDisabled();            
+            
+        })
+
+        test("Displays promote tab not disabled if account is not admin", () => {
+            //Arrange
+            const testData = [{
+                "_id": 2,
+                "userName": "user2",
+                "email": "user2@example.com",
+                "name": "User 2",
+                "admin": false
+            }];
+
+            //Act
+            render(<AdminTable accounts={testData} />,
+                { wrapper: MemoryRouter }
+                       
+            )
+            //Assert
+
+            expect(screen.getByText("Promote")).not.toBeDisabled();            
+            
+        })
+
+        test("Promote button enabled by clicking the switch", async () => {
+            //Arrange
+            const testData = [{
+                "_id": 2,
+                "userName": "user2",
+                "email": "user2@example.com",
+                "name": "User 2",
+                "admin": false
+            }];
+
+            //Act
+            render(<AdminTable accounts={testData} />,
+                { wrapper: MemoryRouter }
+                       
+            )
+
+            const promoteSwitch = screen.getByTestId("promoteSwitch");
+            const promoteButton = screen.getByTestId("promoteButton");
+
+            expect(promoteButton).toBeDisabled();            
+
+            await userEvent.click(promoteSwitch);
+
+
+
+            //Assert
+            expect(promoteButton).not.toBeDisabled();            
+            expect(screen.getByText("Promote")).not.toBeDisabled();            
             
         })
     })

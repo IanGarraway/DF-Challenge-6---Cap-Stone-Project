@@ -13,7 +13,7 @@ const AdminTableLine = ({ account }) => {
   return (
       <div className='AdminTableLine'>
           <Card bg={variant} text={textVariant} >
-              <Card.Header data-testid={"adminAccount"}>{account.name} {(account.admin && "(admin account)" )}</Card.Header>
+              <Card.Header data-testid={"adminAccount"}>{account.userName} {(account.admin && "(admin account)" )}</Card.Header>
             <Tabs variant="pills" defaultActiveKey="info" id="AdminTableLineTab" className='mb-3' >
                   <Tab eventKey="info" title="Info">
                       <AdminTableInfo account={account} />
@@ -21,7 +21,7 @@ const AdminTableLine = ({ account }) => {
                   <Tab eventKey="delete" title="Delete" >
                       delete
                   </Tab>
-                  <Tab eventKey="promote" title="Promote" disabled={account.admin} >
+                  <Tab eventKey="promote" title="Promote" disabled={account.admin} data-testid={"promoteTab"} >
                       <AdminPromote account={account} />
                   </Tab>
               </Tabs>
