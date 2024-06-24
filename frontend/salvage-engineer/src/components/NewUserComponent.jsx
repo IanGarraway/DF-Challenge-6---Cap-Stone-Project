@@ -2,11 +2,14 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { InputGroup, Alert } from 'react-bootstrap';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip  from 'react-bootstrap/Tooltip';
 
 import * as formik from 'formik';
 import * as Yup from 'yup'
 
 import AccountService from '../service/AccountService';
+import Terms from './Terms';
 
 
 
@@ -26,7 +29,13 @@ const NewUserComponent = () => {
         password: Yup.string().matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, { message: 'Password must be at least 8 characters, have at least 1 upper case, 1 lower case, 1 number and 1 special character' })
             .required('Required'),
         terms: Yup.bool().required('Terms must be accepted').oneOf([true], 'Terms must be accepted'),
-    });        
+    }); 
+    
+    const Link = ({id, children, title }) => (
+        <OverlayTrigger overlay={<Tooltip id={id}><Terms /></Tooltip>}>
+            <a href="#">{children}</a>
+        </OverlayTrigger>
+    )
 
     return (
         <Formik
@@ -126,14 +135,22 @@ const NewUserComponent = () => {
             
                     <Form.Check
                         required
-                        label="Agree to terms and conditions"
+                        label=""
                         name="terms"
                         onChange={handleChange}
                         isInvalid={!!errors.terms}
                         feedback="You must agree before submitting."
                         feedbackType="invalid"
                         data-testid={"newTerms"}
-                    />
+                    >
+                        <Form.Check.Label>
+                            Agree to{' '}
+                            <Link title="terms and conditions" id="t&c" >
+                                terms and conditions
+                            </Link>{' '}
+                        </Form.Check.Label>
+                        
+                    </Form.Check>
                     <Button variant="primary" type="submit" data-testid={"newButton"}>
                         Submit
                     </Button>
