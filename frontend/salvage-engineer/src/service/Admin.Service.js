@@ -21,4 +21,23 @@ export default class AdminService{
             throw e;
         }
     } 
+
+    static async promote(accountid) {
+        try {
+            const response = await httpService.post(`${apiURL}/admin/promote`, {
+                "accountId" : accountid},
+                {
+                withCredentials: true
+            
+                });
+            if (response.status === 200) {
+                return response;
+            } else {
+                throw new Error(response.body.message)
+            }
+        } catch (e) {
+            console.error(`Error Promoting account`, e);
+            throw e;
+        }
+    }
 }
