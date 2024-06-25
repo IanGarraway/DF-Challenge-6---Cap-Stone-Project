@@ -99,7 +99,7 @@ done:
 
 done:
 
-- [ ] option on admin page to delete user accounts
+- [x] option on admin page to delete user accounts
 - [ ] delete account service (front end admin service)
 - [ ] delete account route (back end admin service)
 - [ ] front end testing

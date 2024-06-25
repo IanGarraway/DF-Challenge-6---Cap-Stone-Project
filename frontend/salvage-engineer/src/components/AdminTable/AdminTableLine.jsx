@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
 import { Card, Tab, Tabs } from 'react-bootstrap'
-import AdminTableInfo from './AdminTableInfo';
-import AdminPromote from './AdminPromote';
+import AdminTableInfo from './AdminTableInfo.jsx';
+import AdminPromote from './AdminPromote.jsx';
+import AdminDelete from './AdminDelete.jsx'
 
 
 const AdminTableLine = ({ account, getAccounts }) => {
@@ -27,7 +28,7 @@ const AdminTableLine = ({ account, getAccounts }) => {
                       <AdminTableInfo account={account} />
                   </Tab>
                   <Tab eventKey="delete" title="Delete" >
-                      delete
+                      <AdminDelete account={account} getAccounts={getAccounts} setActiveTab={setActiveTab} />
                   </Tab>
                   <Tab eventKey="promote" title="Promote" disabled={account.admin} data-testid={"promoteTab"} >
                       <AdminPromote account={account} getAccounts={getAccounts} setActiveTab={setActiveTab} />

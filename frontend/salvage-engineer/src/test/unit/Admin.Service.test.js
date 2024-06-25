@@ -101,4 +101,49 @@ describe(`Admin Service tests`, () => {
         });
 
     });
+
+    describe(`Post delete tests`, () => {
+
+        test(`should send post request to admin/delete`, async () => {
+            //arrange
+            const mockAccountId = "1234";
+            const mockResponsePayload = { status: 200, body: { message: "Account promoted" }
+        };            
+            
+            axios.post.mockResolvedValue(mockResponsePayload);
+
+            //act
+            const response = await AdminService.delete(mockAccountId);  
+
+            //assert
+            expect(response.status).toEqual(200);
+           expect(response.body).to.have.property('message').that.includes('Account promoted');
+            expect(axios.post).toHaveBeenCalledWith(
+                'http://localhost:3000/admin/delete',
+                {"accountId":mockAccountId},
+                { withCredentials: true }
+            );
+
+        });
+
+        test(`get admin data should be able to handle failed `, async () => {
+            //arrange
+            const mockAccountId = "1234";
+            const mockError = new Error('Unauthorised Account error');
+            
+            axios.post.mockRejectedValue(mockError);
+
+            //act                     
+
+            //assert
+            await expect(AdminService.delete(mockAccountId)).rejects.toThrow("Unauthorised Account error");
+            expect(axios.post).toHaveBeenCalledWith(
+                'http://localhost:3000/admin/delete',
+                {"accountId":mockAccountId},
+                { withCredentials: true }
+            );
+
+        });
+
+    });
 });

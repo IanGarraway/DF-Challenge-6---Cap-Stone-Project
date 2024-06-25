@@ -80,7 +80,7 @@ describe("Admin page tests", () => {
             )
             //Assert
 
-            expect(screen.getByText("Promote")).toBeDisabled();            
+            expect(screen.getByText("Promote")).toBeDisabled();
             
         })
 
@@ -101,7 +101,7 @@ describe("Admin page tests", () => {
             )
             //Assert
 
-            expect(screen.getByText("Promote")).not.toBeDisabled();            
+            expect(screen.getByText("Promote")).not.toBeDisabled();
             
         })
 
@@ -124,15 +124,47 @@ describe("Admin page tests", () => {
             const promoteSwitch = screen.getByTestId("promoteSwitch");
             const promoteButton = screen.getByTestId("promoteButton");
 
-            expect(promoteButton).toBeDisabled();            
+            expect(promoteButton).toBeDisabled();
 
             await userEvent.click(promoteSwitch);
 
 
 
             //Assert
-            expect(promoteButton).not.toBeDisabled();            
-            expect(screen.getByText("Promote")).not.toBeDisabled();            
+            expect(promoteButton).not.toBeDisabled();
+            expect(screen.getByText("Promote")).not.toBeDisabled();
+            
+        })
+    
+
+        test("Delete button enabled by clicking the switch", async () => {
+            //Arrange
+            const testData = [{
+                "_id": 2,
+                "userName": "user2",
+                "email": "user2@example.com",
+                "name": "User 2",
+                "admin": false
+            }];
+
+            //Act
+            render(<AdminTable accounts={testData} />,
+                { wrapper: MemoryRouter }
+                       
+            )
+
+            const deleteSwitch = screen.getByTestId("adminDeleteSwitch");
+            const deleteButton = screen.getByTestId("adminDeleteButton");
+
+            expect(deleteButton).toBeDisabled();
+
+            await userEvent.click(deleteSwitch);
+
+
+
+            //Assert
+            expect(deleteButton).not.toBeDisabled();
+            
             
         })
     })
