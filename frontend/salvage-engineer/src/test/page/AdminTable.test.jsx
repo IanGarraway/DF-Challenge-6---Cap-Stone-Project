@@ -137,7 +137,7 @@ describe("Admin page tests", () => {
         })
     
 
-        test("Delete button enabled by clicking the switch", async () => {
+        test("Delete button exists and is enabled by clicking the switch", async () => {
             //Arrange
             const testData = [{
                 "_id": 2,
@@ -159,13 +159,39 @@ describe("Admin page tests", () => {
             expect(deleteButton).toBeDisabled();
 
             await userEvent.click(deleteSwitch);
-
-
-
+            
             //Assert
             expect(deleteButton).not.toBeDisabled();
-            
-            
+        })
+
+        test("change passwords button exists enabled by clicking the switch", async () => {
+            //Arrange
+            const testData = [{
+                "_id": 2,
+                "userName": "user2",
+                "email": "user2@example.com",
+                "name": "User 2",
+                "admin": false
+            }];
+
+            //Act
+            render(<AdminTable accounts={testData} />,
+                { wrapper: MemoryRouter }
+                       
+            )
+
+            const changeSwitch = screen.getByTestId("changeSwitch");
+            const changeButton = screen.getByTestId("changeButton");
+            const adminChangePassword = screen.getByTestId("adminChangePassword")
+
+            expect(changeSwitch).toBeInTheDocument();
+            expect(adminChangePassword).toBeInTheDocument();
+            expect(changeButton).toBeDisabled();
+
+            await userEvent.click(changeSwitch);
+
+            //Assert
+            expect(changeButton).not.toBeDisabled();
         })
     })
 

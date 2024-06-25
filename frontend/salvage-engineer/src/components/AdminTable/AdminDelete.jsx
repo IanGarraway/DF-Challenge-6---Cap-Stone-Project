@@ -5,11 +5,11 @@ import AdminService from "../../service/Admin.Service.js"
 
 function AdminDelete({account, getAccounts, setActiveTab}) {
 
-  const [confirmPromote, setConfirmPromote] = useState(false);
-  const [promoted, setPromoted] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
+  const [deleted, setDeleted] = useState(false);
   const [errorText, setErrorText] = useState("");
 
-  if (promoted) {
+  if (deleted) {
     return (
       <div className='d-grid gap-2'>
         Promoted
@@ -18,7 +18,7 @@ function AdminDelete({account, getAccounts, setActiveTab}) {
   }
 
   const handleChange = (target) => {
-    setConfirmPromote(target.target.checked);
+    setConfirmDelete(target.target.checked);
     
   }
 
@@ -29,7 +29,7 @@ function AdminDelete({account, getAccounts, setActiveTab}) {
       const response = await AdminService.delete(account._id);
 
       if (response.status === 200) {
-        setPromoted(true);
+        setDeleted(true);
         getAccounts();
         setErrorText("");
         setActiveTab("info");
@@ -47,7 +47,7 @@ function AdminDelete({account, getAccounts, setActiveTab}) {
       <Form onSubmit={handleSubmit} >
         <Form.Check
           type="switch"
-          id="confirmPromoteSwitch"
+          id="confirmDeleteSwitch"
           label="Confirm you wish to delete this account"
           onChange={handleChange}
           data-testid={"adminDeleteSwitch"}
@@ -57,7 +57,7 @@ function AdminDelete({account, getAccounts, setActiveTab}) {
           {errorText}
         </div>
         <div className='d-grid gap-2'>
-          <Button  variant='danger' type='submit' size="lg" disabled={!(confirmPromote)} data-testid={"adminDeleteButton"} >
+          <Button  variant='danger' type='submit' size="lg" disabled={!(confirmDelete)} data-testid={"adminDeleteButton"} >
             Delete this Account
           </Button>
         </div>

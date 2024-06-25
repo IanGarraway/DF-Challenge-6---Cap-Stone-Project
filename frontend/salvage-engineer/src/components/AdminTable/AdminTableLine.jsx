@@ -3,6 +3,7 @@ import { Card, Tab, Tabs } from 'react-bootstrap'
 import AdminTableInfo from './AdminTableInfo.jsx';
 import AdminPromote from './AdminPromote.jsx';
 import AdminDelete from './AdminDelete.jsx'
+import AdminChangePassword from './AdminChangePassword.jsx';
 
 
 const AdminTableLine = ({ account, getAccounts }) => {
@@ -32,6 +33,9 @@ const AdminTableLine = ({ account, getAccounts }) => {
                   </Tab>
                   <Tab eventKey="promote" title="Promote" disabled={account.admin} data-testid={"promoteTab"} >
                       <AdminPromote account={account} getAccounts={getAccounts} setActiveTab={setActiveTab} />
+                  </Tab>
+                  <Tab eventKey="change" title="Change" data-testid={"changeTab"} >
+                      <AdminChangePassword account={account} getAccounts={getAccounts} setActiveTab={setActiveTab} />
                   </Tab>
               </Tabs>
           </Card>

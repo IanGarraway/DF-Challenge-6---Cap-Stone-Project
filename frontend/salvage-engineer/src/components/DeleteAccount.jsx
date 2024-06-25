@@ -52,7 +52,7 @@ const DeleteAccount = () => {
                 </Row>
                 <Row>
                     <Col xs={8}>
-                        <Form.Group as={Row} className="mb-3" controlId="formBasicEmail">
+                        <Form.Group as={Row} className="mb-3" controlId="formBasicPassword">
                             <Form.Label column sm={3}>Password</Form.Label>
                             <Col sm={9}>
                                 <Form.Control
