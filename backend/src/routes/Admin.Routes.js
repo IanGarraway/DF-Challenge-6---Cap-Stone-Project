@@ -33,7 +33,8 @@ export default class AdminRoutes{
         //Admin Routes
 
         this.#router.get('/data', [
-            LoginValidator.verifyToken
+            LoginValidator.verifyToken,
+            LoginValidator.isAdmin
         ], this.#controller.getData);
         
     };

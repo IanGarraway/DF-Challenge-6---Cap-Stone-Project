@@ -11,9 +11,7 @@ export default class AdminController{
 
 
     getData = async (req, res) => {        
-        try {            
-            if (!(req.admin)) { return res.status(401).send({ message: "Unauthorised" }); }
-            
+        try {                                   
             const accountData = await this.#adminService.getData();
             return res.status(200).send(accountData);
         } catch (e) {
