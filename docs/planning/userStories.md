@@ -113,9 +113,9 @@ done:
 
 - [x] option on admin page to change a user's password
 - [x] change password service (front end admin service)
-- [ ] change password route (back end admin service)
-- [ ] front end testing
-- [ ] back end testing
+- [x] change password route (back end admin service)
+- [x] front end testing
+- [x] back end testing
   
 ### User story 9
 
