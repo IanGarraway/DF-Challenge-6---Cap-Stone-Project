@@ -180,5 +180,46 @@ describe(`Account Service tests`, () => {
         });
         
     })
+     describe("Logout Account tests", () => {
+        test("Able to send the logout account post", async () => {
+            //arrange                       
+
+            const mockResponsePayload = { status: 200, data: { message: 'Account logged out' } };
+
+            axios.post.mockResolvedValue(mockResponsePayload);
+
+            //Act
+            const response = await AccountService.logout();
+
+            //Assert
+            expect(response).toStrictEqual(mockResponsePayload);
+            expect(axios.post).toHaveBeenCalledWith(
+                'http://localhost:3000/auth/logout',
+                { "message": "Logout"  },
+                { withCredentials: true }
+            )
+        });
+
+        test("Able to handle errors with the delete account post", async () => {
+            //arrange
+            
+            const mockError = new Error('Delete Account error');
+            axios.post.mockRejectedValue(mockError);                        
+
+            //Act
+            
+
+            //Assert
+            await expect(AccountService.logout()).rejects.toThrow('Delete Account error');
+            
+            expect(axios.post).toHaveBeenCalledWith(
+                'http://localhost:3000/auth/logout',
+                { "message" : "Logout"  },
+                { withCredentials: true }
+            )
+            
+        });
+        
+    })
 
 });

@@ -67,4 +67,18 @@ export default class AccountService{
             throw e;
         }
     }
+
+    static async logout() {
+        try {
+            const response = await httpService.post(`${apiURL}/auth/logout`, {
+                message: "Logout"
+            }, {
+                withCredentials: true
+            });
+            return response;
+        } catch (e) {
+            console.error(`Error logging out`, e);
+            throw e;
+        }
+    }
 }

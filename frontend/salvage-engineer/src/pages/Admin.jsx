@@ -4,11 +4,8 @@ import { Navigate } from "react-router-dom";
 import AdminTable from "../components/AdminTable";
 
 
-const Admin = ({ user }) => {
-    
 
-    if(!user||!(user.admin)){return <Navigate to={'/'} />}
-    
+const Admin = ({ user, setUser }) => {   
 
     const [accounts, setAccounts] = useState([]);
 
@@ -26,7 +23,8 @@ const Admin = ({ user }) => {
     
 
     return (
-        <div className="adminPage">
+
+        <div className="adminPage">            
             <h1 style={{padding: '1rem', borderRadius: "40px"}}>Account Administration</h1>
             <div className="adminTable">
                 <div style={{ display: 'flex', flexDirection: 'column', height: '80vh', flexWrap: "wrap", columnCount: "2" }} >

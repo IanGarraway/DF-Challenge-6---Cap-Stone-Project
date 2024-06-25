@@ -117,6 +117,22 @@ done:
 - [x] front end testing
 - [x] back end testing
   
+### User story 23
+
+"As a user, I want to be able to log out of the program, removing my access token, so I can control who has access to my account"
+
+- [x] add log out button to header
+- [x] add logout route to front end service
+- [x] add logout route to backend service
+- [x] front end testing
+- [x] back end testing
+
+### User story 24
+
+"As a user, I want to be able to navigate the site, so I can use it effectively"
+
+- [x] add navigation system on a header
+
 ### User story 9
 
 "As a player, I'd like to see the games screen laid out like the wireframe"
@@ -271,3 +287,4 @@ done:
 - [ ] logic to verify user's choice is valid
 - [ ] front end testing
 - [ ] back end testing
+

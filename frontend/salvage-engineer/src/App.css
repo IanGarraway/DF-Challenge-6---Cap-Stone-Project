@@ -9,11 +9,13 @@
   justify-content: center;
   height: 100vh;
   background-image: url("./assets/backgroundEngineer.png");
+  background-size:contain;
 
 }
 
 .routesContainer{
   padding: 10px;
+  width: 100%;
   
   
 }

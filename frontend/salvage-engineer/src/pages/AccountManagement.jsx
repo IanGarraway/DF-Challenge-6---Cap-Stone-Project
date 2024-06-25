@@ -3,7 +3,7 @@ import ChangePassword from '../components/ChangePassword.jsx';
 import DeleteAccount from '../components/DeleteAccount.jsx'
 
 
-const AccountManagement = ({ user }) => {
+const AccountManagement = ({ user, setUser }) => {
     
 
     return (
