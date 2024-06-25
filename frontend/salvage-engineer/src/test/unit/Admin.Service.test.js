@@ -107,7 +107,7 @@ describe(`Admin Service tests`, () => {
         test(`should send post request to admin/delete`, async () => {
             //arrange
             const mockAccountId = "1234";
-            const mockResponsePayload = { status: 200, body: { message: "Account promoted" }
+            const mockResponsePayload = { status: 200, body: { message: "Account deleted" }
         };            
             
             axios.post.mockResolvedValue(mockResponsePayload);
@@ -117,7 +117,7 @@ describe(`Admin Service tests`, () => {
 
             //assert
             expect(response.status).toEqual(200);
-           expect(response.body).to.have.property('message').that.includes('Account promoted');
+           expect(response.body).to.have.property('message').that.includes('Account deleted');
             expect(axios.post).toHaveBeenCalledWith(
                 'http://localhost:3000/admin/delete',
                 {"accountId":mockAccountId},
@@ -140,6 +140,59 @@ describe(`Admin Service tests`, () => {
             expect(axios.post).toHaveBeenCalledWith(
                 'http://localhost:3000/admin/delete',
                 {"accountId":mockAccountId},
+                { withCredentials: true }
+            );
+
+        });
+
+    });
+
+    describe(`Post changepassword tests`, () => {
+
+        test(`should send post request to admin/changepassword`, async () => {
+            //arrange
+            const mockAccountId = "1234";
+            const mockNewPassword = "Test123!"
+            const mockResponsePayload = { status: 200, body: { message: "Password changed" }
+        };            
+            
+            axios.post.mockResolvedValue(mockResponsePayload);
+
+            //act
+            const response = await AdminService.changePassword(mockAccountId, mockNewPassword);  
+
+            //assert
+            expect(response.status).toEqual(200);
+           expect(response.body).to.have.property('message').that.includes('Password changed');
+            expect(axios.post).toHaveBeenCalledWith(
+                'http://localhost:3000/admin/changepassword',
+                {
+                    "accountId": mockAccountId,
+                    "newpassword": mockNewPassword
+                },
+                { withCredentials: true }
+            );
+
+        });
+
+        test(`get admin data should be able to handle failed `, async () => {
+            //arrange
+            const mockAccountId = "1234";
+            const mockNewPassword = "Test123!"
+            const mockError = new Error('Unauthorised Account error');
+            
+            axios.post.mockRejectedValue(mockError);
+
+            //act                     
+
+            //assert
+            await expect(AdminService.changePassword(mockAccountId, mockNewPassword)).rejects.toThrow("Unauthorised Account error");
+            expect(axios.post).toHaveBeenCalledWith(
+                'http://localhost:3000/admin/changepassword',
+                {
+                    "accountId": mockAccountId,
+                    "newpassword": mockNewPassword
+                },
                 { withCredentials: true }
             );
 

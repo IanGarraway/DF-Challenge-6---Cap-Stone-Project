@@ -58,4 +58,24 @@ export default class AdminService{
             throw e;
         }
     }
+
+    static async changePassword(accountid, password) {
+        try {
+            const response = await httpService.post(`${apiURL}/admin/changepassword`, {
+                "accountId": accountid,
+                "newpassword": password
+            },{
+                withCredentials: true
+            
+                });
+            if (response.status === 200) {
+                return response;
+            } else {
+                throw new Error(response.body.message)
+            }
+        } catch (e) {
+            console.error(`Error Deleting account`, e);
+            throw e;
+        }
+    }
 }
