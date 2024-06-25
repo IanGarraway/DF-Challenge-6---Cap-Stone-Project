@@ -39,10 +39,16 @@ export default class AdminRoutes{
         ], this.#controller.getData);
 
         this.#router.post('/promote', [
-            body(`username`).exists().notEmpty().escape(),
+            body(`accountId`).exists().notEmpty().escape(),
             LoginValidator.verifyToken,
             LoginValidator.isAdmin            
         ], this.#controller.promote)
+
+        this.#router.post('/delete', [
+            body(`accountId`).exists().notEmpty().escape(),
+            LoginValidator.verifyToken,
+            LoginValidator.isAdmin            
+        ], this.#controller.delete)
         
     };
     getRouter = () => { return this.#router; };

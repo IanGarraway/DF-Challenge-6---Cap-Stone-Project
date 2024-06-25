@@ -100,9 +100,9 @@ done:
 done:
 
 - [x] option on admin page to delete user accounts
-- [ ] delete account service (front end admin service)
+- [x] delete account service (front end admin service)
 - [ ] delete account route (back end admin service)
-- [ ] front end testing
+- [x] front end testing
 - [ ] back end testing
 
 ### User story 8

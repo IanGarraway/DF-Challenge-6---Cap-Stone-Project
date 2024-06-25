@@ -26,12 +26,25 @@ export default class AdminController{
             
             account.admin = true;
 
-            account.save();
+            await account.save();
 
             return res.status(200).send({ message: "Account promoted" });
         } catch (e) {
             return res.status(500).send({ message: e.message });
         }
     }
+
+    delete = async (req, res) => {
+        try {
+            const account = await User.findById(req.body.accountId)           
+            
+            await account.deleteOne();
+
+            return res.status(200).send({ message: "Account deleted" });
+        } catch (e) {
+            return res.status(500).send({ message: e.message });
+        }
+    }
+
     
 }

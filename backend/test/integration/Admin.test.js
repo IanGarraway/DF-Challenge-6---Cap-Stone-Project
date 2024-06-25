@@ -199,7 +199,7 @@ describe("Tests of Admin routes", () => {
 
     })
 
-    describe("Admin/Promote tests", () => {
+    describe("Post Admin promote tests", () => {
         it("Should change a users admin status to admin: true", async () => {
             //Arrange
             const testUser = "user3";
@@ -296,6 +296,109 @@ describe("Tests of Admin routes", () => {
             expect(response.body).to.have.property("message").that.includes("Unauthorised");
         });
         
+    });
+
+    describe("Post Admin delete tests", () => {
+        it("Should delete an account", async () => {
+            //Arrange
+            const testUser = "user5";
+
+            const testUserData = await User.findOne({ userName: testUser });
+            
+            const testUserID = testUserData._id;
+            const payload = { accountId: testUserID };
+
+            //Act
+
+            const response = await request.post("/admin/delete").set('Cookie', `token=${token}`).send(payload);
+
+            //Assert
+
+            expect(response.status).to.equal(200);
+            expect(response.body).to.have.property("message").that.includes("Account deleted");
+
+            const users = await User.find({});
+
+            expect(users).to.be.an('array').that.has.lengthOf(20);
+        });
+
+        it("Should handle an invalid account name", async () => {
+            //Arrange
+            const testUser = "badAccount";
+            
+            const payload = { accountId: testUser };
+
+            //Act
+
+            const response = await request.post("/admin/delete").set('Cookie', `token=${token}`).send(payload);
+
+            //Assert
+
+            expect(response.status).to.equal(500);
+            expect(response.body).to.have.property("message").that.includes("Cast to ObjectId failed");
+        });
+
+        it("Should refuse with no token", async () => {
+            //Arrange
+            const testUser = "user4";
+
+            const testUserData = await User.findOne({ userName: testUser });            
+
+            expect(testUserData.admin).to.be.false;
+            const testUserID = testUserData._id;
+            const payload = { accountId: testUserID };
+
+            //Act
+
+            const response = await request.post("/admin/delete").send(payload);
+
+            //Assert
+
+            expect(response.status).to.equal(401);
+            expect(response.body).to.have.property("message").that.includes("Unauthorised");
+        });
+
+        it("Should refuse with non admin token", async () => {
+            //Arrange
+            const testUser = "user4";
+
+            const testUserData = await User.findOne({ userName: testUser });            
+
+            expect(testUserData.admin).to.be.false;
+            const testUserID = testUserData._id;
+            const payload = { accountId: testUserID };
+
+            //Act
+
+            const response = await request.post("/admin/delete").set('Cookie', `token=${nonAdminToken}`).send(payload);
+
+            //Assert
+
+            expect(response.status).to.equal(401);
+            expect(response.body).to.have.property("message").that.includes("Unauthorised");
+        });
+
+        it("Should refuse with expired token", async () => {
+            //Arrange
+            const testUser = "user4";
+
+            const testUserData = await User.findOne({ userName: testUser });            
+
+            expect(testUserData.admin).to.be.false;
+            const testUserID = testUserData._id;
+            const payload = { accountId: testUserID };
+
+            //Act
+
+            const response = await request.post("/admin/delete").set('Cookie', `token=${expiredToken}`).send(payload);
+
+            //Assert
+
+            expect(response.status).to.equal(401);
+            expect(response.body).to.have.property("message").that.includes("Unauthorised");
+        });
+
+
     });
 
 });
