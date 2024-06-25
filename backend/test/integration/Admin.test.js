@@ -401,4 +401,117 @@ describe("Tests of Admin routes", () => {
 
     });
 
+    describe("Post change password tests", () => {
+        it("Should change the password of an account", async () => {
+            //Arrange
+            const testUser = "user6";
+            const newTestPass = "Testpass!2"
+
+            const testUserData = await User.findOne({ userName: testUser });
+            
+            const testUserID = testUserData._id;
+            const payload = { "accountId": testUserID, "newpassword": newTestPass };
+
+            const login = { username: testUser, password: newTestPass };
+
+            //Act
+
+            const response = await request.post("/admin/changepassword").set('Cookie', `token=${token}`).send(payload);
+
+            //Assert
+
+            expect(response.status).to.equal(200);
+            expect(response.body).to.have.property("message").that.includes("Password updated");
+
+            const loginResponse = await request.post("/auth/login").send(login);
+
+            expect(loginResponse.status).to.equal(200);
+            expect(loginResponse.headers['set-cookie']).to.satisfy(cookies => cookies.some(cookie => cookie.startsWith('token=')));
+
+            
+        });
+
+        it("Should handle an invalid account name", async () => {
+            //Arrange
+            const testUser = "badAccount";
+            const testPass = "Bad!pas5";
+            
+            const payload = {
+                accountId: testUser,
+                password: testPass
+             };
+
+            //Act
+
+            const response = await request.post("/admin/changepassword").set('Cookie', `token=${token}`).send(payload);
+
+            //Assert
+
+            expect(response.status).to.equal(500);
+            expect(response.body).to.have.property("message").that.includes("Cast to ObjectId failed");
+        });
+
+        it("Should refuse with no token", async () => {
+            //Arrange
+            const testUser = "user6";
+            const newTestPass = "Testpass!2"
+
+            const testUserData = await User.findOne({ userName: testUser });
+            
+            const testUserID = testUserData._id;
+            const payload = { "accountId": testUserID, "newpassword": newTestPass };          
+            
+            //Act
+
+            const response = await request.post("/admin/changepassword").send(payload);
+
+            //Assert
+
+            expect(response.status).to.equal(401);
+            expect(response.body).to.have.property("message").that.includes("Unauthorised");
+        });
+
+        it("Should refuse with non admin token", async () => {
+            //Arrange
+           const testUser = "user6";
+            const newTestPass = "Testpass!2"
+
+            const testUserData = await User.findOne({ userName: testUser });
+            
+            const testUserID = testUserData._id;
+            const payload = { "accountId": testUserID, "newpassword": newTestPass };
+
+            //Act
+
+            const response = await request.post("/admin/changepassword").set('Cookie', `token=${nonAdminToken}`).send(payload);
+
+            //Assert
+
+            expect(response.status).to.equal(401);
+            expect(response.body).to.have.property("message").that.includes("Unauthorised");
+        });
+
+        it("Should refuse with expired token", async () => {
+            //Arrange
+            const testUser = "user6";
+            const newTestPass = "Testpass!2"
+
+            const testUserData = await User.findOne({ userName: testUser });
+            
+            const testUserID = testUserData._id;
+            const payload = { "accountId": testUserID, "newpassword": newTestPass };
+
+            //Act
+
+            const response = await request.post("/admin/changepassword").set('Cookie', `token=${expiredToken}`).send(payload);
+
+            //Assert
+
+            expect(response.status).to.equal(401);
+            expect(response.body).to.have.property("message").that.includes("Unauthorised");
+        });
+
+
+    });
+
 });

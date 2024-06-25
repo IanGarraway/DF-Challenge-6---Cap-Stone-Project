@@ -49,6 +49,13 @@ export default class AdminRoutes{
             LoginValidator.verifyToken,
             LoginValidator.isAdmin            
         ], this.#controller.delete)
+
+        this.#router.post('/changepassword', [
+            body(`accountId`).exists().notEmpty().escape(),
+            body(`newpassword`).exists().notEmpty().escape(),
+            LoginValidator.verifyToken,
+            LoginValidator.isAdmin  
+        ], this.#controller.changePassword)
         
     };
     getRouter = () => { return this.#router; };

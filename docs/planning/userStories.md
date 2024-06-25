@@ -111,8 +111,8 @@ done:
 
 done:
 
-- [ ] option on admin page to change a user's password
-- [ ] change password service (front end admin service)
+- [x] option on admin page to change a user's password
+- [x] change password service (front end admin service)
 - [ ] change password route (back end admin service)
 - [ ] front end testing
 - [ ] back end testing

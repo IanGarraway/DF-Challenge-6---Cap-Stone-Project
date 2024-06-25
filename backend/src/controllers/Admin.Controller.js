@@ -22,11 +22,7 @@ export default class AdminController{
 
     promote = async (req, res) => {
         try {
-            const account = await User.findById(req.body.accountId)
-            
-            account.admin = true;
-
-            await account.save();
+            const account = await this.#adminService.promote(req)
 
             return res.status(200).send({ message: "Account promoted" });
         } catch (e) {
@@ -36,12 +32,21 @@ export default class AdminController{
 
     delete = async (req, res) => {
         try {
-            const account = await User.findById(req.body.accountId)           
-            
-            await account.deleteOne();
+            const account = await this.#adminService.delete(req);            
 
             return res.status(200).send({ message: "Account deleted" });
         } catch (e) {
+            return res.status(500).send({ message: e.message });
+        }
+    }
+
+    changePassword = async (req, res) => {
+        try {
+            const account = await this.#adminService.changePassword(req);
+
+            return res.status(200).send({ message: "Password updated" });
+        } catch (e) {
+            
             return res.status(500).send({ message: e.message });
         }
     }
