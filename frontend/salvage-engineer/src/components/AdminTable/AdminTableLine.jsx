@@ -1,10 +1,12 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Card, Tab, Tabs } from 'react-bootstrap'
 import AdminTableInfo from './AdminTableInfo';
 import AdminPromote from './AdminPromote';
 
 
-const AdminTableLine = ({ account }) => {
+const AdminTableLine = ({ account, getAccounts }) => {
+
+    const [activeTab, setActiveTab] = useState("info");
 
     let variant = "light";
     let textVariant = "dark"
@@ -14,7 +16,13 @@ const AdminTableLine = ({ account }) => {
       <div className='AdminTableLine'>
           <Card bg={variant} text={textVariant} >
               <Card.Header data-testid={"adminAccount"}>{account.userName} {(account.admin && "(admin account)" )}</Card.Header>
-            <Tabs variant="pills" defaultActiveKey="info" id="AdminTableLineTab" className='mb-3' >
+              <Tabs
+                  variant="pills"
+                  activeKey={activeTab}
+                  id="AdminTableLineTab"
+                  className='mb-3'
+                  onSelect={(selectedTab)=> setActiveTab(selectedTab)}
+              >
                   <Tab eventKey="info" title="Info">
                       <AdminTableInfo account={account} />
                   </Tab>
@@ -22,7 +30,7 @@ const AdminTableLine = ({ account }) => {
                       delete
                   </Tab>
                   <Tab eventKey="promote" title="Promote" disabled={account.admin} data-testid={"promoteTab"} >
-                      <AdminPromote account={account} />
+                      <AdminPromote account={account} getAccounts={getAccounts} setActiveTab={setActiveTab} />
                   </Tab>
               </Tabs>
           </Card>

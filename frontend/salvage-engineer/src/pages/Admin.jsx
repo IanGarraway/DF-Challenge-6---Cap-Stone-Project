@@ -31,7 +31,7 @@ const Admin = ({ user }) => {
             <div className="adminTable">
                 <div style={{ display: 'flex', flexDirection: 'column', height: '80vh', flexWrap: "wrap", columnCount: "2" }} >
                     <div style={{flex: '1', overflowY: 'auto'}}>
-                        <AdminTable accounts={accounts} />
+                        <AdminTable accounts={accounts} getAccounts={getAccounts} />
                         </div>
                 </div>
             </div>

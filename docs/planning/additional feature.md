@@ -10,4 +10,10 @@
 
 ## Interface
 
-### better feedback to the user on errors
+### feedback
+better feedback to the user on errors
+
+### admin page
+sort options
+search field
+different layout

@@ -89,9 +89,9 @@ done:
 
 - [x] option on admin page to promote a user to admin
 - [x] promote account service (front end admin service)
-- [ ] promote account route (back end admin service)
+- [x] promote account route (back end admin service)
 - [x] front end testing
-- [ ] back end testing
+- [x] back end testing
 
 ### User story 7
 
