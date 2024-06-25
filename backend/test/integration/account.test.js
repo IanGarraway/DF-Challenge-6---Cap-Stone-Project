@@ -585,7 +585,20 @@ describe("Tests of Account routes", () => {
             expect(users).to.be.an('array').that.has.lengthOf(1);
             
         });
-     })
+    })
+    
+    describe("Logout tests", () => {
+        it("will send a log out cookie", async()=> {
+            //Arrange
+
+            //Act
+
+            const response = await request.post("/auth/logout").send({ "message": "Logout" }).set('Cookie', `token=${token}`);
+
+            expect(response.status).to.equal(200);
+            expect(response.body).to.have.property("message").that.includes("User has logged out");
+        })
+    })
 
     
 

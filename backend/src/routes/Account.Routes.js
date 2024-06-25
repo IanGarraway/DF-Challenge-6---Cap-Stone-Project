@@ -57,7 +57,9 @@ export default class AccountRoutes{
         this.#router.post('/deleteaccount', [
             body('password').exists().notEmpty().escape(),
             LoginValidator.verifyToken
-        ],this.#controller.deleteAccount);
+        ], this.#controller.deleteAccount);
+        
+        this.#router.post('/logout', this.#controller.logout);
         
     };
     getRouter = () => { return this.#router; };

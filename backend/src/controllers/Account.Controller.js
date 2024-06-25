@@ -85,5 +85,23 @@ export default class AccountController{
             res.status(401).send({message: "Unauthorised"}).json(error);
         }
     }
+
+    logout = async (req, res) => {        
+        try {
+            
+            return res.status(200)
+                .cookie('token', "logout", {
+                    httpOnly: true,
+                    secure: SECURE, //needs to be true if on https
+                    sameSite: 'Strict',
+                    maxAge: 0 
+                })
+                .send({ message: "User has logged out" });
+            
+        } catch (error) {
+            //console.log(error);
+            res.status(401).json(error);
+        }        
+    }
     
 }
