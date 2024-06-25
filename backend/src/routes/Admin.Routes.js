@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { body } from "express-validator";
 import AdminController from "../controllers/Admin.Controller.js";
 import LoginValidator from "../middleware/Login.validator.js";
 
@@ -36,6 +37,12 @@ export default class AdminRoutes{
             LoginValidator.verifyToken,
             LoginValidator.isAdmin
         ], this.#controller.getData);
+
+        this.#router.post('/promote', [
+            body(`username`).exists().notEmpty().escape(),
+            LoginValidator.verifyToken,
+            LoginValidator.isAdmin            
+        ], this.#controller.promote)
         
     };
     getRouter = () => { return this.#router; };

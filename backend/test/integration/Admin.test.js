@@ -78,7 +78,7 @@ describe("Tests of Admin routes", () => {
 
         await request.post("/auth/newuser").send(adminTestUser);
 
-        const user = await User.findOne({ userName: "TestAdmin" });        
+        const user = await User.findOne({ userName: "TestAdmin" });
         user.admin = true;
         user.save();
 
@@ -95,14 +95,14 @@ describe("Tests of Admin routes", () => {
             admin: user.admin
         }, process.env.SECRET, {
             expiresIn: 0,
-        });      
+        });
         
         await addUsers(userData);
 
         const users = await User.find({});
         console.log(users.length, ' test accounts in db');
 
-        const notAdminResponse = await request.post("/auth/login").send({"username": "user1","password": "Testpass!1"});
+        const notAdminResponse = await request.post("/auth/login").send({ "username": "user1", "password": "Testpass!1" });
         const tokenCookie2 = notAdminResponse.headers['set-cookie'].find(cookie => cookie.startsWith('token='));
         nonAdminToken = tokenCookie2.split(';')[0].split('=')[1];
         
@@ -114,7 +114,7 @@ describe("Tests of Admin routes", () => {
     }
     async function addUsers(userData) {
         for (const userd of userData) {
-            const payload  = {
+            const payload = {
                 "username": userd.username,
                 "password": userd.password,
                 "name": userd.name,
@@ -122,7 +122,7 @@ describe("Tests of Admin routes", () => {
             }
             
             await request.post("/auth/newuser").send(payload);
-            //setTimeout(thing, 1);
+            setTimeout(thing, 1);
             
         }
     }
@@ -139,6 +139,7 @@ describe("Tests of Admin routes", () => {
     })
 
     describe("Get Admin data tests", () => {
+        
         it("should return 200 when a request with authorisation, gets the data", async () => {
             //arrange
 
@@ -152,10 +153,10 @@ describe("Tests of Admin routes", () => {
             expect(response.body).to.be.an('array').that.has.lengthOf(21);
         })
 
-    })
+    
 
-    describe("Get Admin data tests without a cookie", () => {
-        it("should return 401 unauthorised", async () => {
+    
+        it("should return 401 unauthorised if there is no cookie", async () => {
             //arrange
 
             //act
@@ -168,9 +169,8 @@ describe("Tests of Admin routes", () => {
             expect(response.body).to.have.property("message").that.includes("Unauthorised");
         })
 
-    })
-    describe("Get Admin data tests with an expired cookie", () => {
-        it("should return 401 unauthorised", async () => {
+    
+        it("should return 401 unauthorised with an expired cookie", async () => {
             //arrange
 
             //act
@@ -183,10 +183,8 @@ describe("Tests of Admin routes", () => {
             expect(response.body).to.have.property("message").that.includes("Unauthorised");
         })
 
-    })
-
-    describe("Get Admin data tests with a non admin cookie", () => {
-        it("should return 401 unauthorised", async () => {
+    
+        it("should return 401 unauthorised with a non admin cookie", async () => {
             //arrange
 
             //act
@@ -201,4 +199,103 @@ describe("Tests of Admin routes", () => {
 
     })
 
-})
+    describe("Admin/Promote tests", () => {
+        it("Should change a users admin status to admin: true", async () => {
+            //Arrange
+            const testUser = "user3";
+
+            const testUserData = await User.findOne({ userName: testUser });            
+
+            expect(testUserData.admin).to.be.false;
+            const testUserID = testUserData._id;
+            const payload = { accountId: testUserID };
+
+            //Act
+
+            const response = await request.post("/admin/promote").set('Cookie', `token=${token}`).send(payload);
+
+            //Assert
+
+            expect(response.status).to.equal(200);
+            expect(response.body).to.have.property("message").that.includes("Account promoted");
+        });
+
+        it("Should handle an invalid account name", async () => {
+            //Arrange
+            const testUser = "badAccount";
+            
+            const payload = { accountId: testUser };
+
+            //Act
+
+            const response = await request.post("/admin/promote").set('Cookie', `token=${token}`).send(payload);
+
+            //Assert
+
+            expect(response.status).to.equal(500);
+            expect(response.body).to.have.property("message").that.includes("Cast to ObjectId failed");
+        });
+
+        it("Should refuse with no token", async () => {
+            //Arrange
+            const testUser = "user4";
+
+            const testUserData = await User.findOne({ userName: testUser });            
+
+            expect(testUserData.admin).to.be.false;
+            const testUserID = testUserData._id;
+            const payload = { accountId: testUserID };
+
+            //Act
+
+            const response = await request.post("/admin/promote").send(payload);
+
+            //Assert
+
+            expect(response.status).to.equal(401);
+            expect(response.body).to.have.property("message").that.includes("Unauthorised");
+        });
+
+        it("Should refuse with non admin token", async () => {
+            //Arrange
+            const testUser = "user4";
+
+            const testUserData = await User.findOne({ userName: testUser });            
+
+            expect(testUserData.admin).to.be.false;
+            const testUserID = testUserData._id;
+            const payload = { accountId: testUserID };
+
+            //Act
+
+            const response = await request.post("/admin/promote").set('Cookie', `token=${nonAdminToken}`).send(payload);
+
+            //Assert
+
+            expect(response.status).to.equal(401);
+            expect(response.body).to.have.property("message").that.includes("Unauthorised");
+        });
+
+        it("Should refuse with expired token", async () => {
+            //Arrange
+            const testUser = "user4";
+
+            const testUserData = await User.findOne({ userName: testUser });            
+
+            expect(testUserData.admin).to.be.false;
+            const testUserID = testUserData._id;
+            const payload = { accountId: testUserID };
+
+            //Act
+
+            const response = await request.post("/admin/promote").set('Cookie', `token=${expiredToken}`).send(payload);
+
+            //Assert
+
+            expect(response.status).to.equal(401);
+            expect(response.body).to.have.property("message").that.includes("Unauthorised");
+        });
+        
+    });
+
+});

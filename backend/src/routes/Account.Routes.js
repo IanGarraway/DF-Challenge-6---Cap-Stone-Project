@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { body, validationResult } from "express-validator";
+import { body } from "express-validator";
 import AccountController from "../controllers/Account.Controller.js";
 
 import VerifySignup from "../middleware/VerifySignup.validator.js";
