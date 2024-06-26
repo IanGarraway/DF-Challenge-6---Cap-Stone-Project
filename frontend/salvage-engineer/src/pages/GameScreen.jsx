@@ -13,7 +13,7 @@ function GameScreen({ user, setUser }) {
     const [gameData, setGameData] = useState();
 
     const getData = async() => {
-        const response = await GameService.getData();
+        const response = await GameService.getDataa();
         if (response.status === 200) {
             setGameData(response.data);
         }
