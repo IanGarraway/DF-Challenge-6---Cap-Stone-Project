@@ -3,15 +3,18 @@ import bcrypt from "bcrypt";
 import AccountService from "../services/Account.Service.js";
 import User from "../models/User.model.js";
 import { validationResult } from "express-validator";
+import GameService from "../services/Game.Service.js";
 
 const { SECURE } = process.env;
 
 
 export default class AccountController{
     #accountService;
+    #gameService;
 
-    constructor(accountService = new AccountService) {
+    constructor(accountService = new AccountService, gameService = new GameService) {
         this.#accountService = accountService;
+        this.#gameService = gameService;
     }
 
 
@@ -31,6 +34,7 @@ export default class AccountController{
             });
 
             await user.save();
+            await this.#gameService.newAccount(user._id);
             return res.status(201).send({ message: "User was registered successfully" });
         } catch (error) {
             console.log("Registration error -->", error);

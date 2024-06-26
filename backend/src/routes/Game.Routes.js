@@ -1,5 +1,6 @@
 import { Router } from "express";
 import GameController from "../controllers/Game.Controller.js";
+import LoginValidator from "../middleware/Login.validator.js";
 
 
 export default class GameRoutes{
@@ -29,7 +30,9 @@ export default class GameRoutes{
 
         //Game Routes
 
-        this.#router.get('/data', this.#controller.getData);
+        this.#router.get('/data', [
+            LoginValidator.verifyToken
+        ],this.#controller.getData);
         
     };
     getRouter = () => { return this.#router; };

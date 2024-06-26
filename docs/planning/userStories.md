@@ -149,9 +149,9 @@ done:
 
 - [ ] Front end service to request data
 - [ ] Front end updates on receipt of data
-- [ ] getdata route
-- [ ] sends the users data
-- [ ] front end testing
+- [x] getdata route
+- [x] sends the users data
+- [x] front end testing
 - [ ] back end testing
 
 ### User story 11

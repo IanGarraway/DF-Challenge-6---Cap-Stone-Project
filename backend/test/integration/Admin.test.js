@@ -18,6 +18,7 @@ import GameRoutes from "../../src/routes/Game.Routes.js";
 import GameService from "../../src/services/Game.Service.js";
 
 import User from "../../src/models/User.model.js";
+import GameData from "../../src/models/gamedata.model.js";
 
 import jwt from "jsonwebtoken";
 import { response } from "express";
@@ -130,6 +131,7 @@ describe("Tests of Admin routes", () => {
     after(async () => {
         try {
             await User.deleteMany();
+            await GameData.deleteMany();
         } catch (e) {
             console.log(e.message);
             console.log("Error clearing out users");

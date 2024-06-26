@@ -3,8 +3,7 @@
     "userID" : "66796001268640893a535ff0",
     "lastgen": "timestamp",
     "inventory" : {
-        "credits" : 10,
-        "scrapCap" : 100,
+        "credits" : 10,        
         "scrap": 10,
         "T1Metal": 1,
         "T2Metal": 0,
@@ -100,7 +99,7 @@
             "smeltTier": 1
         }
     },
-    "PartsCap" : 10,
+    
     "partsStorage": [
         { 
             "name" : "Novatech Motor mk2",
@@ -144,8 +143,16 @@
         "powerDis": 1,
         "partsContainer" : 1,
         "rawResourceHopper" : 1
+    },
+    "power":{
+        "fabricator" : false,
+        "claw" : false,
+        "magnet" : false,
+        "scoop" : false
+    },
+    "caps":{
+        "PartsCap" : 10,
+        "scrapCap" : 100
     }
-
-
 
 }
