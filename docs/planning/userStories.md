@@ -137,8 +137,8 @@ done:
 
 "As a player, I'd like to see the games screen laid out like the wireframe"
 
-- [ ] Game screen layout matches the provided wireframe
-- [ ] User interface is responsive
+- [x] Game screen layout matches the provided wireframe
+- [x] User interface is responsive
 - [ ] front end testing
 
 ### User story 10

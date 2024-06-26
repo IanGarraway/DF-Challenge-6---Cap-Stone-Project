@@ -8,14 +8,17 @@
   padding-top: 40px;
   justify-content: center;
   height: 100vh;
-  background-image: url("./assets/backgroundEngineer.png");
-  background-size:contain;
+  background-image: url("backgrounds/background1.png");  
+  background-size:cover;
 
 }
 
 .routesContainer{
+  display: flex;
   padding: 10px;
   width: 100%;
+  align-items: center;
+  justify-content: center;
   
   
 }
@@ -67,4 +70,20 @@
 }
 .tableInfo{
   padding: 10px;
+}
+
+.gameScreen{
+  height: 90vh;
+  width: 90vw;
+  background-image: url("rig/salvageRig.jpg");
+  background-size: cover;
+  background-size: 40%;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex; 
+    
+  align-items: center;
+}
+.loading{
+  
 }

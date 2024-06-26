@@ -1,0 +1,189 @@
+[
+    {
+        "Name": "Scoop Motor Model 2834",
+        "Manufacturer": "ZyphCorp",
+        "Type": "Scoop Motor",
+        "Gathering Volume": 4
+    },
+    {
+        "Name": "Smelter Controllers Model 9421",
+        "Manufacturer": "GalactiWorks",
+        "Type": "Smelter Controllers",
+        "Tiers of Metal Which Can Be Refined": 5
+    },
+    {
+        "Name": "Grinder Motor Model 4728",
+        "Manufacturer": "StellarForge",
+        "Type": "Grinder Motor",
+        "Speed of Breaking Down Raw Resources": 2
+    },
+    {
+        "Name": "Scoop Sensor Model 5043",
+        "Manufacturer": "QuasarDynamics",
+        "Type": "Scoop Sensor",
+        "Gathering Quality": 3
+    },
+    {
+        "Name": "Sensors Model 6542",
+        "Manufacturer": "NebulaTech",
+        "Type": "Sensors",
+        "Time Between New Parts": 1
+    },
+    {
+        "Name": "Grinder Gears Model 7834",
+        "Manufacturer": "GalactiWorks",
+        "Type": "Grinder Gears",
+        "Speed of Breaking Down Raw Resources": 4
+    },
+    {
+        "Name": "Smelter Heater Model 1129",
+        "Manufacturer": "NebulaTech",
+        "Type": "Smelter Heater",
+        "Tiers of Metal Which Can Be Refined": 2
+    },
+    {
+        "Name": "Claw Hydraulics Model 8981",
+        "Manufacturer": "QuasarDynamics",
+        "Type": "Claw Hydraulics",
+        "Gathering Speed": 5,
+        "Gathering Volume": 1
+    },
+    {
+        "Name": "Claw Scanner Model 5560",
+        "Manufacturer": "GalactiWorks",
+        "Type": "Claw Scanner",
+        "Max Quality of Found Parts": 3
+    },
+    {
+        "Name": "Magnet Core Model 7482",
+        "Manufacturer": "ZyphCorp",
+        "Type": "Magnet Core",
+        "Gathering Volume": 4,
+        "Max Quality": 2
+    },
+    {
+        "Name": "Magnet Motor Model 2514",
+        "Manufacturer": "StellarForge",
+        "Type": "Magnet Motor",
+        "Gathering Speed": 3,
+        "Gathering Volume": 5
+    },
+    {
+        "Name": "Scoop Motor Model 9234",
+        "Manufacturer": "NebulaTech",
+        "Type": "Scoop Motor",
+        "Gathering Volume": 3
+    },
+    {
+        "Name": "Smelter Controllers Model 3359",
+        "Manufacturer": "QuasarDynamics",
+        "Type": "Smelter Controllers",
+        "Tiers of Metal Which Can Be Refined": 1
+    },
+    {
+        "Name": "Grinder Motor Model 6072",
+        "Manufacturer": "GalactiWorks",
+        "Type": "Grinder Motor",
+        "Speed of Breaking Down Raw Resources": 4
+    },
+    {
+        "Name": "Scoop Sensor Model 3491",
+        "Manufacturer": "StellarForge",
+        "Type": "Scoop Sensor",
+        "Gathering Quality": 5
+    },
+    {
+        "Name": "Sensors Model 7180",
+        "Manufacturer": "ZyphCorp",
+        "Type": "Sensors",
+        "Time Between New Parts": 3
+    },
+    {
+        "Name": "Grinder Gears Model 8415",
+        "Manufacturer": "NebulaTech",
+        "Type": "Grinder Gears",
+        "Speed of Breaking Down Raw Resources": 5
+    },
+    {
+        "Name": "Smelter Heater Model 2860",
+        "Manufacturer": "StellarForge",
+        "Type": "Smelter Heater",
+        "Tiers of Metal Which Can Be Refined": 3
+    },
+    {
+        "Name": "Claw Hydraulics Model 5932",
+        "Manufacturer": "GalactiWorks",
+        "Type": "Claw Hydraulics",
+        "Gathering Speed": 1,
+        "Gathering Volume": 2
+    },
+    {
+        "Name": "Claw Scanner Model 4771",
+        "Manufacturer": "QuasarDynamics",
+        "Type": "Claw Scanner",
+        "Max Quality of Found Parts": 4
+    },
+    {
+        "Name": "Magnet Core Model 8046",
+        "Manufacturer": "NebulaTech",
+        "Type": "Magnet Core",
+        "Gathering Volume": 2,
+        "Max Quality": 5
+    },
+    {
+        "Name": "Magnet Motor Model 1003",
+        "Manufacturer": "StellarForge",
+        "Type": "Magnet Motor",
+        "Gathering Speed": 2,
+        "Gathering Volume": 4
+    },
+    {
+        "Name": "Scoop Motor Model 5719",
+        "Manufacturer": "GalactiWorks",
+        "Type": "Scoop Motor",
+        "Gathering Volume": 1
+    },
+    {
+        "Name": "Smelter Controllers Model 2957",
+        "Manufacturer": "NebulaTech",
+        "Type": "Smelter Controllers",
+        "Tiers of Metal Which Can Be Refined": 4
+    },
+    {
+        "Name": "Grinder Motor Model 7324",
+        "Manufacturer": "ZyphCorp",
+        "Type": "Grinder Motor",
+        "Speed of Breaking Down Raw Resources": 2
+    },
+    {
+        "Name": "Scoop Sensor Model 1846",
+        "Manufacturer": "QuasarDynamics",
+        "Type": "Scoop Sensor",
+        "Gathering Quality": 4
+    },
+    {
+        "Name": "Sensors Model 9672",
+        "Manufacturer": "GalactiWorks",
+        "Type": "Sensors",
+        "Time Between New Parts": 5
+    },
+    {
+        "Name": "Grinder Gears Model 3091",
+        "Manufacturer": "StellarForge",
+        "Type": "Grinder Gears",
+        "Speed of Breaking Down Raw Resources": 1
+    },
+    {
+        "Name": "Smelter Heater Model 5820",
+        "Manufacturer": "QuasarDynamics",
+        "Type": "Smelter Heater",
+        "Tiers of Metal Which Can Be Refined": 2
+    },
+    {
+        "Name": "Claw Hydraulics Model 3458",
+        "Manufacturer": "ZyphCorp",
+        "Type": "Claw Hydraulics",
+        "Gathering Speed": 4,
+        "Gathering Volume": 3
+    }
+]

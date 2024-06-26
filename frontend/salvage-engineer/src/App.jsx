@@ -19,7 +19,7 @@ import Header from './components/Header.jsx';
 
 function App() {  
 
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState();
   const [cookies, setCookie, removeCookie] = useCookies(['user']);
   
 
@@ -35,11 +35,11 @@ function App() {
       <div className='salvageEngineer'>
         {user && <Header user={user} setUser={setUser}/>}
 
-        <div className='routesContainer' fluid>
+        <div className='routesContainer' >
           <Routes>
             <Route
               path="/login"
-              element={<Login user={user} setUser={setUser} />}
+              element={user ? <Navigate to="/" /> : <Login user={user} setUser={setUser} />}
             />
             <Route
               path="/"
