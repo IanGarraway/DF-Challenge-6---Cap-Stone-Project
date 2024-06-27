@@ -4,10 +4,10 @@ export default class GameService{
 
     getData = async (req) => {        
         try {
-            const gameData = await GameData.find({ userID: req.userId }, {_id:0, userID: 0});
+            const gameData = await GameData.findOne({ userID: req.userId });
 
-            delete gameData._id;
-            delete gameData.userID;
+            gameData._id = "";
+            gameData.userID = "";
             return gameData;
             
         } catch (e) {

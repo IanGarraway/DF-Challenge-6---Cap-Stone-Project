@@ -10,6 +10,7 @@ export default class GameRoutes{
     #routeStartPoint;
 
     constructor(origin = "http://localhost:5173", controller = new GameController(), routeStartPoint = "/") {
+        this.#origin=origin
         this.#controller = controller;
         this.#routeStartPoint = routeStartPoint;
         this.#router = Router();

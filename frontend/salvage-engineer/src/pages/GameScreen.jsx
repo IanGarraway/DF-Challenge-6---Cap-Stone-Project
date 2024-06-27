@@ -5,17 +5,21 @@ import Part from '../components/GameScreen/Part.jsx';
 import GameService from '../service/Game.Service.js';
 
 
-function GameScreen({ user, setUser }) {
+function GameScreen() {
 
     var r = document.querySelector('.salvageEngineer')
     r.style.setProperty('background-image','url("backgrounds/background3.png")' )      
 
     const [gameData, setGameData] = useState();
 
-    const getData = async() => {
-        const response = await GameService.getData();
-        if (response.status === 200) {
-            setGameData(response.data);
+    const getData = async () => {
+        try {
+            const response = await GameService.getData();
+            if (response.status === 200) {
+                setGameData(response.data);
+            }
+        } catch (e) {
+            console.error(e.message);
         }
     }    
 

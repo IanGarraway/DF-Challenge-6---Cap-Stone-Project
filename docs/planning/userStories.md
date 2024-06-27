@@ -147,12 +147,12 @@ done:
 
 done:
 
-- [ ] Front end service to request data
-- [ ] Front end updates on receipt of data
+- [x] Front end service to request data
+- [x] Front end updates on receipt of data
 - [x] getdata route
 - [x] sends the users data
 - [x] front end testing
-- [ ] back end testing
+- [x] back end testing
 
 ### User story 11
 

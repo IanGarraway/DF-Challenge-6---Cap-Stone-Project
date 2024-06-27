@@ -43,7 +43,7 @@ function App() {
             />
             <Route
               path="/"
-              element={user ? <GameScreen user ={user} setUser={setUser} /> : <Login user={user} setUser={setUser} /> } 
+              element={user ? <GameScreen  /> : <Login user={user} setUser={setUser} /> } 
             />
             <Route
               path="/accountmanagement"

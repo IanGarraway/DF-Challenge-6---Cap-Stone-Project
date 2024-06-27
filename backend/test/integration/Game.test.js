@@ -139,8 +139,8 @@ describe("Tests of Game routes", () => {
             //assert
 
             expect(response.status).to.equal(200);
-            expect(response.body[0]).to.have.property("lastGen");
-            expect(response.body[0]).to.have.property("inventory").to.have.property("credits");
+            expect(response.body).to.have.property("lastGen");
+            expect(response.body).to.have.property("inventory").to.have.property("credits");
         })
 
         it("should return 401 when a request without authorisation, dosen't get the data", async () => {

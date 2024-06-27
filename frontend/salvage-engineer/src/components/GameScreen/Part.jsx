@@ -5,8 +5,7 @@ import { Card, Container } from 'react-bootstrap'
 function Part({ part, symbol, slot, role } ) {
     
     const logoPath = `icons/${symbol}`; 
-
-    console.log(logoPath);
+    
 
     
     return (
