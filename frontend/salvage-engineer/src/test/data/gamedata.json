@@ -57,7 +57,7 @@
             "mlogo": "salvageTechLogo.png",
             "maxQual" : 1            
         },
-        "Sensor" : {
+        "sensor" : {
             "name" : "Novatech Salvage Scan mk1",
             "type" : "magnetCore",
             "manufacturer" :"Salvage Tech",

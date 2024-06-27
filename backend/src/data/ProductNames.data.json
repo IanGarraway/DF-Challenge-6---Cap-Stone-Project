@@ -1,0 +1,20 @@
+
+
+
+{  
+    "magnetMotor": ["NeoMag Drive", "MagnaLift Engine", "CraneMag Power", "LiftPulse Motor", "MagTorque System"],
+    "magnetCore": ["CoreMag Pulse", "MagCore Element", "FluxCore Magnet","MagnaCore Field","PowerCore Magnet"],
+    "clawHydrolics": ["HydroGrip System","ClawLift Hydraulics","AquaGrip Force","HydroClaw Power","AquaDrive Claw"],
+    "clawScanner": ["ScanClaw Vision","ClawScan Optic","GripScan Module","FindGrip Sensor","ClawEye Detector"],
+    "scoopMotor": ["PowerScoop Drive","ScoopForce Engine","ScoopLift Motor","DynaScoop Power","ScoopPulse Motor"],
+    "scoopSensor":["ScoopScan Pro","ScanScoop Detector","ScoopSense Module","ScoopEye Vision","ScoopTrack Sensor"],
+    "sensor":["OmniSense Module","AllTrack Sensor","OmniScan Detector","AllSight Sensor","OmniDetect Module"],
+    "grinderMotor": ["GrindForce Motor","GrindPower Engine","CrusherDrive Motor","GrindMaster Motor","TorqueGrind Engine"],
+    "grindGear": ["TitanGear Set","GrindGear Pack","CrusherGear System","GrindTorque Gears","SteelGrind Gears"],
+    "smelterHeater" : ["ThermaFusion Unit", "HeatMaster System", "SmeltHeat Engine", "ThermaCore Heater", "FusionHeat Module"],
+    "smelterControl":["SmeltControl Matrix", "SmeltMaster Control", "FusionControl System", "HeatManage Controller", "SmeltLogic System"]
+}   
+   
+        
+    
+    

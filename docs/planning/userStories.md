@@ -139,7 +139,7 @@ done:
 
 - [x] Game screen layout matches the provided wireframe
 - [x] User interface is responsive
-- [ ] front end testing
+- [x] front end testing
 
 ### User story 10
 

@@ -1,0 +1,6 @@
+{
+    "HeavyWorlds": ["TitanSeries", "MegaLift", "TerraForce", "ColossusRange", "HeavyMax"],
+  "SalvageTech": ["ReclaimPro", "ScrapMaster", "RecoveryLine", "ReviveSeries", "RescueTech", "CraftWorks"],
+  "SalvageWorks": ["EcoCycle", "ScrapWorx", "RegenRange", "RebuildPro", "RestorationLine", "EdenRecovery"],
+  "UberMech": ["MechMaster", "TechForge", "CyberSeries", "RoboLine", "MechPower", "OverLord", "Dominator"]
+}
