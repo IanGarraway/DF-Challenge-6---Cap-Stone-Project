@@ -128,7 +128,7 @@ describe("Tests of Game routes", () => {
         await database.close();
     })
 
-    describe("Get Admin data tests", () => {
+    describe("Get game data tests", () => {
         it("should return 200 when a request with authorisation, gets the data", async () => {
             //arrange
 
@@ -137,7 +137,7 @@ describe("Tests of Game routes", () => {
            
 
             //assert
-
+            
             expect(response.status).to.equal(200);
             expect(response.body).to.have.property("lastGen");
             expect(response.body).to.have.property("inventory").to.have.property("credits");

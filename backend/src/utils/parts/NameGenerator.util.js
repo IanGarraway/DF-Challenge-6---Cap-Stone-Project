@@ -7,7 +7,7 @@ export default class NameGenerator{
 
     static getName = (part) => {
         
-        const compNum = GetRandom.int(100);        
+        const compNum = GetRandom.int(100);          
 
         if (compNum >= 99) { part = this.#ubermech(part); }
         else if (compNum >= 80) { part = this.#salvageWorks(part); }
@@ -20,6 +20,7 @@ export default class NameGenerator{
 
 
     static #heavyWorlds = (part) => {
+        
         part.mlogo = "heavyWorldLogo.png";
         part.manufactuer = "Heavy World";
         if (part.gathVol > 0) { part.gathVol++; }
@@ -31,6 +32,7 @@ export default class NameGenerator{
     }
 
     static #salvagetech = (part) => {
+        
         part.mlogo = "salvageTech.png";
         part.manufactuer = "SalvageTech";        
         const brand = GetRandom.element(brandNames["SalvageTech"]);
@@ -40,6 +42,7 @@ export default class NameGenerator{
     
     }
     static #salvageWorks = (part) => {
+        
         part.mlogo = "SalvageWorks.png";
         part.manufactuer = "Salvage Works";
         if (part.gathSpd > 0) { part.gathSpd++; }
@@ -50,6 +53,7 @@ export default class NameGenerator{
     
     }
     static #ubermech = (part) => {
+        
         part.mlogo = "ubermechLogo.png";
         part.manufactuer = "Ubermech";        
         if (part.maxQual > 0) { part.maxQual++; }

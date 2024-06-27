@@ -161,7 +161,7 @@ done:
 done:
 
 - [ ] works out how many parts should have been generated since the last check
-- [ ] randomly generates parts based on stats
+- [x] randomly generates parts based on stats
 - [ ] back end testing
 
 ### User story 12

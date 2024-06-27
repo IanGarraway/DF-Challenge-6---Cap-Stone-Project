@@ -1,16 +1,21 @@
 import GameData from "../models/gamedata.model.js";
+import Generate from "../utils/Generate.util.js";
 
 export default class GameService{
 
     getData = async (req) => {        
         try {
-            const gameData = await GameData.findOne({ userID: req.userId });
+            let gameData = await GameData.findOne({ userID: req.userId });
+            gameData = Generate.parts(gameData);
+
+            await gameData.save();
 
             gameData._id = "";
             gameData.userID = "";
             return gameData;
             
         } catch (e) {
+            
             throw new Error(e.message)
         }
         
@@ -68,9 +73,9 @@ export default class GameService{
                     "mlogo": "salvageTechLogo.png",
                     "maxQual": 1
                 },
-                "Sensor": {
+                "sensor": {
                     "name": "Novatech Salvage Scan mk1",
-                    "type": "magnetCore",
+                    "type": "sensor",
                     "manufacturer": "Salvage Tech",
                     "mlogo": "salvageTechLogo.png",
                     "findTime": 1,
