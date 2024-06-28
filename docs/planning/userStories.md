@@ -160,7 +160,7 @@ done:
 
 done:
 
-- [ ] works out how many parts should have been generated since the last check
+- [x] works out how many parts should have been generated since the last check
 - [x] randomly generates parts based on stats
 - [ ] back end testing
 
@@ -170,7 +170,7 @@ done:
 
 done:
 
-- [ ] check what capacity is available before generating parts, and only generate parts up to that amount
+- [x] check what capacity is available before generating parts, and only generate parts up to that amount
 - [ ] back end testing
 
 ### User story 13

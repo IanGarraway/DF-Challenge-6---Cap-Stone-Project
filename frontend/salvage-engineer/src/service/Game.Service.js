@@ -11,8 +11,10 @@ export default class GameService{
             const response = await httpService.get(`${apiURL}/data`,{
                 withCredentials: true            
             });
+            console.log(response,`<--response`);
             
             if (response.status === 200) {
+                
                 return response;
             } else {
                 throw new Error(response.message)

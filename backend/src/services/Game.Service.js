@@ -3,10 +3,13 @@ import Generate from "../utils/Generate.util.js";
 
 export default class GameService{
 
-    getData = async (req) => {        
+    getData = async (req) => {
+        
         try {
             let gameData = await GameData.findOne({ userID: req.userId });
+            console.log(gameData,`<-service`);
             gameData = Generate.parts(gameData);
+            console.log(gameData,`<-service2`);
 
             await gameData.save();
 
@@ -15,6 +18,7 @@ export default class GameService{
             return gameData;
             
         } catch (e) {
+            console.log(e);
             
             throw new Error(e.message)
         }

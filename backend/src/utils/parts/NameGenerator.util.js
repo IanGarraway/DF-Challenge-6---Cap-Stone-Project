@@ -22,7 +22,7 @@ export default class NameGenerator{
     static #heavyWorlds = (part) => {
         
         part.mlogo = "heavyWorldLogo.png";
-        part.manufactuer = "Heavy World";
+        part.manufacturer = "Heavy World";
         if (part.gathVol > 0) { part.gathVol++; }
         const brand = GetRandom.element(brandNames["HeavyWorlds"]);
         const product = GetRandom.element(rangeNames[part.type]);
@@ -34,7 +34,7 @@ export default class NameGenerator{
     static #salvagetech = (part) => {
         
         part.mlogo = "salvageTech.png";
-        part.manufactuer = "SalvageTech";        
+        part.manufacturer = "SalvageTech";        
         const brand = GetRandom.element(brandNames["SalvageTech"]);
         const product = GetRandom.element(rangeNames[part.type]);
         part.name = `${brand} ${product}`;
@@ -44,7 +44,7 @@ export default class NameGenerator{
     static #salvageWorks = (part) => {
         
         part.mlogo = "SalvageWorks.png";
-        part.manufactuer = "Salvage Works";
+        part.manufacturer = "Salvage Works";
         if (part.gathSpd > 0) { part.gathSpd++; }
         const brand = GetRandom.element(brandNames["SalvageWorks"]);
         const product = GetRandom.element(rangeNames[part.type]);
@@ -55,7 +55,7 @@ export default class NameGenerator{
     static #ubermech = (part) => {
         
         part.mlogo = "ubermechLogo.png";
-        part.manufactuer = "Ubermech";        
+        part.manufacturer = "Ubermech";        
         if (part.maxQual > 0) { part.maxQual++; }
         const brand = GetRandom.element(brandNames["UberMech"]);
         const product = GetRandom.element(rangeNames[part.type]);
