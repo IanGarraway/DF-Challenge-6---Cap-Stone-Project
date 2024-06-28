@@ -7,9 +7,9 @@ export default class GameService{
         
         try {
             let gameData = await GameData.findOne({ userID: req.userId });
-            console.log(gameData,`<-service`);
+            
             gameData = Generate.parts(gameData);
-            console.log(gameData,`<-service2`);
+            
 
             await gameData.save();
 

@@ -12,8 +12,7 @@ export default class GameController{
     getData = async (req, res) => {        
         try {            
             const gameData = await this.#gameService.getData(req);
-            console.log(gameData, `<-controller`);
-            
+                        
             return res.status(200).send(gameData);
         } catch (e) {
             

@@ -27,7 +27,7 @@ describe("NameGenerator", () => {
 
             const result = NameGenerator.getName(part);
 
-            expect(result.manufactuer).to.equal("Ubermech");
+            expect(result.manufacturer).to.equal("Ubermech");
             expect(result.mlogo).to.equal("ubermechLogo.png");
             // Add more assertions based on what you expect NameGenerator to do
         });
@@ -41,7 +41,7 @@ describe("NameGenerator", () => {
 
             const result = NameGenerator.getName(part);
 
-            expect(result.manufactuer).to.equal("Salvage Works");
+            expect(result.manufacturer).to.equal("Salvage Works");
             expect(result.mlogo).to.equal("SalvageWorks.png");
             // Add more assertions for Heavy Worlds scenario
         });
@@ -55,7 +55,7 @@ describe("NameGenerator", () => {
 
             const result = NameGenerator.getName(part);
 
-            expect(result.manufactuer).to.equal("Salvage Works");
+            expect(result.manufacturer).to.equal("Salvage Works");
             expect(result.mlogo).to.equal("SalvageWorks.png");
             // Add more assertions for Heavy Worlds scenario
         });
@@ -70,7 +70,7 @@ describe("NameGenerator", () => {
 
             const result = NameGenerator.getName(part);
 
-            expect(result.manufactuer).to.equal("Heavy World");
+            expect(result.manufacturer).to.equal("Heavy World");
             expect(result.mlogo).to.equal("heavyWorldLogo.png");
             // Add more assertions for Heavy Worlds scenario
         });
@@ -84,7 +84,7 @@ describe("NameGenerator", () => {
 
             const result = NameGenerator.getName(part);
 
-            expect(result.manufactuer).to.equal("Heavy World");
+            expect(result.manufacturer).to.equal("Heavy World");
             expect(result.mlogo).to.equal("heavyWorldLogo.png");
             // Add more assertions for Heavy Worlds scenario
         });
@@ -98,7 +98,7 @@ describe("NameGenerator", () => {
 
             const result = NameGenerator.getName(part);
 
-            expect(result.manufactuer).to.equal("Heavy World");
+            expect(result.manufacturer).to.equal("Heavy World");
             expect(result.mlogo).to.equal("heavyWorldLogo.png");
             // Add more assertions for Heavy Worlds scenario
         });
@@ -112,7 +112,7 @@ describe("NameGenerator", () => {
 
             const result = NameGenerator.getName(part);
 
-            expect(result.manufactuer).to.equal("SalvageTech");
+            expect(result.manufacturer).to.equal("SalvageTech");
             expect(result.mlogo).to.equal("salvageTech.png");
             // Add more assertions for Heavy Worlds scenario
         });

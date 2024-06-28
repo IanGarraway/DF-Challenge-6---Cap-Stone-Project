@@ -7,7 +7,8 @@ export default class NameGenerator{
 
     static getName = (part) => {
         
-        const compNum = GetRandom.int(100);          
+        const compNum = GetRandom.int(100);
+        
 
         if (compNum >= 99) { part = this.#ubermech(part); }
         else if (compNum >= 80) { part = this.#salvageWorks(part); }
