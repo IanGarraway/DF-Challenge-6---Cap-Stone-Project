@@ -10,8 +10,7 @@ export default class GameService{
         try {
             const response = await httpService.get(`${apiURL}/data`,{
                 withCredentials: true            
-            });
-            console.log(response,`<--response`);
+            });            
             
             if (response.status === 200) {
                 
@@ -21,8 +20,7 @@ export default class GameService{
             }
             
         } catch (e) {
-            console.error(`Error getting data`, e);
-            throw e;
+            console.error(`Error getting data`, e);            
         }
     }
 

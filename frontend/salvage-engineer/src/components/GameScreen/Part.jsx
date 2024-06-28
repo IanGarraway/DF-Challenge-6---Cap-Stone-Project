@@ -21,11 +21,11 @@ function Part({ part, symbol, slot, role } ) {
                 opacity: "0.8"
 
             }}>
-                <Card.Title style={{ fontSize: "1.5vh"  }}> {role} </Card.Title>
-                <Card.Img src={logoPath} style={{height: "10vh", width: "10vh"}} />
-                <Card.Body style={{fontSize: "1.1vh"  }} >
+                <Card.Header style={{ fontSize: "1.5vh"  }}> {role} </Card.Header>
+                <Card.Img src={logoPath} style={{height: "50%", width: "50%"}} />
+                <Card.Footer style={{fontSize: "1.1vh"  }} >
                     {part.name}                      
-                </Card.Body>                       
+                </Card.Footer>                       
                    
             </Card>
         </div>

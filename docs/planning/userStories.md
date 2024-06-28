@@ -162,7 +162,7 @@ done:
 
 - [x] works out how many parts should have been generated since the last check
 - [x] randomly generates parts based on stats
-- [ ] back end testing
+- [x] back end testing
 
 ### User story 12
 
@@ -171,7 +171,7 @@ done:
 done:
 
 - [x] check what capacity is available before generating parts, and only generate parts up to that amount
-- [ ] back end testing
+- [x] back end testing
 
 ### User story 13
 
@@ -179,7 +179,7 @@ done:
 
 done:
 
-- [ ] front end can display all parts
+- [x] front end can display all parts
 - [ ] front end testing
 
 ### User story 14

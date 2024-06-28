@@ -1,0 +1,15 @@
+{
+    "magnetMotor": "Magnet Motor",
+    "magnetCore": "Magnet Core",
+    "clawHydraulics": "Claw Hydraulics",
+    "clawScanner": "Claw Scanner",
+    "scoopMotor": "Scoop Motor",
+    "scoopSensor": "Scoop Sensor",
+    "sensor": "Sensor",
+    "grinderMotor": "Grinder Motor",
+    "grindGear":"Grinder Gear",
+    "smelterHeater": "Smelter Heater",
+    "smelterControl": "Smelter Control"
+
+
+}

@@ -34,7 +34,7 @@ export default class NameGenerator{
 
     static #salvagetech = (part) => {
         
-        part.mlogo = "salvageTech.png";
+        part.mlogo = "salvageTechLogo.png";
         part.manufacturer = "SalvageTech";        
         const brand = GetRandom.element(brandNames["SalvageTech"]);
         const product = GetRandom.element(rangeNames[part.type]);
@@ -44,7 +44,7 @@ export default class NameGenerator{
     }
     static #salvageWorks = (part) => {
         
-        part.mlogo = "SalvageWorks.png";
+        part.mlogo = "SalvageWorksLogo.png";
         part.manufacturer = "Salvage Works";
         if (part.gathSpd > 0) { part.gathSpd++; }
         const brand = GetRandom.element(brandNames["SalvageWorks"]);

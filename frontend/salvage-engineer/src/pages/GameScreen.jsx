@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Button, Spinner } from 'react-bootstrap';
+import { Container, Row, Col, Button, Spinner, Modal } from 'react-bootstrap';
 
 import Part from '../components/GameScreen/Part.jsx';
 import GameService from '../service/Game.Service.js';
+import Inventory from '../components/GameScreen/Inventory.jsx';
 
 
 function GameScreen() {
@@ -11,6 +12,11 @@ function GameScreen() {
     r.style.setProperty('background-image','url("backgrounds/background3.png")' )      
 
     const [gameData, setGameData] = useState();
+    const [showInv, setShowInv] = useState(false);
+    const [itemFocus, setItemFocus] = useState("none");
+
+    const handleClose = () => setShowInv(false);
+    const handleShow = () => setShowInv(true);
 
     const getData = async () => {
         try {
@@ -75,7 +81,19 @@ function GameScreen() {
                   <Col></Col>
                   <Col><Part part={equipment.clawHydrolics} symbol={"clawIcon.png"} slot={"clawHydrolics" } role={"Claw Hydrolics"}/></Col>
               </Row>
-              
+
+              <Button variant="dark" onClick={handleShow}>
+                  Inventory
+              </Button>
+
+              <Modal show={showInv} onHide={handleClose} size='xl' >
+                  <Modal.Header closeButton>
+                      <Modal.Title>Parts Storage</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                      <Inventory gameData={gameData} focus={itemFocus} />
+                  </Modal.Body>
+              </Modal>
           </Container>
           
     </div>

@@ -84,6 +84,9 @@
     
   align-items: center;
 }
-.loading{
-  
+.invItems{
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  padding: 10px  
 }
