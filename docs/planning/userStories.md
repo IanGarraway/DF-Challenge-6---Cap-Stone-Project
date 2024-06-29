@@ -194,6 +194,19 @@ done:
 - [ ] front end testing
 - [ ] back end testing
 
+### User story 18
+
+"As a player, I would like to be able to scrap parts in my parts storage, so I have capacity for new parts"
+
+done:
+
+- [ ] interface component to scrap a part
+- [ ] scrap part service (front end user service)
+- [ ] scrap route (back end user service)
+- [ ] logic to ensure part scrappable
+- [ ] front end testing
+- [ ] back end testing
+
 ### User story 15
 
 "As a player, I want a part to only be able to go into a single slot, so I only need to compare one component"
@@ -225,18 +238,6 @@ done:
 - [ ] front end testing
 - [ ] back end testing
 
-### User story 18
-
-"As a player, I would like to be able to scrap parts in my parts storage, so I have capacity for new parts"
-
-done:
-
-- [ ] interface component to scrap a part
-- [ ] scrap part service (front end user service)
-- [ ] scrap route (back end user service)
-- [ ] logic to ensure part scrappable
-- [ ] front end testing
-- [ ] back end testing
 
 ### User story 19
 
