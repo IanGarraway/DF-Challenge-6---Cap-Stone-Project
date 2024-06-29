@@ -248,6 +248,34 @@ describe("Tests of Game routes", () => {
                 expect(response.body).to.have.property("partsStorage").to.be.an('array').lengthOf(12)
         
             })
+
+            it("should give 5 more parts, in addition to the mock ones", async() => {                
+                //arrange
+                mockGameData.lastGen = Date.now() - 1200000
+                mockGameData.caps.partsCap = 10;
+                mockGameData.partsStorage = [
+                    { name: "mockpart", type: "mockType", manufacturer: "fakeCorp", mlogo: "fake.jpg", maxQual: 5 },
+                    { name: "mockpart", type: "mockType", manufacturer: "fakeCorp", mlogo: "fake.jpg", maxQual: 5 },
+                    { name: "mockpart", type: "mockType", manufacturer: "fakeCorp", mlogo: "fake.jpg", maxQual: 5 },
+                    { name: "mockpart", type: "mockType", manufacturer: "fakeCorp", mlogo: "fake.jpg", maxQual: 5 },
+                    { name: "mockpart", type: "mockType", manufacturer: "fakeCorp", mlogo: "fake.jpg", maxQual: 5 }
+                ]
+                await mockGameData.save();                
+
+                //act
+                const response = await request.get("/data").set('Cookie', `token=${token}`);
+           
+
+                //assert
+            
+                expect(response.status).to.equal(200);                
+                expect(response.body).to.have.property("partsStorage").to.be.an('array').lengthOf(10)
+                expect(response.body.partsStorage[0].name).to.equal("mockpart");
+                expect(response.body.partsStorage[4].name).to.equal("mockpart");
+                expect(response.body.partsStorage[5].name).not.to.equal("mockpart");
+                expect(response.body.partsStorage[9].name).not.to.equal("mockpart");
+        
+            })
         })
 
     });
