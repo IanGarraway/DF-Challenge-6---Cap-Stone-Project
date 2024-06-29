@@ -15,20 +15,19 @@ export default class Generate{
     }
 
     static parts = (gameData) => {
-        const { stats, lastGen } = gameData;
-        
+        const { stats, lastGen } = gameData;        
 
         const timeSince = Date.now() - lastGen;
         
         const timeBetween = (30 * stats.zone) - stats.gathSpd;
         let partsToGen = Math.floor((timeSince / 1000) / timeBetween);
         
-        if (partsToGen == 0) { return gameData; }
+        if (partsToGen == 0) { return gameData.partsStorage; }
 
-        gameData = this.#generateParts(gameData, partsToGen);
-        gameData.lastGen = Date.now();        
+        const parts = this.#generateParts(gameData, partsToGen);
+        
 
-        return gameData;
+        return parts;
 
         
     }
@@ -43,7 +42,7 @@ export default class Generate{
             partsStorage.push(this.part(stats.maxQual, stats.zone));            
         }
         
-        return gameData;
+        return partsStorage;
             
     };
 

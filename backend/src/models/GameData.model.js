@@ -21,7 +21,8 @@ const partSchema = new Schema({
 
 const GameDataSchema = new Schema({
     userID: { type: String, required: true },    
-    lastGen: {type: Date, required: true},
+    lastGen: { type: Date, required: true },
+    lastResourceGen: {type: Date, required: true},
     inventory: {
         credits: { type: Number, default: 0 },
         scrap: { type: Number, default: 0 },

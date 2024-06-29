@@ -53,7 +53,7 @@ describe("Test of the generate util, without mocked random", () => {
             let data = Generate.parts(gameData);
 
             //Assert
-            expect(data.partsStorage).to.be.an('array').lengthOf(2);
+            expect(data).to.be.an('array').lengthOf(2);
             })
     })
 

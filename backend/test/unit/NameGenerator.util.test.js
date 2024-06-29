@@ -42,7 +42,7 @@ describe("NameGenerator", () => {
             const result = NameGenerator.getName(part);
 
             expect(result.manufacturer).to.equal("Salvage Works");
-            expect(result.mlogo).to.equal("SalvageWorks.png");
+            expect(result.mlogo).to.equal("SalvageWorksLogo.png");
             // Add more assertions for Heavy Worlds scenario
         });
         it("should set attributes correctly for Salvage Works edge lower", () => {
@@ -56,7 +56,7 @@ describe("NameGenerator", () => {
             const result = NameGenerator.getName(part);
 
             expect(result.manufacturer).to.equal("Salvage Works");
-            expect(result.mlogo).to.equal("SalvageWorks.png");
+            expect(result.mlogo).to.equal("SalvageWorksLogo.png");
             // Add more assertions for Heavy Worlds scenario
         });
 
@@ -113,7 +113,7 @@ describe("NameGenerator", () => {
             const result = NameGenerator.getName(part);
 
             expect(result.manufacturer).to.equal("SalvageTech");
-            expect(result.mlogo).to.equal("salvageTech.png");
+            expect(result.mlogo).to.equal("salvageTechLogo.png");
             // Add more assertions for Heavy Worlds scenario
         });
 

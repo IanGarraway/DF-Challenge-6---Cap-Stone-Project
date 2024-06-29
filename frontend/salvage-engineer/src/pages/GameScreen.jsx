@@ -86,11 +86,11 @@ function GameScreen() {
                   Inventory
               </Button>
 
-              <Modal show={showInv} onHide={handleClose} size='xl' >
-                  <Modal.Header closeButton>
-                      <Modal.Title>Parts Storage</Modal.Title>
+              <Modal show={showInv} onHide={handleClose} size='xl'  >
+                  <Modal.Header closeButton style={{backgroundImage: 'url("backgrounds/rustymetal.avif")'}}>
+                      <Modal.Title >Parts Storage</Modal.Title>
                   </Modal.Header>
-                  <Modal.Body>
+                  <Modal.Body style={{backgroundImage: 'url("backgrounds/rustymetal.avif")'}}>
                       <Inventory gameData={gameData} focus={itemFocus} />
                   </Modal.Body>
               </Modal>

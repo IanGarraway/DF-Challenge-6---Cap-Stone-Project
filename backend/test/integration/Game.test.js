@@ -39,6 +39,7 @@ describe("Tests of Game routes", () => {
     let expiredToken
 
     let nonAdminToken;
+    let userId;
 
     const adminTestUser = {
         "username": "TestAdmin",
@@ -81,6 +82,7 @@ describe("Tests of Game routes", () => {
 
         const user = await User.findOne({ userName: "TestAdmin" });
         user.admin = true;
+        userId = user._id;
         user.save();
 
         const response = await request.post("/auth/login").send(adminTestLogin);
@@ -129,6 +131,7 @@ describe("Tests of Game routes", () => {
     })
 
     describe("Get game data tests", () => {
+        
         it("should return 200 when a request with authorisation, gets the data", async () => {
             //arrange
 
@@ -168,6 +171,83 @@ describe("Tests of Game routes", () => {
 
             expect(response.status).to.equal(401);
             expect(response.body).to.have.property("message").that.includes("Unauthorised");
+        })
+
+        describe("Part generation tests", () => {
+            let mockGameData;
+            
+
+            beforeEach(async () => {
+                mockGameData = await GameData.findOne({ userID: userId });
+                
+                mockGameData.partsStorage = [];
+                
+                await mockGameData.save();
+            })
+            it("should give two parts", async() => {                
+                //arrange
+                mockGameData.lastGen = Date.now() - 60000
+                await mockGameData.save();                
+
+                //act
+                const response = await request.get("/data").set('Cookie', `token=${token}`);
+           
+
+                //assert
+            
+                expect(response.status).to.equal(200);                
+                expect(response.body).to.have.property("partsStorage").to.be.an('array').lengthOf(2)
+        
+            })
+
+            it("should give 0 parts", async() => {                
+                //arrange
+                mockGameData.lastGen = Date.now() 
+                await mockGameData.save();                
+
+                //act
+                const response = await request.get("/data").set('Cookie', `token=${token}`);
+           
+
+                //assert
+            
+                expect(response.status).to.equal(200);                
+                expect(response.body).to.have.property("partsStorage").to.be.an('array').lengthOf(0)
+        
+            })
+
+            it("should give 10 parts", async() => {                
+                //arrange
+                mockGameData.lastGen = Date.now() - 1200000
+                await mockGameData.save();                
+
+                //act
+                const response = await request.get("/data").set('Cookie', `token=${token}`);
+           
+
+                //assert
+            
+                expect(response.status).to.equal(200);                
+                expect(response.body).to.have.property("partsStorage").to.be.an('array').lengthOf(10)
+        
+            })
+
+            it("should give 12 parts if the cap is higher", async() => {                
+                //arrange
+                mockGameData.lastGen = Date.now() - 1200000
+                mockGameData.caps.partsCap = 12;
+                await mockGameData.save();                
+
+                //act
+                const response = await request.get("/data").set('Cookie', `token=${token}`);
+           
+
+                //assert
+            
+                expect(response.status).to.equal(200);                
+                expect(response.body).to.have.property("partsStorage").to.be.an('array').lengthOf(12)
+        
+            })
         })
 
     });
