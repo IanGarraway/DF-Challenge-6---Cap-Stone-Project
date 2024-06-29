@@ -305,7 +305,16 @@ describe("Tests of Game routes", () => {
             "mlogo": "salvageTechLogo.png",
             "findTime": 1,
             "maxQual": 1
-        }];
+        },
+        {
+            "name": "Novatech Smelt Master mk1",
+            "type": "smelterControl",
+            "manufacturer": "Salvage Tech",
+            "mlogo": "salvageTechLogo.png",
+            "smeltSpd": 2,
+            "smeltTier": 2
+        }
+        ];
             
 
         beforeEach(async () => {
@@ -316,7 +325,65 @@ describe("Tests of Game routes", () => {
             await mockGameData.save();
         });
 
-        it("should respond with the mock part in magnet motor slot", async() => {
+        it("should respond with 200 and the fabrication mock part in smelterControl slot", async () => {
+            //Arrange
+
+            //Act
+
+            const response = await request.patch("/changepart").send(mockParts[3]).set('Cookie', `token=${token}`);
+            const getResponse = await request.get("/data").set('Cookie', `token=${token}`);
+
+            //Assert
+            
+
+            expect(response.status).to.be.equal(200);
+            expect(getResponse.body.fabrication.smelterControl.name).to.equal(mockParts[3].name);
+            expect(getResponse.body.fabrication.smelterControl.smeltSpd).to.equal(2);
+        });
+
+        it("should respond with 200 and the mock part in magnet motor slot", async () => {
+            //Arrange
+
+            //Act
+
+            const response = await request.patch("/changepart").send(mockParts[0]).set('Cookie', `token=${token}`);
+            const getResponse = await request.get("/data").set('Cookie', `token=${token}`);
+
+            //Assert
+            
+
+            expect(response.status).to.be.equal(200);
+            expect(getResponse.body.equipment.magnetMotor.name).to.equal(mockParts[0].name);
+            expect(getResponse.body.equipment.magnetMotor.gathSpd).to.equal(2);
+        });
+
+        it("should respond with the mock part in magnet motor slot", async () => {
+            //Arrange
+
+            const mockBadPart = {
+            "name": "Novatech Salvage Scam mk1",
+            "type": "magnetCore",
+            "manufacturer": "Salvage Tech",
+            "mlogo": "salvageTechLogo.png",
+            "findTime": 10,
+            "maxQual": 10
+        }
+
+
+            //Act
+
+            const response = await request.patch("/changepart").send(mockBadPart).set('Cookie', `token=${token}`);
+            const getResponse = await request.get("/data").set('Cookie', `token=${token}`);
+
+            //Assert
+            
+
+            expect(response.status).to.be.equal(422);
+            expect(getResponse.body.equipment.magnetMotor.name).to.equal(mockParts[0].name);
+            expect(getResponse.body.equipment.magnetMotor.gathSpd).to.equal(2);
+        });
+
+        it("should respond with 422 if a part not in the parts list is send in", async() => {
             //Arrange
 
 
@@ -332,6 +399,38 @@ describe("Tests of Game routes", () => {
             expect(response.status).to.be.equal(200);
             expect(getResponse.body.equipment.magnetMotor.name).to.equal(mockParts[0].name);
             expect(getResponse.body.equipment.magnetMotor.gathSpd).to.equal(2);
+        })
+
+        it("should respond with 401 if no cookie is sent", async() => {
+            //Arrange
+
+
+            //Act
+
+            const response = await request.patch("/changepart").send(mockParts[0]);
+            
+            //Assert
+            // console.log(response.status, `<--res`);
+            // console.log(getResponse.status, `<---get`);
+
+            expect(response.status).to.be.equal(401);
+            
+        })
+
+        it("should respond with 401 if no expired cookie is sent", async() => {
+            //Arrange
+
+
+            //Act
+
+            const response = await request.patch("/changepart").send(mockParts[0]).set('Cookie', `token=${expiredToken}`);
+            
+            //Assert
+            // console.log(response.status, `<--res`);
+            // console.log(getResponse.status, `<---get`);
+
+            expect(response.status).to.be.equal(401);
+            
         })
         
     })
