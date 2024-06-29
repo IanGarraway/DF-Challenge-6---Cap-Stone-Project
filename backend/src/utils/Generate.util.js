@@ -1,4 +1,5 @@
 import NameGenerator from "./parts/NameGenerator.util.js";
+import TimeTicks from "./TimeTicks.util.js";
 import TypeGenerator from "./parts/TypeGenerator.util.js"
 
 
@@ -45,6 +46,42 @@ export default class Generate{
         return partsStorage;
             
     };
+
+    static resources = (gameData) => {
+        let { stats, inventory, caps, lastResourceGen, upgrades } = gameData;
+        
+        const timeBetween = (Date.now() - lastResourceGen) / 1000;
+console.log(timeBetween,`timebetween`);
+
+        const gatherTimeTicks = TimeTicks.calc(30, stats.gathSpd);
+        const grindTimeTicks = TimeTicks.calc(30, stats.grinderSpd);
+        const smeltTimeTicks = TimeTicks.calc(30, stats.smeltSpd);
+
+        const gatherTicks = Math.floor(timeBetween / gatherTimeTicks);
+        const grindTicks = Math.floor(timeBetween / grindTimeTicks);
+        const smeltTicks = Math.floor(timeBetween / smeltTimeTicks);
+        if (gatherTicks == 0 && grindTicks == 0 && smeltTicks == 0) { return inventory; }
+
+        const totalGathered = (gatherTicks*stats.gathVol)+inventory.scrap;
+        const totalGround = Math.min(totalGathered, (grindTicks*stats.grinderVol)+inventory.ground);
+        const totalSmelt = Math.min(totalGround, (upgrades.smelter * 10) * smeltTicks);        
+        
+
+        const scrapLeft = Math.min(caps.scrapCap, totalGathered - totalGround);        
+        const groundLeft = Math.min(caps.scrapCap, totalGround - totalSmelt);        
+
+        inventory.scrap = scrapLeft;
+        inventory.ground = groundLeft;
+        inventory.t1Metal += totalSmelt / 10;
+
+        
+
+        return inventory;
+
+
+
+        
+    }
 
         
  

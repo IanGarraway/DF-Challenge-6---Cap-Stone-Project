@@ -26,6 +26,7 @@ const GameDataSchema = new Schema({
     inventory: {
         credits: { type: Number, default: 0 },
         scrap: { type: Number, default: 0 },
+        ground: { type: Number, default: 0 },
         t1Metal: { type: Number, default: 0 },
         t2Metal: { type: Number, default: 0 },
         t3Metal: { type: Number, default: 0 }
@@ -62,7 +63,10 @@ const GameDataSchema = new Schema({
         reactor: { type: Number, default: 0 },
         powerDis: { type: Number, default: 0 },
         partsContainer: { type: Number, default: 0 },
-        rawResourceHopper: { type: Number, default: 0 }
+        rawResourceHopper: { type: Number, default: 0 },
+        grinder: { type: Number, default: 1 },
+        smelter: { type: Number, default: 1 }
+        
     },
     power: {
         fabricator: { type: Boolean, default: false },

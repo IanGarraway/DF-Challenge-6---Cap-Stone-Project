@@ -39,15 +39,22 @@ export default class GameService{
                 gameData.partsStorage = newParts;
                 gameData.lastGen = Date.now();
             }
-            
+            const newResources = Generate.resources(gameData);
+            console.log(newResources, `service`);
+            if (newResources != gameData.inventory) {
+                changed = true;
+                gameData.inventory = newResources;
+                gameData.lastResourceGen = Date.now();
+            }
 
-            await gameData.save();
+            changed && await gameData.save();
 
             gameData._id = "";
             gameData.userID = "";
             return gameData;
             
-        } catch (e) {                        
+        } catch (e) {    
+            // console.log(e,`service error`);
             throw new Error(e.message)
         }
         
@@ -65,8 +72,7 @@ export default class GameService{
 
             if (partIndex === -1) { return 422; }
             
-            gameData = Swap.part(gameData, partIndex);
-            
+            gameData = Swap.part(gameData, partIndex);            
             gameData = Recalc.stats(gameData);
 
             await gameData.save();   

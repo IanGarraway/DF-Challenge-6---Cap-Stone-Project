@@ -186,7 +186,8 @@ describe("Tests of Game routes", () => {
             })
             it("should give two parts", async() => {                
                 //arrange
-                mockGameData.lastGen = Date.now() - 60000
+                mockGameData.lastGen = Date.now() - 60000;
+                mockGameData.lastResourceGen = Date.now() - 60000;
                 await mockGameData.save();                
 
                 //act
@@ -194,9 +195,11 @@ describe("Tests of Game routes", () => {
            
 
                 //assert
+                // console.log(response.body, `test body`);
             
                 expect(response.status).to.equal(200);                
-                expect(response.body).to.have.property("partsStorage").to.be.an('array').lengthOf(2)
+                expect(response.body).to.have.property("partsStorage").to.be.an('array').lengthOf(2);
+                expect(response.body.inventory).to.have.property("t1Metal").to.equal(0.2);
         
             })
 
@@ -219,6 +222,7 @@ describe("Tests of Game routes", () => {
             it("should give 10 parts", async() => {                
                 //arrange
                 mockGameData.lastGen = Date.now() - 1200000
+                mockGameData.lastResourceGen = Date.now() - 1200000
                 await mockGameData.save();                
 
                 //act
@@ -229,6 +233,7 @@ describe("Tests of Game routes", () => {
             
                 expect(response.status).to.equal(200);                
                 expect(response.body).to.have.property("partsStorage").to.be.an('array').lengthOf(10)
+                expect(response.body.inventory).to.have.property("t1Metal").to.equal(4.4);
         
             })
 

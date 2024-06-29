@@ -198,8 +198,8 @@ done:
 
 "As a player, i'd like the parts I have equipped to impact my resource generations, so that my choices in them matter"
 
-- [ ] back end code to adjust the numbers
-- [ ] back end testing
+- [x] back end code to adjust the numbers
+- [x] back end testing
   
 ### User story 18
 
