@@ -20,7 +20,28 @@ export default class GameService{
             }
             
         } catch (e) {
-            console.error(`Error getting data`, e);            
+            console.error(`Error getting data`, e);
+            throw e;
+        }
+    }
+
+    static async changePart(part) {
+        
+        try {
+            const response = await httpService.patch(`${apiURL}/changepart`, {
+                part: part
+            }, {
+                withCredentials: true
+            });
+
+            if (response.status === 200) {
+                return response;
+            } else {
+                throw new Error(response.message);
+            }
+        }catch (e) {
+            console.error(`Error getting data`, e);
+            throw e;
         }
     }
 

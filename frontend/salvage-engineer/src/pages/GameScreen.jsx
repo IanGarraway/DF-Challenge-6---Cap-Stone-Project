@@ -82,7 +82,7 @@ function GameScreen() {
                   <Col><Part part={equipment.clawHydrolics} symbol={"clawIcon.png"} slot={"clawHydrolics" } role={"Claw Hydrolics"}/></Col>
               </Row>
 
-              <Button variant="dark" onClick={handleShow}>
+              <Button variant="dark" onClick={handleShow} data-testid={"invButton"}>
                   Inventory
               </Button>
 
@@ -91,7 +91,7 @@ function GameScreen() {
                       <Modal.Title >Parts Storage</Modal.Title>
                   </Modal.Header>
                   <Modal.Body style={{backgroundImage: 'url("backgrounds/rustymetal.avif")'}}>
-                      <Inventory gameData={gameData} focus={itemFocus} />
+                      <Inventory gameData={gameData} focus={itemFocus} getData={getData } />
                   </Modal.Body>
               </Modal>
           </Container>

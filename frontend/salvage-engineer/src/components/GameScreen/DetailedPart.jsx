@@ -19,7 +19,7 @@ function DetailedPart({ part }) {
           </div>
           <CardImg src={logoPath} style={{ width: '10vh', height: '10vh' }} />
         </div>
-        <ListGroup variant='flush' center>
+        <ListGroup variant='flush' >
           {part.grindSpeed && <ListGroupItem>Grind Speed: {part.grindSpeed}</ListGroupItem>}
           {part.grindStr && <ListGroupItem>Grind Strength: {part.grindStr}</ListGroupItem>}
           {part.grindVol && <ListGroupItem>Grind Volume: {part.grindVol}</ListGroupItem>}

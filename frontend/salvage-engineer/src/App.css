@@ -92,5 +92,8 @@
 }
 
 .partsStorage{
-  
+  border-color: black;
+  background-color: gold;
+  border-radius: 5%;
+  margin: 5px;
 }
