@@ -4,6 +4,7 @@ import Generate from "../utils/Generate.util.js";
 import newPlayerData from "../data/NewPlayerGameData.json" assert { type: "json" };
 import Swap from "../utils/Swap.util.js";
 import Find from "../utils/Find.util.js";
+import Recalc from "../utils/Recalc.util.js";
 
 export default class GameService{
 
@@ -58,25 +59,22 @@ export default class GameService{
         try {           
             let gameData = await GameData.findOne({ userID: req.userId });
             
-            if (!gameData) { throw new Error("Invalid account data"); } 
+            if (!gameData) { throw new Error("Invalid account data"); }             
 
-            
-
-            const partIndex = Find.index(gameData.partsStorage, req.body);
-
-            // console.log(partIndex, `<--partIndex, service`);
-            // console.log(req.body);
-            // console.log(gameData.partsStorage, `<---partsStorage`);
+            const partIndex = Find.index(gameData.partsStorage, req.body);            
 
             if (partIndex === -1) { return 422; }
             
             gameData = Swap.part(gameData, partIndex);
+            
+            gameData = Recalc.stats(gameData);
 
             await gameData.save();   
             
             return 200;
 
         } catch (e) {
+            console.log(e, `<--error`);
             throw new Error(e.message)
         }
     }

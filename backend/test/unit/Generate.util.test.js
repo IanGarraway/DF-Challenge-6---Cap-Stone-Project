@@ -34,7 +34,7 @@ describe("Tests of the generate utility with mock random", () => {
             //Assert
             expect(part.manufacturer).to.equal("Ubermech")
             expect(part.type).to.equal("sensor");
-            expect(part.maxQual).to.equal(4);
+            expect(part.maxQual).to.equal(3);
         })
     });
 

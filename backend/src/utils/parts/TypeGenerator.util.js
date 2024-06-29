@@ -87,7 +87,8 @@ export default class TypeGenerator{
     }
     static #sensor = (part, maxQual, zone) => {
         part.type = "sensor";
-        part.maxQual = GetRandom.int(1 + maxQual + zone) + GetRandom.int(1 + maxQual + zone);
+        part.maxQual = GetRandom.int(1 + maxQual + zone);
+        part.findTime = GetRandom.int(1 + maxQual + zone);
         return part;
     }
     static #grinderMotor = (part, maxQual, zone) => {

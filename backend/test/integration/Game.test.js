@@ -17,6 +17,7 @@ import GameController from "../../src/controllers/Game.Controller.js";
 import GameRoutes from "../../src/routes/Game.Routes.js";
 import GameService from "../../src/services/Game.Service.js";
 
+import GameData from "../../src/models/gamedata.model.js";
 import User from "../../src/models/User.model.js";
 
 import jwt from "jsonwebtoken";
@@ -24,7 +25,6 @@ import { response } from "express";
 
 
 import userData from "../data/users.json" assert { type: "json" }
-import GameData from "../../src/models/gamedata.model.js";
 
 
 describe("Tests of Game routes", () => {
@@ -430,6 +430,45 @@ describe("Tests of Game routes", () => {
             // console.log(getResponse.status, `<---get`);
 
             expect(response.status).to.be.equal(401);
+            
+        })
+
+        it("should calculate the correct stats", async() => {
+            //Arrange
+            mockGameData.stats = {
+                "grinderSpd": 0,
+                "grinderVol": 0,
+                "grinderStr": 0,
+                "smeltSpd": 0,
+                "smeltTier": 0,
+                "maxQual": 0,
+                "gathSpd": 0,
+                "gathVol": 0,
+                "speed": 0,
+                "zone": 0
+            };
+
+
+            //Act
+
+            const response = await request.patch("/changepart").send(mockParts[1]).set('Cookie', `token=${token}`);
+            const getResponse = await request.get("/data").set('Cookie', `token=${token}`);
+            //Assert
+            
+            let { stats } = getResponse.body;            
+
+            expect(response.status).to.be.equal(200);
+            expect(getResponse.body.equipment.magnetCore.name).to.equal(mockParts[1].name);
+            expect(stats.grinderSpd).to.equal(1);
+            expect(stats.grinderVol).to.equal(1);
+            expect(stats.grinderStr).to.equal(1);
+            expect(stats.smeltSpd).to.equal(1);
+            expect(stats.smeltTier).to.equal(1);
+            expect(stats.maxQual).to.equal(3);
+            expect(stats.gathVol).to.equal(7);
+            expect(stats.gathSpd).to.equal(3);
+            expect(stats.speed).to.equal(1);
+            expect(stats.zone).to.equal(1);
             
         })
         

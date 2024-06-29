@@ -120,7 +120,8 @@ describe("TypeGenerator", () => {
 
             //Assert
             expect(result.type).to.equal("sensor");            
-            expect(result.maxQual).to.equal(3);
+            expect(result.maxQual).to.equal(1);
+            expect(result.findTime).to.equal(2);
             
         });
 

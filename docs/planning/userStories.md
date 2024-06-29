@@ -190,9 +190,9 @@ done:
 
 - [x] front end allows user to equip a part to a slot
 - [x] front end service for equipping the part (front end user service)
-- [ ] equip part route (back end user service)
+- [x] equip part route (back end user service)
 - [x] front end testing
-- [ ] back end testing
+- [x] back end testing
 
 ### user story 25
 
