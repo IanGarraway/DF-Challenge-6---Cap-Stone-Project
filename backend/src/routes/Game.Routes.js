@@ -33,7 +33,11 @@ export default class GameRoutes{
 
         this.#router.get('/data', [
             LoginValidator.verifyToken
-        ],this.#controller.getData);
+        ], this.#controller.getData);
+        
+        this.#router.patch('/changepart', [
+            LoginValidator.verifyToken
+        ], this.#controller.changePart);
         
     };
     getRouter = () => { return this.#router; };

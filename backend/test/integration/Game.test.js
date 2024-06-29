@@ -279,4 +279,60 @@ describe("Tests of Game routes", () => {
         })
 
     });
+
+    describe("Change part(patch) route tests", () => {
+        let mockGameData;
+        let mockParts = [{
+            "name": "Novatech Motor mk2",
+            "type": "magnetMotor",
+            "manufacturer": "Salvage Tech",
+            "mlogo": "salvageTechLogo.png",
+            "gathSpd": 2,
+            "gathVol": 1
+        },
+        {
+            "name": "Novatech Magnet Core mk2",
+            "type": "magnetCore",
+            "manufacturer": "Salvage Tech",
+            "mlogo": "salvageTechLogo.png",
+            "maxQual": 1,
+            "gathVol": 2
+        },
+        {
+            "name": "Novatech Salvage Scan mk1",
+            "type": "magnetCore",
+            "manufacturer": "Salvage Tech",
+            "mlogo": "salvageTechLogo.png",
+            "findTime": 1,
+            "maxQual": 1
+        }];
+            
+
+        beforeEach(async () => {
+            mockGameData = await GameData.findOne({ userID: userId });
+                
+            mockGameData.partsStorage = mockParts;
+                
+            await mockGameData.save();
+        });
+
+        it("should respond with the mock part in magnet motor slot", async() => {
+            //Arrange
+
+
+            //Act
+
+            const response = await request.patch("/changepart").send(mockParts[0]).set('Cookie', `token=${token}`);
+            const getResponse = await request.get("/data").set('Cookie', `token=${token}`);
+
+            //Assert
+            // console.log(response.status, `<--res`);
+            // console.log(getResponse.status, `<---get`);
+
+            expect(response.status).to.be.equal(200);
+            expect(getResponse.body.equipment.magnetMotor.name).to.equal(mockParts[0].name);
+            expect(getResponse.body.equipment.magnetMotor.gathSpd).to.equal(2);
+        })
+        
+    })
 });

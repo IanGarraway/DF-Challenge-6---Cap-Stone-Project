@@ -180,7 +180,7 @@ done:
 done:
 
 - [x] front end can display all parts
-- [ ] front end testing
+- [x] front end testing
 
 ### User story 14
 
@@ -188,12 +188,19 @@ done:
 
 done:
 
-- [ ] front end allows user to equip a part to a slot
-- [ ] front end service for equipping the part (front end user service)
+- [x] front end allows user to equip a part to a slot
+- [x] front end service for equipping the part (front end user service)
 - [ ] equip part route (back end user service)
-- [ ] front end testing
+- [x] front end testing
 - [ ] back end testing
 
+### user story 25
+
+"As a player, i'd like the parts I have equipped to impact my resource generations, so that my choices in them matter"
+
+- [ ] back end code to adjust the numbers
+- [ ] back end testing
+  
 ### User story 18
 
 "As a player, I would like to be able to scrap parts in my parts storage, so I have capacity for new parts"
