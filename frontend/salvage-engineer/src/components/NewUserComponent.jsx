@@ -16,7 +16,7 @@ import Terms from './Terms';
 
 
 
-const NewUserComponent = () => {
+const NewUserComponent = ({setActiveTab}) => {
     const { Formik } = formik;
     const [success, setSuccess] = useState(false);
         
@@ -48,6 +48,7 @@ const NewUserComponent = () => {
                     if (response.status === 201) {
                         setSuccess(true);
                         resetForm();
+                        setActiveTab("Login");
                     }
                 } catch (e) {
                     console.error("There was an error creating the account", e);

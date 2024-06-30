@@ -46,18 +46,18 @@ function AdminDelete({account, getAccounts, setActiveTab}) {
     <div>
       <Form onSubmit={handleSubmit} >
         <Form.Check
-          type="switch"
-          id="confirmDeleteSwitch"
+          type="switch"          
           label="Confirm you wish to delete this account"
           onChange={handleChange}
           data-testid={"adminDeleteSwitch"}
+          key={account._id}
         />
       
         <div className='errorText'>
           {errorText}
         </div>
         <div className='d-grid gap-2'>
-          <Button  variant='danger' type='submit' size="lg" disabled={!(confirmDelete)} data-testid={"adminDeleteButton"} >
+          <Button key={account._id} variant='danger' type='submit' size="lg" disabled={!(confirmDelete)} data-testid={"adminDeleteButton"} >
             Delete this Account
           </Button>
         </div>

@@ -47,7 +47,7 @@ function AdminPromote({account, getAccounts, setActiveTab}) {
       <Form onSubmit={handleSubmit} >
         <Form.Check
           type="switch"
-          id="confirmPromoteSwitch"
+          key={account._id}
           label="Confirm you wish to promote this account"
           onChange={handleChange}
           data-testid={"promoteSwitch"}

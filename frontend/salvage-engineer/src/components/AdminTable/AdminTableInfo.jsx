@@ -11,10 +11,10 @@ function AdminTableInfo({ account }) {
                 className="mb-1"
               
             >
-                <Form.Control type="test" placeholder="name@example.com" value={account.email} readOnly data-testid={"adminEmail"} />
+                <Form.Control key={account._id} type="test" placeholder="name@example.com" value={account.email} readOnly data-testid={"adminEmail"} />
             </FloatingLabel>
             <FloatingLabel controlId="floatingPassword" label="Name">
-                <Form.Control type="string" placeholder="Name" value={account.name} readOnly data-testid={"adminName"}/>
+                <Form.Control key={account._id} type="string" placeholder="Name" value={account.name} readOnly data-testid={"adminName"}/>
             </FloatingLabel>
           
         </div>

@@ -40,13 +40,13 @@ function AdminChangePassword({account, getAccounts, setActiveTab}) {
     <div>
       <Form onSubmit={handleSubmit} >
         <Form.Check
-          type="switch"
-          id="confirmPromoteSwitch"
+          type="switch"          
           label="Confirm you wish to Change the password "
           onChange={handleChange}
           data-testid={"changeSwitch"}
+          key={account._id}
         />
-        <Form.Group as={Row} className="mb-3" controlId="formBasicEmail">
+        <Form.Group as={Row} className="mb-3" >
           <Form.Label column sm={3}>Password</Form.Label>
           <Col sm={9}>
             <Form.Control
@@ -54,6 +54,7 @@ function AdminChangePassword({account, getAccounts, setActiveTab}) {
               placeholder="Enter new password"
               ref={password}
               data-testid={"adminChangePassword"}
+              key={account._id}
             />
             
           </Col>
@@ -63,7 +64,7 @@ function AdminChangePassword({account, getAccounts, setActiveTab}) {
           {errorText}
         </div>
         <div className='d-grid gap-2'>
-          <Button variant='warning' type='submit' size="lg" disabled={!(confirmChange)} data-testid={"changeButton"} >
+          <Button variant='warning' type='submit' size="lg" disabled={!(confirmChange)} data-testid={"changeButton"} key={account._id} >
             Change the password
           </Button>
         </div>

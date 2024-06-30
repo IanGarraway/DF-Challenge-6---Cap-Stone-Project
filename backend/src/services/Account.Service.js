@@ -8,7 +8,7 @@ export default class AccountService{
 
     login = async ({ username, password }) => {    
         
-        const user = await User.findOne({ userName: username });
+        const user = await User.findOne({ userName: username.toLowerCase() });
 
         if (!user) { throw new Error("Invalid Login details"); }
 

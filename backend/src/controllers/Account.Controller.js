@@ -26,7 +26,7 @@ export default class AccountController{
                 return res.status(422).json({ message: 'Validation failed', errors: errors.array() });
             }
             const user = new User({
-                userName: req.body.username,
+                userName: req.body.username.toLowerCase(),
                 userPassword: bcrypt.hashSync(req.body.password, 10),
                 email: req.body.email,
                 name: req.body.name,

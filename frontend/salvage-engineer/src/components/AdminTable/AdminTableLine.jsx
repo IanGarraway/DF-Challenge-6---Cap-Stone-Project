@@ -29,13 +29,13 @@ const AdminTableLine = ({ account, getAccounts }) => {
                       <AdminTableInfo account={account} />
                   </Tab>
                   <Tab eventKey="delete" title="Delete" >
-                      <AdminDelete account={account} getAccounts={getAccounts} setActiveTab={setActiveTab} />
+                      <AdminDelete key={account._id} account={account} getAccounts={getAccounts} setActiveTab={setActiveTab} />
                   </Tab>
                   <Tab eventKey="promote" title="Promote" disabled={account.admin} data-testid={"promoteTab"} >
-                      <AdminPromote account={account} getAccounts={getAccounts} setActiveTab={setActiveTab} />
+                      <AdminPromote key={account._id} account={account} getAccounts={getAccounts} setActiveTab={setActiveTab} />
                   </Tab>
                   <Tab eventKey="change" title="Change" data-testid={"changeTab"} >
-                      <AdminChangePassword account={account} getAccounts={getAccounts} setActiveTab={setActiveTab} />
+                      <AdminChangePassword key={account._id} account={account} getAccounts={getAccounts} setActiveTab={setActiveTab} />
                   </Tab>
               </Tabs>
           </Card>
