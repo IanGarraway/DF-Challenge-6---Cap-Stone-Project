@@ -23,12 +23,23 @@ export default class GameController{
 
     changePart = async (req, res) => {
         try {
-            const response = await this.#gameService.changePart(req);
-            //console.log(req.body,`<--`, response);
+            const response = await this.#gameService.changePart(req);            
 
             if(response === 422){ return res.status(422).send({ message: "invalid data" });}
 
             return res.status(200).send({ message: "part changed" });
+        } catch (e) {
+            return res.status(500).send({ message: e.message });
+        }
+    }
+
+    scrapPart = async (req, res) => {
+        try {
+            const response = await this.#gameService.scrapPart(req);            
+
+            if(response === 422){ return res.status(422).send({ message: "invalid data" });}
+
+            return res.status(200).send({ message: "part scrapped" });
         } catch (e) {
             return res.status(500).send({ message: e.message });
         }

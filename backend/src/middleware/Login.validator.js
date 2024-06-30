@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 
 export default class LoginValidator{
 
-    static verifyToken = (req, res, next) => {
+    static verifyToken = (req, res, next) => {        
         
         let token = req.cookies.token;        
 

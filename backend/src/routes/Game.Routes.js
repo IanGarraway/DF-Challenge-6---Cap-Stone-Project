@@ -38,6 +38,10 @@ export default class GameRoutes{
         this.#router.patch('/changepart', [
             LoginValidator.verifyToken
         ], this.#controller.changePart);
+
+        this.#router.post('/scrappart', [
+            LoginValidator.verifyToken
+        ], this.#controller.scrapPart);
         
     };
     getRouter = () => { return this.#router; };

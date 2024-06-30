@@ -5,6 +5,7 @@ import newPlayerData from "../data/NewPlayerGameData.json" assert { type: "json"
 import Swap from "../utils/Swap.util.js";
 import Find from "../utils/Find.util.js";
 import Recalc from "../utils/Recalc.util.js";
+import Calc from "../utils/Calc.util.js";
 
 export default class GameService{
 
@@ -68,8 +69,6 @@ export default class GameService{
             
             if (!gameData) { throw new Error("Invalid account data"); }   
             
-            //console.log(gameData.partsStorage,`<->`, req.body);
-
             const partIndex = Find.index(gameData.partsStorage, req.body.part);            
 
             if (partIndex === -1) { return 422; }
@@ -81,10 +80,37 @@ export default class GameService{
             
             return 200;
 
-        } catch (e) {
+        } catch (e) {            
+            throw new Error(e.message)
+        }
+    }
+
+    scrapPart = async(req) => {
+        try {
+            let gameData = await GameData.findOne({ userID: req.userId });
+            
+            if (!gameData) { throw new Error("Invalid account data"); } 
+
+            const partIndex = Find.index(gameData.partsStorage, req.body.part);            
+
+            if (partIndex === -1) { return 422; }
+
+            const scrapValue = Calc.scrappage(gameData.partsStorage[partIndex]);
+            
+            gameData.inventory.t1Metal += scrapValue;
+            if (scrapValue > 15) { gameData.inventory.t2Metal += scrapValue / 10; }
+            
+            gameData.partsStorage.splice(partIndex, 1);
+
+            await gameData.save();
+
+            return 200;
+            
+        }catch (e) {
             console.log(e, `<--error`);
             throw new Error(e.message)
         }
+        
     }
     
 }

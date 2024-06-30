@@ -101,13 +101,13 @@ describe("Tests of Game routes", () => {
         });
         
         const notAdminAcc = {
-             "username": "user1",
-        "password": "Testpass!1",
-        "email": "user1@test.com",
-        "name": "Test Not Admin"
+            "username": "user1",
+            "password": "Testpass!1",
+            "email": "user1@test.com",
+            "name": "Test Not Admin"
         }
 
-        const res = await request.post("/auth/newuser").send(notAdminAcc);        
+        const res = await request.post("/auth/newuser").send(notAdminAcc);
 
         const notAdminResponse = await request.post("/auth/login").send({ "username": "user1", "password": "Testpass!1" });
         
@@ -115,7 +115,7 @@ describe("Tests of Game routes", () => {
         nonAdminToken = tokenCookie2.split(';')[0].split('=')[1];
         
         
-    })
+    });
     
 
     after(async () => {
@@ -332,10 +332,11 @@ describe("Tests of Game routes", () => {
 
         it("should respond with 200 and the fabrication mock part in smelterControl slot", async () => {
             //Arrange
+            const payload = { part: mockParts[3] };
 
             //Act
 
-            const response = await request.patch("/changepart").send(mockParts[3]).set('Cookie', `token=${token}`);
+            const response = await request.patch("/changepart").send(payload).set('Cookie', `token=${token}`);
             const getResponse = await request.get("/data").set('Cookie', `token=${token}`);
 
             //Assert
@@ -349,9 +350,11 @@ describe("Tests of Game routes", () => {
         it("should respond with 200 and the mock part in magnet motor slot", async () => {
             //Arrange
 
+            const payload = { part: mockParts[0] };
+
             //Act
 
-            const response = await request.patch("/changepart").send(mockParts[0]).set('Cookie', `token=${token}`);
+            const response = await request.patch("/changepart").send(payload).set('Cookie', `token=${token}`);
             const getResponse = await request.get("/data").set('Cookie', `token=${token}`);
 
             //Assert
@@ -362,17 +365,19 @@ describe("Tests of Game routes", () => {
             expect(getResponse.body.equipment.magnetMotor.gathSpd).to.equal(2);
         });
 
-        it("should respond with the mock part in magnet motor slot", async () => {
-            //Arrange
+        it("should refuse a bad part ", async () => {
+            //Arrange            
 
             const mockBadPart = {
-            "name": "Novatech Salvage Scam mk1",
-            "type": "magnetCore",
-            "manufacturer": "Salvage Tech",
-            "mlogo": "salvageTechLogo.png",
-            "findTime": 10,
-            "maxQual": 10
-        }
+                part:{
+                    "name": "Novatech Salvage Scam mk1",
+                    "type": "magnetCore",
+                    "manufacturer": "Salvage Tech",
+                    "mlogo": "salvageTechLogo.png",
+                    "findTime": 10,
+                    "maxQual": 10
+                }
+            };
 
 
             //Act
@@ -388,24 +393,7 @@ describe("Tests of Game routes", () => {
             expect(getResponse.body.equipment.magnetMotor.gathSpd).to.equal(2);
         });
 
-        it("should respond with 422 if a part not in the parts list is send in", async() => {
-            //Arrange
-
-
-            //Act
-
-            const response = await request.patch("/changepart").send(mockParts[0]).set('Cookie', `token=${token}`);
-            const getResponse = await request.get("/data").set('Cookie', `token=${token}`);
-
-            //Assert
-            // console.log(response.status, `<--res`);
-            // console.log(getResponse.status, `<---get`);
-
-            expect(response.status).to.be.equal(200);
-            expect(getResponse.body.equipment.magnetMotor.name).to.equal(mockParts[0].name);
-            expect(getResponse.body.equipment.magnetMotor.gathSpd).to.equal(2);
-        })
-
+        
         it("should respond with 401 if no cookie is sent", async() => {
             //Arrange
 
@@ -415,25 +403,21 @@ describe("Tests of Game routes", () => {
             const response = await request.patch("/changepart").send(mockParts[0]);
             
             //Assert
-            // console.log(response.status, `<--res`);
-            // console.log(getResponse.status, `<---get`);
-
+           
             expect(response.status).to.be.equal(401);
             
         })
 
         it("should respond with 401 if no expired cookie is sent", async() => {
             //Arrange
-
+            const payload = { part: mockParts[0] };
 
             //Act
 
-            const response = await request.patch("/changepart").send(mockParts[0]).set('Cookie', `token=${expiredToken}`);
+            const response = await request.patch("/changepart").send(payload).set('Cookie', `token=${expiredToken}`);
             
             //Assert
-            // console.log(response.status, `<--res`);
-            // console.log(getResponse.status, `<---get`);
-
+            
             expect(response.status).to.be.equal(401);
             
         })
@@ -453,10 +437,12 @@ describe("Tests of Game routes", () => {
                 "zone": 0
             };
 
+            const payload = { part: mockParts[1] };
+
 
             //Act
 
-            const response = await request.patch("/changepart").send(mockParts[1]).set('Cookie', `token=${token}`);
+            const response = await request.patch("/changepart").send(payload).set('Cookie', `token=${token}`);
             const getResponse = await request.get("/data").set('Cookie', `token=${token}`);
             //Assert
             
@@ -478,4 +464,137 @@ describe("Tests of Game routes", () => {
         })
         
     })
+
+    describe('tests of the scrappart route', () => { 
+        let mockGameData;
+        let mockParts = [{
+            "name": "Novatech Motor mk2",
+            "type": "magnetMotor",
+            "manufacturer": "Salvage Tech",
+            "mlogo": "salvageTechLogo.png",
+            "gathSpd": 2,
+            "gathVol": 1
+        },
+        {
+            "name": "Novatech Magnet Core mk2",
+            "type": "magnetCore",
+            "manufacturer": "Salvage Tech",
+            "mlogo": "salvageTechLogo.png",
+            "maxQual": 1,
+            "gathVol": 2
+        },
+        {
+            "name": "Novatech Salvage Scan mk1",
+            "type": "magnetCore",
+            "manufacturer": "Salvage Tech",
+            "mlogo": "salvageTechLogo.png",
+            "findTime": 1,
+            "maxQual": 1
+        },
+        {
+            "name": "Novatech Smelt Master mk1",
+            "type": "smelterControl",
+            "manufacturer": "Salvage Tech",
+            "mlogo": "salvageTechLogo.png",
+            "smeltSpd": 2,
+            "smeltTier": 2
+        }
+        ];
+            
+
+        beforeEach(async () => {
+            mockGameData = await GameData.findOne({ userID: userId });
+                
+            mockGameData.partsStorage = mockParts;
+            mockGameData.inventory.t1Metal = 0
+            mockGameData.inventory.t2Metal = 0
+            mockGameData.lastGen = Date.now();
+            mockGameData.lastResourceGen = Date.now();
+
+            await mockGameData.save();       
+            
+        });
+
+        it("should respond with 200 and the partsStorage should not contain the mock part", async () => {
+            //Arrange
+            const payload = { part: mockParts[2] };                        
+
+            //Act
+            let response = await request.get("/data").set('Cookie', `token=${token}`);
+            
+            // console.log(response.body.partsStorage, `before`);
+            expect(response.body.partsStorage).to.be.an('array').lengthOf(4);
+            
+
+            response = await request.post("/scrappart").send(payload).set('Cookie', `token=${token}`);
+            const getResponse = await request.get("/data").set('Cookie', `token=${token}`);
+
+            //Assert   
+            // console.log(getResponse.body.partsStorage, `after`);
+
+            expect(response.status).to.be.equal(200);
+            expect(getResponse.body.partsStorage).to.be.an('array').lengthOf(3);
+            const { partsStorage } = getResponse.body;
+            expect(partsStorage[0].name).not.to.equal(mockParts[2].name);
+            expect(partsStorage[1].name).not.to.equal(mockParts[2].name);
+            expect(partsStorage[2].name).not.to.equal(mockParts[2].name);
+            expect(getResponse.body.inventory.t1Metal).to.equal(0.3);
+        });
+
+        it("should refuse a bad part ", async () => {
+            //Arrange            
+
+            const mockBadPart = {
+                part:{
+                    "name": "Novatech Salvage Scam mk1",
+                    "type": "magnetCore",
+                    "manufacturer": "Salvage Tech",
+                    "mlogo": "salvageTechLogo.png",
+                    "findTime": 10,
+                    "maxQual": 10
+                }
+            };
+
+
+            //Act
+
+            const response = await request.post("/scrappart").send(mockBadPart).set('Cookie', `token=${token}`);
+            
+
+            //Assert
+            
+
+            expect(response.status).to.be.equal(422);            
+        });
+
+        
+        it("should respond with 401 if no cookie is sent", async() => {
+            //Arrange
+
+
+            //Act
+
+            const response = await request.post("/scrappart").send(mockParts[0]);
+            
+            //Assert
+           
+            expect(response.status).to.be.equal(401);
+            
+        })
+
+        it("should respond with 401 if no expired cookie is sent", async() => {
+            //Arrange
+            const payload = { part: mockParts[0] };
+
+            //Act
+
+            const response = await request.post("/scrappart").send(payload).set('Cookie', `token=${expiredToken}`);
+            
+            //Assert
+            
+            expect(response.status).to.be.equal(401);
+            
+        })
+
+     })
 });
