@@ -51,7 +51,7 @@ export default class GameService{
             return gameData;
             
         } catch (e) {    
-            // console.log(e,`service error`);
+            console.log(e,`service error`);
             throw new Error(e.message)
         }
         
@@ -64,10 +64,9 @@ export default class GameService{
             let gameData = await GameData.findOne({ userID: req.userId });
             
             if (!gameData) { throw new Error("Invalid account data"); } 
-            console.log(gameData, `gd - change`);
             
-            const partIndex = Find.index(gameData.partsStorage, req.body.part); 
-            console.log(partIndex, `<-change- `, gameData.partsStorage,` + `, req.body.part);
+            
+            const partIndex = Find.index(gameData.partsStorage, req.body.part);             
 
             if (partIndex === -1) { return 422; }
             

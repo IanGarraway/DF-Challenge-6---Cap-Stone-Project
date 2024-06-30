@@ -141,7 +141,7 @@ describe("TypeGenerator", () => {
             expect(result.grindStr).to.equal(2);            
         });
 
-        it("should generate a grindGear part", () => {
+        it("should generate a grindergear part", () => {
             //Arrange
             getRandomStub.onCall(0).returns(8);
             getRandomStub.onCall(1).returns(1);
@@ -152,7 +152,7 @@ describe("TypeGenerator", () => {
             const result = TypeGenerator.getType(2, 1);
 
             //Assert
-            expect(result.type).to.equal("grindGear");            
+            expect(result.type).to.equal("grinderGear");            
             expect(result.grindSpeed).to.equal(1);            
             expect(result.grindVol).to.equal(2);            
         });

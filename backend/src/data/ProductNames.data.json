@@ -10,7 +10,7 @@
     "scoopSensor":["ScoopScan Pro","ScanScoop Detector","ScoopSense Module","ScoopEye Vision","ScoopTrack Sensor"],
     "sensor":["OmniSense Module","AllTrack Sensor","OmniScan Detector","AllSight Sensor","OmniDetect Module"],
     "grinderMotor": ["GrindForce Motor","GrindPower Engine","CrusherDrive Motor","GrindMaster Motor","TorqueGrind Engine"],
-    "grindGear": ["TitanGear Set","GrindGear Pack","CrusherGear System","GrindTorque Gears","SteelGrind Gears"],
+    "grinderGear": ["TitanGear Set","GrindGear Pack","CrusherGear System","GrindTorque Gears","SteelGrind Gears"],
     "smelterHeater" : ["ThermaFusion Unit", "HeatMaster System", "SmeltHeat Engine", "ThermaCore Heater", "FusionHeat Module"],
     "smelterControl":["SmeltControl Matrix", "SmeltMaster Control", "FusionControl System", "HeatManage Controller", "SmeltLogic System"]
 }   

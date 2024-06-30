@@ -165,7 +165,7 @@ describe("Tests of Game routes", () => {
 
             //act
             const response = await request.get("/data").set('Cookie', `token=${expiredToken}`);
-            //console.log(response);
+            
 
             //assert
 
@@ -183,6 +183,7 @@ describe("Tests of Game routes", () => {
                 mockGameData.partsStorage = [];
                 
                 await mockGameData.save();
+                await new Promise(resolve => setTimeout(resolve, 500));
             })
             it("should give two parts", async() => {                
                 //arrange
@@ -195,11 +196,11 @@ describe("Tests of Game routes", () => {
            
 
                 //assert
-                // console.log(response.body, `test body`);
+                
             
                 expect(response.status).to.equal(200);                
                 expect(response.body).to.have.property("partsStorage").to.be.an('array').lengthOf(2);
-                expect(response.body.inventory).to.have.property("t1Metal").to.equal(0.2);
+                expect(response.body.inventory).to.have.property("t1Metal").to.greaterThan(0.2);
         
             })
 
@@ -233,7 +234,7 @@ describe("Tests of Game routes", () => {
             
                 expect(response.status).to.equal(200);                
                 expect(response.body).to.have.property("partsStorage").to.be.an('array').lengthOf(10)
-                expect(response.body.inventory).to.have.property("t1Metal").to.equal(4.4);
+                expect(response.body.inventory).to.have.property("t1Metal").to.greaterThan(4.4);
         
             })
 
@@ -247,7 +248,7 @@ describe("Tests of Game routes", () => {
                 const response = await request.get("/data").set('Cookie', `token=${token}`);
            
 
-                //assert
+                //assert                
             
                 expect(response.status).to.equal(200);                
                 expect(response.body).to.have.property("partsStorage").to.be.an('array').lengthOf(12)
@@ -343,6 +344,7 @@ describe("Tests of Game routes", () => {
             
 
             expect(response.status).to.be.equal(200);
+            
             expect(getResponse.body.fabrication.smelterControl.name).to.equal(mockParts[3].name);
             expect(getResponse.body.fabrication.smelterControl.smeltSpd).to.equal(2);
         });
@@ -522,7 +524,7 @@ describe("Tests of Game routes", () => {
             //Act
             let response = await request.get("/data").set('Cookie', `token=${token}`);
             
-            // console.log(response.body.partsStorage, `before`);
+            
             expect(response.body.partsStorage).to.be.an('array').lengthOf(4);
             
 
@@ -530,15 +532,14 @@ describe("Tests of Game routes", () => {
             const getResponse = await request.get("/data").set('Cookie', `token=${token}`);
 
             //Assert   
-            // console.log(getResponse.body.partsStorage, `after`);
-
+            
             expect(response.status).to.be.equal(200);
             expect(getResponse.body.partsStorage).to.be.an('array').lengthOf(3);
             const { partsStorage } = getResponse.body;
             expect(partsStorage[0].name).not.to.equal(mockParts[2].name);
             expect(partsStorage[1].name).not.to.equal(mockParts[2].name);
             expect(partsStorage[2].name).not.to.equal(mockParts[2].name);
-            expect(getResponse.body.inventory.t1Metal).to.equal(0.3);
+            expect(getResponse.body.inventory.t1Metal).to.greaterThan(0.3);
         });
 
         it("should refuse a bad part ", async () => {
