@@ -27,28 +27,24 @@ export default class GameService{
     }
 
     getData = async (req) => {
-        let changed = false;
-        
+                
         try {
             let gameData = await GameData.findOne({ userID: req.userId });
 
             if (!gameData) { throw new Error("Invalid account data"); } 
             
             const newParts = Generate.parts(gameData);
-            if (newParts != gameData.partsStorage) {
-                changed = true;
-                gameData.partsStorage = newParts;
+            if (newParts[0] ) {                
+                gameData.partsStorage = newParts[1];
                 gameData.lastGen = Date.now();
             }
             const newResources = Generate.resources(gameData);
+                        
+            gameData.inventory = newResources;
+            gameData.lastResourceGen = Date.now();
             
-            if (newResources != gameData.inventory) {
-                changed = true;
-                gameData.inventory = newResources;
-                gameData.lastResourceGen = Date.now();
-            }
 
-            changed && await gameData.save();
+            await gameData.save();
 
             gameData._id = "";
             gameData.userID = "";
@@ -67,9 +63,11 @@ export default class GameService{
         try {           
             let gameData = await GameData.findOne({ userID: req.userId });
             
-            if (!gameData) { throw new Error("Invalid account data"); }   
+            if (!gameData) { throw new Error("Invalid account data"); } 
+            console.log(gameData, `gd - change`);
             
-            const partIndex = Find.index(gameData.partsStorage, req.body.part);            
+            const partIndex = Find.index(gameData.partsStorage, req.body.part); 
+            console.log(partIndex, `<-change- `, gameData.partsStorage,` + `, req.body.part);
 
             if (partIndex === -1) { return 422; }
             
@@ -88,10 +86,12 @@ export default class GameService{
     scrapPart = async(req) => {
         try {
             let gameData = await GameData.findOne({ userID: req.userId });
+           
             
             if (!gameData) { throw new Error("Invalid account data"); } 
 
-            const partIndex = Find.index(gameData.partsStorage, req.body.part);            
+            const partIndex = Find.index(gameData.partsStorage, req.body.part); 
+           
 
             if (partIndex === -1) { return 422; }
 

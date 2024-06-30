@@ -35,7 +35,7 @@ export default class TypeGenerator{
                 part = this.#grinderMotor(part, maxQual, zone);
                 break;
             case 8:
-                part =this.#grindGear(part, maxQual, zone);
+                part =this.#grinderGear(part, maxQual, zone);
                 break;
             case 9:
                 part = this.#smelterHeater(part, maxQual, zone);
@@ -97,8 +97,8 @@ export default class TypeGenerator{
         part.grindStr = GetRandom.int(1 + maxQual + zone)
         return part;
     }
-    static #grindGear = (part, maxQual, zone) => {
-        part.type = "grindGear";
+    static #grinderGear = (part, maxQual, zone) => {
+        part.type = "grinderGear";
         part.grindSpeed = GetRandom.int(1 + maxQual + zone)
         part.grindVol = GetRandom.int(1 + maxQual + zone)
         return part;

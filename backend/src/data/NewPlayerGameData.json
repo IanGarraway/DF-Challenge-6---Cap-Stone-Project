@@ -62,7 +62,7 @@
     "fabrication": {
         "grinderMotor": {
             "name": "Novatech ShredTech Motor",
-            "type": "grinderMotor",
+            "type": "grindMotor",
             "manufacturer": "Salvage Tech",
             "mlogo": "salvageTechLogo.png",
             "grindSpeed": 1,
@@ -70,7 +70,7 @@
         },
         "grinderGear": {
             "name": "Novatech ShredTech GrindGear",
-            "type": "grinderGear",
+            "type": "grindGear",
             "manufacturer": "Salvage Tech",
             "mlogo": "salvageTechLogo.png",
             "grindSpeed": 1,

@@ -4,19 +4,35 @@ import PartDetails from './PartDetails';
 import { Row, Col, Stack, Button } from 'react-bootstrap';
 import DetailedPart from './DetailedPart';
 import GameService from '../../service/Game.Service';
+import Storage from './Storage';
 
 function Inventory({ gameData, focus, getData }) {
     const [inv, setInv] = useState(gameData.partsStorage);
     const [selected, setSelected] = useState(0);
+    const [disableButtons, setDisableButtons] = useState(false)
     let equipped;
     
 
     useEffect(() => {
-        if (focus !== "none") {
-            const items = InventoryFocus.onType(gameData.partsStorage, focus)            
-            setInv(items)
+        if (gameData.partsStorage.length === 0) {
+            setDisableButtons(true);
+            setInv([
+                {
+                    name: "empty",
+                    manufacturer: "empty",
+                    type: "clawHydrolics",
+                    mlogo: "placeholder.png"
+                }
+            ])
+            
         } else {
-            setInv(gameData.partsStorage);
+            setDisableButtons(false);
+            if (focus !== "none") {
+                const items = InventoryFocus.onType(gameData.partsStorage, focus)
+                setInv(items)
+            } else {
+                setInv(gameData.partsStorage);
+            }
         }
     }, [gameData, focus]);  
 
@@ -66,6 +82,7 @@ function Inventory({ gameData, focus, getData }) {
         <div className='parstsStorage' >
             <Stack direction='horizontal' gap={3} className='invItems' >
                 {partBoxes}
+                <div class="vr"></div>
             </Stack>
             <div className='detailedInv'>
                 <Stack direction='horizontal' style={{justifyContent:'center', alignItems: 'center', padding: '10px'}}>
@@ -77,14 +94,18 @@ function Inventory({ gameData, focus, getData }) {
                         equipped
                         <DetailedPart part={equipped} key={"equipped"} />
                     </div>
+                    <div className='storage' style={{padding: '10px', fontSize: '2vh', border: "black"}}>
+                         ``
+                        <Storage inv={gameData.inventory} />
+                    </div>
                 </Stack>
             </div>
             <div className='invControlBox'>
             selected
             <div className='controls'>
                 
-                <Button variant='success' onClick={equipItemHandler} data-testid={"equipButton"}>Equip</Button>
-                <Button variant='danger' onClick={scrapItemHandler} data-testid={"scrapButton"}>Scrap</Button>
+                <Button variant='success' onClick={equipItemHandler} data-testid={"equipButton"} disabled={disableButtons}>Equip</Button>
+                <Button variant='danger' onClick={scrapItemHandler} data-testid={"scrapButton"}disabled={disableButtons}>Scrap</Button>
 
                 </div>
                 </div>

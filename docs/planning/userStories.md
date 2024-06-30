@@ -220,10 +220,10 @@ done:
 
 - [x] interface component to scrap a part
 - [x] scrap part service (front end user service)
-- [ ] scrap route (back end user service)
-- [ ] logic to ensure part scrappable
+- [x] scrap route (back end user service)
+- [x] logic to ensure part scrappable
 - [x] front end testing
-- [ ] back end testing
+- [x] back end testing
 
 ### User story 15
 

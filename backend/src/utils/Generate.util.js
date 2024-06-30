@@ -22,13 +22,14 @@ export default class Generate{
         
         const timeBetween = (30 * stats.zone) - stats.gathSpd;
         let partsToGen = Math.floor((timeSince / 1000) / timeBetween);
+        console.log(partsToGen, `parts2gen`);
         
-        if (partsToGen == 0) { return gameData.partsStorage; }
+        if (partsToGen == 0) { return [false, gameData.partsStorage]; }
 
         const parts = this.#generateParts(gameData, partsToGen);
         
 
-        return parts;
+        return [true, parts];
 
         
     }

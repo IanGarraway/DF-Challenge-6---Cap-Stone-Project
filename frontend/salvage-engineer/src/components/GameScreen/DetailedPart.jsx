@@ -4,7 +4,10 @@ import { Card, CardImg, ListGroup, ListGroupItem } from 'react-bootstrap'
 import typeNames from "../../data/typeName.data.json";
 
 function DetailedPart({ part }) {
-  const logoPath = `logos/${part.mlogo}`;
+  if (!part) {return (<>loading... </>)}
+  let logoPath = `logos/heavyWorldLogo.png`;
+   logoPath = part && `logos/${part.mlogo}`;
+  
   return (
     <Card style={{ width: '40vh', height: '40vh' }}>
       <Card.Header>{part.name}</Card.Header>
@@ -29,7 +32,7 @@ function DetailedPart({ part }) {
           {part.findTime>-1 && <ListGroupItem>Part Location speed: {part.findTime}</ListGroupItem>}
           {part.speed>-1 && <ListGroupItem>Speed: {part.speed}</ListGroupItem>}
           {part.gathVol>-1 && <ListGroupItem>Gather Volume: {part.gathVol}</ListGroupItem>}
-          {part.gathSpd>-1 && <ListGroupItem>Grind Speed: {part.gathSpd}</ListGroupItem>}
+          {part.gathSpd>-1 && <ListGroupItem>Gather Speed: {part.gathSpd}</ListGroupItem>}
 
         </ListGroup>
               

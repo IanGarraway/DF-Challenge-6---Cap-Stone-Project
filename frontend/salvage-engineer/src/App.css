@@ -104,6 +104,13 @@
     margin: 5px;
     color: white;
   }
+  .storage{
+    border-color: black;
+      background-color: rgb(126, 78, 6);
+      border-radius: 5%;
+      margin: 5px;
+      color: (126,78,6);
+  }
 
 .cellValue{
   text-align: right;
