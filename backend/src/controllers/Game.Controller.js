@@ -24,8 +24,9 @@ export default class GameController{
     changePart = async (req, res) => {
         try {
             const response = await this.#gameService.changePart(req);
+            //console.log(req.body,`<--`, response);
 
-            if(response === 422){res.status(422).send({ message: "invalid data" });}
+            if(response === 422){ return res.status(422).send({ message: "invalid data" });}
 
             return res.status(200).send({ message: "part changed" });
         } catch (e) {

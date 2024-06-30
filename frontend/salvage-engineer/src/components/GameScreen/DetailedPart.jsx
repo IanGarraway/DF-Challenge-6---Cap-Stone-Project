@@ -20,16 +20,16 @@ function DetailedPart({ part }) {
           <CardImg src={logoPath} style={{ width: '10vh', height: '10vh' }} />
         </div>
         <ListGroup variant='flush' >
-          {part.grindSpeed && <ListGroupItem>Grind Speed: {part.grindSpeed}</ListGroupItem>}
-          {part.grindStr && <ListGroupItem>Grind Strength: {part.grindStr}</ListGroupItem>}
-          {part.grindVol && <ListGroupItem>Grind Volume: {part.grindVol}</ListGroupItem>}
-          {part.smeltSpd && <ListGroupItem>Smelt Speed: {part.smeltSpd}</ListGroupItem>}
-          {part.smeltTier && <ListGroupItem>Smelt Tier: {part.smeltTier}</ListGroupItem>}
-          {part.maxQual && <ListGroupItem>Maximum Quality: {part.maxQual}</ListGroupItem>}
-          {part.findTime && <ListGroupItem>Part Location speed: {part.findTime}</ListGroupItem>}
-          {part.speed && <ListGroupItem>Speed: {part.speed}</ListGroupItem>}
-          {part.gathVol && <ListGroupItem>Gather Volume: {part.gathVol}</ListGroupItem>}
-          {part.gathSpd && <ListGroupItem>Grind Speed: {part.gathSpd}</ListGroupItem>}
+          {part.grindSpeed>-1 && <ListGroupItem>Grind Speed: {part.grindSpeed}</ListGroupItem>}
+          {part.grindStr>-1 && <ListGroupItem>Grind Strength: {part.grindStr}</ListGroupItem>}
+          {part.grindVol>-1 && <ListGroupItem>Grind Volume: {part.grindVol}</ListGroupItem>}
+          {part.smeltSpd>-1 && <ListGroupItem>Smelt Speed: {part.smeltSpd}</ListGroupItem>}
+          {part.smeltTier>-1 && <ListGroupItem>Smelt Tier: {part.smeltTier}</ListGroupItem>}
+          {part.maxQual>-1 && <ListGroupItem>Maximum Quality: {part.maxQual}</ListGroupItem>}
+          {part.findTime>-1 && <ListGroupItem>Part Location speed: {part.findTime}</ListGroupItem>}
+          {part.speed>-1 && <ListGroupItem>Speed: {part.speed}</ListGroupItem>}
+          {part.gathVol>-1 && <ListGroupItem>Gather Volume: {part.gathVol}</ListGroupItem>}
+          {part.gathSpd>-1 && <ListGroupItem>Grind Speed: {part.gathSpd}</ListGroupItem>}
 
         </ListGroup>
               

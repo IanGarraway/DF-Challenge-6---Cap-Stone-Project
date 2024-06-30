@@ -15,8 +15,10 @@ function Inventory({ gameData, focus, getData }) {
         if (focus !== "none") {
             const items = InventoryFocus.onType(gameData.partsStorage, focus)            
             setInv(items)
+        } else {
+            setInv(gameData.partsStorage);
         }
-    }, []);  
+    }, [gameData, focus]);  
 
     const partBoxes = inv.map((part, i) => {
         const isSelected = (selected === i);
@@ -36,7 +38,7 @@ function Inventory({ gameData, focus, getData }) {
     
     const equipItemHandler = async() => {
         try {
-            response = await GameService.changePart(inv[selected]);
+            const response = await GameService.changePart(inv[selected]);
 
             if (response.status === 200) {
                 getData();

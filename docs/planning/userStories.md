@@ -201,6 +201,17 @@ done:
 - [x] back end code to adjust the numbers
 - [x] back end testing
   
+### User story 17
+
+"As a player, I would like the parts I have slotted to have an impact on how quickly I can gather resources and parts"
+
+done:
+
+- [x] add logic to the back end, which uses the time since the last time the user got their data to calculate how much of the various resources they have gathered since then.
+- [ ] add interface components which report the numbers so the user is aware of the effectiveness of their gear choices
+- [ ] front end testing
+- [x] back end testing
+
 ### User story 18
 
 "As a player, I would like to be able to scrap parts in my parts storage, so I have capacity for new parts"
@@ -220,10 +231,12 @@ done:
 
 done:
 
-- [ ] interface designed to allow parts to only go into the correct slot
-- [ ] back end logic to ensure parts can only be equipped in the right place
-- [ ] front end testing
-- [ ] back end testing
+- [x] interface designed to allow parts to only go into the correct slot
+- [x] back end logic to ensure parts can only be equipped in the right place
+- [x] front end testing
+- [x] back end testing
+
+implementation choice, players don't choose which slot it goes into, a part's type determines that.
 
 ### User story 16
 
@@ -233,18 +246,6 @@ done:
 
 - [ ] Selecting a slot on the front end, displays all the parts which could be equipped
 - [ ] front end testing
-
-### User story 17
-
-"As a player, I would like the parts I have slotted to have an impact on how quickly I can gather resources and parts"
-
-done:
-
-- [ ] add logic to the back end, which uses the time since the last time the user got their data to calculate how much of the various resources they have gathered since then.
-- [ ] add interface components which report the numbers so the user is aware of the effectiveness of their gear choices
-- [ ] front end testing
-- [ ] back end testing
-
 
 ### User story 19
 
@@ -295,4 +296,3 @@ done:
 - [ ] logic to verify user's choice is valid
 - [ ] front end testing
 - [ ] back end testing
-

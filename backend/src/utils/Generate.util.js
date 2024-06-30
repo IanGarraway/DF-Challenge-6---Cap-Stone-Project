@@ -51,11 +51,10 @@ export default class Generate{
         let { stats, inventory, caps, lastResourceGen, upgrades } = gameData;
         
         const timeBetween = (Date.now() - lastResourceGen) / 1000;
-console.log(timeBetween,`timebetween`);
 
         const gatherTimeTicks = TimeTicks.calc(30, stats.gathSpd);
         const grindTimeTicks = TimeTicks.calc(30, stats.grinderSpd);
-        const smeltTimeTicks = TimeTicks.calc(30, stats.smeltSpd);
+        const smeltTimeTicks = TimeTicks.calc(30*upgrades.smelter, stats.smeltSpd);
 
         const gatherTicks = Math.floor(timeBetween / gatherTimeTicks);
         const grindTicks = Math.floor(timeBetween / grindTimeTicks);

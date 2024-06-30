@@ -15,7 +15,7 @@ export default class Recalc {
         stats.findTime = this.#findTime(equipment);
         stats.speed = this.#speed(equipment)
         stats.maxQual = this.#maxQual(equipment);
-        stats.gathVol = this.#gathVol(equipment);
+        stats.gathVol = this.#gathVol(equipment);        
         stats.gathSpd = this.#gathSpd(equipment);
 
         return gameData;
@@ -66,7 +66,7 @@ export default class Recalc {
         }
     static #gathVol(equipment) {        
 
-        return equipment.magnetMotor.gathVol + equipment.magnetCore.gathVol + equipment.clawHydrolics.gathVol + equipment.scoopMotor.gathVol + equipment.scoopSensor.gathVol;
+        return equipment.magnetMotor.gathVol + equipment.magnetCore.gathVol + equipment.clawHydrolics.gathVol + equipment.scoopMotor.gathVol + equipment.scoopSensor.gathVol;               
             
         }
     static #gathSpd(equipment) {

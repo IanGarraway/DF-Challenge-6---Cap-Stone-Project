@@ -4,6 +4,7 @@ import { Container, Row, Col, Button, Spinner, Modal } from 'react-bootstrap';
 import Part from '../components/GameScreen/Part.jsx';
 import GameService from '../service/Game.Service.js';
 import Inventory from '../components/GameScreen/Inventory.jsx';
+import StatsScreen from '../components/GameScreen/StatsScreen.jsx';
 
 
 function GameScreen() {
@@ -13,10 +14,13 @@ function GameScreen() {
 
     const [gameData, setGameData] = useState();
     const [showInv, setShowInv] = useState(false);
+    const [showStats, setShowStats] = useState(false);
     const [itemFocus, setItemFocus] = useState("none");
 
-    const handleClose = () => setShowInv(false);
-    const handleShow = () => setShowInv(true);
+    const handleInvClose = () => setShowInv(false);
+    const handleInvShow = () => setShowInv(true);
+    const handleStatsClose = () => setShowStats(false);
+    const handleStatsShow = () => setShowStats(true);
 
     const getData = async () => {
         try {
@@ -82,17 +86,37 @@ function GameScreen() {
                   <Col><Part part={equipment.clawHydrolics} symbol={"clawIcon.png"} slot={"clawHydrolics" } role={"Claw Hydrolics"}/></Col>
               </Row>
 
-              <Button variant="dark" onClick={handleShow} data-testid={"invButton"}>
+              <Button variant="dark" onClick={handleInvShow} data-testid={"invButton"}>
                   Inventory
               </Button>
+              <Button variant="dark" onClick={handleStatsShow} data-testid={"invButton"}>
+                  Stats
+              </Button>
 
-              <Modal show={showInv} onHide={handleClose} size='xl'  >
+              <Modal show={showInv} onHide={handleInvClose} size='xl'  >
                   <Modal.Header closeButton style={{backgroundImage: 'url("backgrounds/rustymetal.avif")'}}>
                       <Modal.Title >Parts Storage</Modal.Title>
                   </Modal.Header>
                   <Modal.Body style={{backgroundImage: 'url("backgrounds/rustymetal.avif")'}}>
                       <Inventory gameData={gameData} focus={itemFocus} getData={getData } />
                   </Modal.Body>
+              </Modal>
+              <Modal
+                  show={showStats}
+                  onHide={handleStatsClose}
+                  style={{
+                      backgroundImage: 'url("backgrounds/rustyScreen.png")',
+                      backgroundSize: "contain",
+                      backgroundRepeat: 'no-repeat',
+                      backgroundPosition: 'center',
+                      alignContent: 'center',
+                      justifyItems: 'start'
+                  }}
+              data-backdrop="false">
+                  
+                  
+                      <StatsScreen stats ={gameData.stats} equipment={gameData.equipment} upgrades={gameData.upgrades}  />
+                  
               </Modal>
           </Container>
           

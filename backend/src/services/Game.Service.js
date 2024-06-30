@@ -40,7 +40,7 @@ export default class GameService{
                 gameData.lastGen = Date.now();
             }
             const newResources = Generate.resources(gameData);
-            console.log(newResources, `service`);
+            
             if (newResources != gameData.inventory) {
                 changed = true;
                 gameData.inventory = newResources;
@@ -66,14 +66,16 @@ export default class GameService{
         try {           
             let gameData = await GameData.findOne({ userID: req.userId });
             
-            if (!gameData) { throw new Error("Invalid account data"); }             
+            if (!gameData) { throw new Error("Invalid account data"); }   
+            
+            //console.log(gameData.partsStorage,`<->`, req.body);
 
-            const partIndex = Find.index(gameData.partsStorage, req.body);            
+            const partIndex = Find.index(gameData.partsStorage, req.body.part);            
 
             if (partIndex === -1) { return 422; }
             
             gameData = Swap.part(gameData, partIndex);            
-            gameData = Recalc.stats(gameData);
+            gameData = Recalc.stats(gameData);           
 
             await gameData.save();   
             
