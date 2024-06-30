@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Button, Spinner, Modal } from 'react-bootstrap';
+import { Container, Row, Col, Button, Spinner, Modal, Alert } from 'react-bootstrap';
 
 import Part from '../components/GameScreen/Part.jsx';
 import GameService from '../service/Game.Service.js';
@@ -22,11 +22,25 @@ function GameScreen() {
     const handleStatsClose = () => setShowStats(false);
     const handleStatsShow = () => setShowStats(true);
 
-    const getData = async () => {
+    const getData = async (trys = 0) => {
+        let response;
         try {
-            const response = await GameService.getData();
+            response = await GameService.getData();
             if (response.status === 200) {
                 setGameData(response.data);
+
+                await new Promise(resolve => setTimeout(resolve, 5000));
+                getData();
+            }
+            if (response === 500) {
+                if (trys < 10) {
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    getData(trys++);
+                }
+                else {
+                    //add alert
+                }
+                
             }
         } catch (e) {
             console.error(e.message);

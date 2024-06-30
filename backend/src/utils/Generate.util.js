@@ -22,7 +22,7 @@ export default class Generate{
         
         const timeBetween = (30 * stats.zone) - stats.gathSpd;
         let partsToGen = Math.floor((timeSince / 1000) / timeBetween);
-        console.log(partsToGen, `parts2gen`);
+        
         
         if (partsToGen == 0) { return [false, gameData.partsStorage]; }
 
@@ -49,7 +49,7 @@ export default class Generate{
     };
 
     static resources = (gameData) => {
-        let { stats, inventory, caps, lastResourceGen, upgrades } = gameData;
+        let { stats, inventory, caps, lastResourceGen, upgrades } = gameData;        
         
         const timeBetween = (Date.now() - lastResourceGen) / 1000;
 
@@ -57,11 +57,11 @@ export default class Generate{
         const grindTimeTicks = TimeTicks.calc(30, stats.grinderSpd);
         const smeltTimeTicks = TimeTicks.calc(30*upgrades.smelter, stats.smeltSpd);
 
-        const gatherTicks = Math.floor(timeBetween / gatherTimeTicks);
-        const grindTicks = Math.floor(timeBetween / grindTimeTicks);
-        const smeltTicks = Math.floor(timeBetween / smeltTimeTicks);
-        if (gatherTicks == 0 && grindTicks == 0 && smeltTicks == 0) { return inventory; }
-
+        const gatherTicks = timeBetween / gatherTimeTicks;
+        const grindTicks = timeBetween / grindTimeTicks;
+        const smeltTicks = timeBetween / smeltTimeTicks;
+        if (gatherTicks == 0 && grindTicks == 0 && smeltTicks == 0) { return [false,inventory]; }
+        
         const totalGathered = (gatherTicks*stats.gathVol)+inventory.scrap;
         const totalGround = Math.min(totalGathered, (grindTicks*stats.grinderVol)+inventory.ground);
         const totalSmelt = Math.min(totalGround, (upgrades.smelter * 10) * smeltTicks);        
@@ -71,12 +71,10 @@ export default class Generate{
         const groundLeft = Math.min(caps.scrapCap, totalGround - totalSmelt);        
 
         inventory.scrap = scrapLeft;
-        inventory.ground = groundLeft;
+        inventory.ground = groundLeft;        
         inventory.t1Metal += totalSmelt / 10;
 
-        
-
-        return inventory;
+        return [true, inventory];
 
 
 

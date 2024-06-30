@@ -82,7 +82,7 @@ function Inventory({ gameData, focus, getData }) {
         <div className='parstsStorage' >
             <Stack direction='horizontal' gap={3} className='invItems' >
                 {partBoxes}
-                <div class="vr"></div>
+                <div className="vr"></div>
             </Stack>
             <div className='detailedInv'>
                 <Stack direction='horizontal' style={{justifyContent:'center', alignItems: 'center', padding: '10px'}}>

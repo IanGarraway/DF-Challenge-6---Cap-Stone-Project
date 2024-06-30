@@ -40,8 +40,8 @@ export default class GameService{
             }
             const newResources = Generate.resources(gameData);
                         
-            gameData.inventory = newResources;
-            gameData.lastResourceGen = Date.now();
+            gameData.inventory = newResources[1];
+            if(newResources[0]) {gameData.lastResourceGen = Date.now();}
             
 
             await gameData.save();
