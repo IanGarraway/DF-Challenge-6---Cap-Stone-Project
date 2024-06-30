@@ -45,4 +45,23 @@ export default class GameService{
         }
     }
 
+    static async scrapPart(part) {
+        try {
+            const response = await httpService.post(`${apiURL}/scrappart`, {
+                part: part
+            }, {
+                withCredentials: true
+            });
+
+            if (response.status === 200) {
+                return response;
+            } else {
+                throw new Error(response.message);
+            }
+        }catch (e) {
+            console.error(`Error getting data`, e);
+            throw e;
+        }
+    }
+
 }

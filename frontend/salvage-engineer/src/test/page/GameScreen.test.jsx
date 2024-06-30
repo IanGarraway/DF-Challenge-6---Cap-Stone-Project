@@ -213,6 +213,90 @@ describe("Tests of GameScreen", () => {
             );
             
         })
+
+        test(" clicking the scrap button triggers the axios post to /scrappart ", async () => {
+            //Arrange
+            let invbutton;
+            let invItems;
+            mockResponsePayload = { status: 200, message: "part scrapped" };
+            axios.post.mockResolvedValue(mockResponsePayload);
+            const mockPart = {
+                "name" : "Novatech Motor mk2",
+            "type" : "magnetMotor",
+            "manufacturer" : "Salvage Tech",
+            "mlogo": "salvageTechLogo.png",
+            "gathSpd" : 2,
+            "gathVol": 1
+            }
+
+            
+            render(<GameScreen />,
+            { wrapper: MemoryRouter }
+            )
+
+            await waitFor(() => {
+            invbutton = screen.getByTestId("invButton");                
+            })
+
+            await userEvent.click(invbutton);
+            
+            invItems = screen.getAllByTestId("invItems")            
+            //Act
+
+            await userEvent.click(screen.getByTestId("scrapButton"))
+
+            //Assert
+
+            expect(axios.post).toHaveBeenCalledWith(
+                'http://localhost:3000/scrappart',
+                { part: mockPart },
+                { withCredentials: true }
+            );
+            
+        })
+
+        test(" clicking the equip button triggers the axios fetch, with a different item selected ", async () => {
+            //Arrange
+            let invbutton;
+            let invItems;
+            mockResponsePayload = { status: 200, message: "part changed" };
+            axios.patch.mockResolvedValue(mockResponsePayload);
+            const mockPart = {
+                "name" : "Novatech Magnet Core mk2",
+            "type" : "magnetCore",
+            "manufacturer" :"Salvage Tech",
+            "mlogo": "salvageTechLogo.png",
+            "maxQual" : 1,
+            "gathVol": 2
+            }
+
+            
+            render(<GameScreen />,
+            { wrapper: MemoryRouter }
+            )
+
+            await waitFor(() => {
+            invbutton = screen.getByTestId("invButton");                
+            })
+
+            await userEvent.click(invbutton);
+            
+            invItems = screen.getAllByTestId("invItems")  
+            
+            await userEvent.click(invItems[1]);
+            //Act
+
+            await userEvent.click(screen.getByTestId("scrapButton"))
+
+            //Assert
+
+            expect(axios.post).toHaveBeenCalledWith(
+                'http://localhost:3000/scrappart',
+                { part: mockPart },
+                { withCredentials: true }
+            );
+            
+        })
     })
     
 })

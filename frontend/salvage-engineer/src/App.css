@@ -97,6 +97,13 @@
   border-radius: 5%;
   margin: 5px;
 }
+.partsEquipped{
+    border-color: black;
+    background-color:green;
+    border-radius: 5%;
+    margin: 5px;
+    color: white;
+  }
 
 .cellValue{
   text-align: right;
@@ -130,4 +137,13 @@
   text-shadow: 0 0 10px #00FF00;
   /* Glow effect */
 
+}
+
+.invControlBox{
+  border: 2px solid yellow;
+  width: min-content;
+  color: white
+}
+.controls{
+  display: flex;
 }

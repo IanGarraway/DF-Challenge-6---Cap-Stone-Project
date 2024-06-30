@@ -208,7 +208,7 @@ done:
 done:
 
 - [x] add logic to the back end, which uses the time since the last time the user got their data to calculate how much of the various resources they have gathered since then.
-- [ ] add interface components which report the numbers so the user is aware of the effectiveness of their gear choices
+- [x] add interface components which report the numbers so the user is aware of the effectiveness of their gear choices
 - [ ] front end testing
 - [x] back end testing
 
@@ -218,11 +218,11 @@ done:
 
 done:
 
-- [ ] interface component to scrap a part
-- [ ] scrap part service (front end user service)
+- [x] interface component to scrap a part
+- [x] scrap part service (front end user service)
 - [ ] scrap route (back end user service)
 - [ ] logic to ensure part scrappable
-- [ ] front end testing
+- [x] front end testing
 - [ ] back end testing
 
 ### User story 15

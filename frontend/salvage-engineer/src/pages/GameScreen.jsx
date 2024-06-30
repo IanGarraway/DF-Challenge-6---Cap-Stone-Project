@@ -89,7 +89,7 @@ function GameScreen() {
               <Button variant="dark" onClick={handleInvShow} data-testid={"invButton"}>
                   Inventory
               </Button>
-              <Button variant="dark" onClick={handleStatsShow} data-testid={"invButton"}>
+              <Button variant="dark" onClick={handleStatsShow} data-testid={"statsButton"}>
                   Stats
               </Button>
 
