@@ -16,6 +16,14 @@ export default class Swap{
             temp = gameData.equipment[slot];
             gameData.equipment[slot] = gameData.partsStorage[partIndex]; 
         };
+        if (temp == null) {
+            temp = {
+                name: "Scrap",
+                type: slot,
+                manufacturer: "unknown",
+                mlogo: "placeholder.png"
+            }
+        }
         gameData.partsStorage[partIndex] = temp;
                 
         return gameData;
