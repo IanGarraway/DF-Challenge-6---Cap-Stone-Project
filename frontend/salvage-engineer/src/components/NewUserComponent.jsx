@@ -39,7 +39,7 @@ const NewUserComponent = ({setActiveTab}) => {
 
     return (
         <Formik
-            validationSchema={schema}
+            validationSchema={schema}            
             onSubmit={async (values, { setSubmitting, resetForm }) => {
             
                 try {
@@ -64,7 +64,7 @@ const NewUserComponent = ({setActiveTab}) => {
             }}
         >
             {({ handleSubmit, handleChange, values, touched, errors }) => (
-                <Form noValidate onSubmit={handleSubmit}>
+                <Form noValidate onSubmit={handleSubmit} >
                     {success && <Alert key={success} variant={success}>Account Created</Alert>}
                     <Form.Group className="mb-3" controlId="formBasicUsername">
                         <Form.Label>Username</Form.Label>

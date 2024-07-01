@@ -7,10 +7,16 @@ import Inventory from '../components/GameScreen/Inventory.jsx';
 import StatsScreen from '../components/GameScreen/StatsScreen.jsx';
 
 
-function GameScreen() {
+const GameScreen = ({setBackGroundImg}) => {
 
-    var r = document.querySelector('.salvageEngineer')
-    r.style.setProperty('background-image','url("backgrounds/background3.png")' )      
+    useEffect(() => {
+        setBackGroundImg(`url("backgrounds/background3.png`)
+    }, []);
+
+    
+
+    // var r = document.querySelector('.salvageEngineer')
+    // r.style.setProperty('background-image','url("backgrounds/background3.png")' )      
 
     const [gameData, setGameData] = useState();
     const [showInv, setShowInv] = useState(false);
@@ -53,6 +59,7 @@ function GameScreen() {
     }    
 
     useEffect(() => {
+        
         getData();
     }, []);
 
@@ -65,7 +72,7 @@ function GameScreen() {
     const { inventory, equipment, fabrication, partsStorage, stats, upgrades } = gameData;
     
   return (
-      <div className='gameScreen'>
+      <div className='gameScreen' style={{backgroundImage: `url("rig/salvageRig.jpg`}}>
           <Container fluid>
               <Row>
                   <Col onClick={()=>handleInvShow("magnetMotor")} style={{cursor: "pointer"}}><Part part={equipment.magnetMotor} symbol={"magnetCraneIcon.png"} slot={"magnetMotor"} role={"Magnet Motor"}   /></Col>                  

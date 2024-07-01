@@ -21,6 +21,7 @@ function App() {
 
   const [user, setUser] = useState();
   const [cookies, setCookie, removeCookie] = useCookies(['user']);
+  const [backgroundImg, setBackGroundImg] = useState(`url("backgrounds/background1.png`);
   
 
   useEffect(() => {
@@ -32,26 +33,26 @@ function App() {
 
   return (
     <>
-      <div className='salvageEngineer'>
+      <div className='salvageEngineer' style={{ backgroundImage: backgroundImg }}>
         {user && <Header user={user} setUser={setUser}/>}
 
         <div className='routesContainer' >
           <Routes>
             <Route
               path="/login"
-              element={user ? <Navigate to="/" /> : <Login user={user} setUser={setUser} />}
+              element={user ? <Navigate to="/" /> : <Login user={user} setUser={setUser} setBackGroundImg={setBackGroundImg} />}
             />
             <Route
               path="/"
-              element={user ? <GameScreen  /> : <Login user={user} setUser={setUser} /> } 
+              element={user ? <GameScreen setBackGroundImg={setBackGroundImg} /> : <Login user={user} setUser={setUser} setBackGroundImg={setBackGroundImg}/> } 
             />
             <Route
               path="/accountmanagement"
-              element={user ? <AccountManagement user ={user} setUser={setUser}/> : <Login user={user} setUser={setUser} />  }            
+              element={user ? <AccountManagement user ={user} setUser={setUser} setBackGroundImg={setBackGroundImg}/> : <Login user={user} setUser={setUser} setBackGroundImg={setBackGroundImg}/>  }            
             />
             <Route
               path="/admin"
-              element={user ? <Admin user ={user} setUser={setUser} /> : <Login user={user} setUser={setUser} /> }
+              element={user ? <Admin user ={user} setUser={setUser} setBackGroundImg={setBackGroundImg} /> : <Login user={user} setUser={setUser} setBackGroundImg={setBackGroundImg}/> }
             />
 
             {/* <Route

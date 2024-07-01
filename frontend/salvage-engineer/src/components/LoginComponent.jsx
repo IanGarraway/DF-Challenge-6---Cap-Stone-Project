@@ -45,8 +45,8 @@ const LoginComponent = ({ setUser }) => {
         }
     }
     return (
-        <>
-            <Form onSubmit={handleSubmit}>
+        <div style={{minWidth: "260px"}}>
+            <Form onSubmit={handleSubmit} >
                 <Form.Group className="mb-3" controlId="loginUsername">
                     <Form.Label>Username</Form.Label>
                     <Form.Control type="username" placeholder="Username" ref={username} data-testid={"loginUsername"} />
@@ -63,7 +63,7 @@ const LoginComponent = ({ setUser }) => {
             </Form >
             <p id='error'>{errorMessage}</p>
         
-        </>
+        </div>
     );
 }
 

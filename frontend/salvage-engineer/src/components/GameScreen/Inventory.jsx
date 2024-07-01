@@ -17,10 +17,7 @@ function Inventory({ gameData, focus, getData }) {
     const [inv, setInv] = useState([placeHolderPart]);
     const [selected, setSelected] = useState(0);
     const [disableButtons, setDisableButtons] = useState(false)
-    let equipped;
-
-    console.log(gameData, `ps`);
-    
+    let equipped;        
 
     useEffect(() => {
         let invItems = [];        
@@ -60,7 +57,7 @@ function Inventory({ gameData, focus, getData }) {
         );
     });
     const options = ["grinderMotor", "grinderGear", "smelterHeater", "smelterControl"]
-    console.log(inv);
+    
     let invType = inv[selected].type || "clawHydrolics";
     if (options.includes(invType)) { equipped = gameData.fabrication[invType]; }
     else { equipped = gameData.equipment[invType] }

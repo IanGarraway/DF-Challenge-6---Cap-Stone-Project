@@ -244,7 +244,7 @@ implementation choice, players don't choose which slot it goes into, a part's ty
 
 done:
 
-- [ ] Selecting a slot on the front end, displays all the parts which could be equipped
+- [x] Selecting a slot on the front end, displays all the parts which could be equipped
 - [ ] front end testing
 
 ### User story 19

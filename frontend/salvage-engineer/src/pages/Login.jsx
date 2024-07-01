@@ -11,21 +11,21 @@ import NewUserComponent from '../components/NewUserComponent.jsx'
 
 
  
-const Login = ({ user, setUser }) => {      
+const Login = ({ user, setUser, setBackGroundImg }) => {      
     const [activeTab, setActiveTab] = useState("Login");
 
     
-    if (user) { return (<Navigate to="/" />); }
-        
-//     useEffect(() => {
-       
-//     }, [user])
+    if (user) { return (<Navigate to="/" />); }        
+
+    useEffect(() => {
+        setBackGroundImg(`url("backgrounds/background1.png`)
+    },[])
     
     return (
-        <Container fluid>
+        <div className='loginContainer'>
             
             <div className='loginScreen'>
-                <div className="d-flex justify-content-center">
+                <div className="d-flex justify-content-center ">
                     <div className='loginBoxes'>
             
                         <Tabs
@@ -46,7 +46,7 @@ const Login = ({ user, setUser }) => {
                 </div>
             </div>
            
-        </Container>
+        </div>
         
     )
 }
