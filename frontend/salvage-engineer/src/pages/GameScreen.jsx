@@ -18,9 +18,14 @@ function GameScreen() {
     const [itemFocus, setItemFocus] = useState("none");
 
     const handleInvClose = () => setShowInv(false);
-    const handleInvShow = () => setShowInv(true);
+    const handleInvShow = (focus) => {
+        if(itemFocus!= focus) {setItemFocus(focus);}
+        setShowInv(true);
+    }
     const handleStatsClose = () => setShowStats(false);
     const handleStatsShow = () => setShowStats(true);
+
+    
 
     const getData = async (trys = 0) => {
         let response;
@@ -63,19 +68,19 @@ function GameScreen() {
       <div className='gameScreen'>
           <Container fluid>
               <Row>
-                  <Col><Part part={equipment.magnetMotor} symbol={"magnetCraneIcon.png"} slot={"magnetMotor"} role={"Magnet Motor"}  /></Col>                  
-                  <Col><Part part={fabrication.grinderMotor} symbol={"grinderIcon.png"} slot={"grinderMotor"} role={"Grinder Motor"} /></Col>
+                  <Col onClick={()=>handleInvShow("magnetMotor")} style={{cursor: "pointer"}}><Part part={equipment.magnetMotor} symbol={"magnetCraneIcon.png"} slot={"magnetMotor"} role={"Magnet Motor"}   /></Col>                  
+                  <Col onClick={()=>handleInvShow("grinderMotor")} style={{cursor: "pointer"}}><Part part={fabrication.grinderMotor} symbol={"grinderIcon.png"} slot={"grinderMotor"} role={"Grinder Motor"} /></Col>
                   <Col></Col>
-                  <Col><Part part={fabrication.grinderGear} symbol={"grinderIcon.png"} slot={"grinderGear" } role={"Grinder Gears"}/></Col>
-                  <Col><Part part={fabrication.smelterHeater} symbol={"smelteryIcon.png"} slot={"smelterHeater" } role={"Smelter Heater"}/></Col>
+                  <Col onClick={()=>handleInvShow("grinderGear")} style={{cursor: "pointer"}}><Part part={fabrication.grinderGear} symbol={"grinderIcon.png"} slot={"grinderGear" } role={"Grinder Gears"}/></Col>
+                  <Col onClick={()=>handleInvShow("smelterHeater")} style={{cursor: "pointer"}}><Part part={fabrication.smelterHeater} symbol={"smelteryIcon.png"} slot={"smelterHeater" } role={"Smelter Heater"}/></Col>
                   
               </Row>
               <Row>
-                  <Col><Part part={equipment.magnetCore} symbol={"magnetCraneIcon.png"} slot={"magnetCore" } role={"Magnet Core"}/></Col>
+                  <Col onClick={()=>handleInvShow("magnetCore")} style={{cursor: "pointer"}}><Part part={equipment.magnetCore} symbol={"magnetCraneIcon.png"} slot={"magnetCore" } role={"Magnet Core"}/></Col>
                   <Col></Col>
                  <Col></Col>
                   <Col></Col>
-                  <Col><Part part={fabrication.smelterControl} symbol={"smelteryIcon.png"} slot={"smelterControl" } role={"Smelter Controller"}/></Col>
+                  <Col onClick={()=>handleInvShow("smelterControl")} style={{cursor: "pointer"}}><Part part={fabrication.smelterControl} symbol={"smelteryIcon.png"} slot={"smelterControl" } role={"Smelter Controller"}/></Col>
               </Row>
               <Row>
                   <Col></Col>
@@ -85,22 +90,22 @@ function GameScreen() {
                   <Col></Col>
               </Row>
               <Row>
-                  <Col><Part part={equipment.scoopSensor} symbol={"scoopIcon.png"} slot={"scoopSensor" } role={"Scoop Sensor"}/></Col>
+                  <Col onClick={()=>handleInvShow("scoopSensor")} style={{cursor: "pointer"}}><Part part={equipment.scoopSensor} symbol={"scoopIcon.png"} slot={"scoopSensor" } role={"Scoop Sensor"}/></Col>
                   <Col></Col>
                 <Col></Col>
                   <Col></Col>
-                  <Col><Part part={equipment.clawScanner} symbol={"clawIcon.png"} slot={"clawScanner" } role={"Claw Scanner"}/></Col>
+                  <Col onClick={()=>handleInvShow("clawScanner")} style={{cursor: "pointer"}}><Part part={equipment.clawScanner} symbol={"clawIcon.png"} slot={"clawScanner" } role={"Claw Scanner"}/></Col>
               </Row>
               <Row>
-                  <Col><Part part={equipment.scoopMotor} symbol={"scoopIcon.png"} slot={"scoopMotor" } role={"Scoop Motor"}/></Col>
+                  <Col onClick={()=>handleInvShow("scoopMotor")} style={{cursor: "pointer"}}><Part part={equipment.scoopMotor} symbol={"scoopIcon.png"} slot={"scoopMotor" } role={"Scoop Motor"}/></Col>
                   <Col></Col>
-                  <Col><Part part={equipment.sensor} symbol={"sensorIcon.png"} slot={"sensor"} role={"Sensor"} /></Col>
+                  <Col onClick={()=>handleInvShow("sensor")} style={{cursor: "pointer"}}><Part part={equipment.sensor} symbol={"sensorIcon.png"} slot={"sensor"} role={"Sensor"} /></Col>
                 
                   <Col></Col>
-                  <Col><Part part={equipment.clawHydrolics} symbol={"clawIcon.png"} slot={"clawHydrolics" } role={"Claw Hydrolics"}/></Col>
+                  <Col onClick={()=>handleInvShow("clawHydrolics")}><Part part={equipment.clawHydrolics} symbol={"clawIcon.png"} slot={"clawHydrolics" } role={"Claw Hydrolics"}/></Col>
               </Row>
 
-              <Button variant="dark" onClick={handleInvShow} data-testid={"invButton"}>
+              <Button variant="dark" onClick={()=>handleInvShow("none")} data-testid={"invButton"}>
                   Inventory
               </Button>
               <Button variant="dark" onClick={handleStatsShow} data-testid={"statsButton"}>

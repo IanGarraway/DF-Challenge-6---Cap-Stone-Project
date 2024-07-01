@@ -33,7 +33,7 @@ export default class GameService{
 
             if (!gameData) { throw new Error("Invalid account data"); } 
             
-            const newParts = Generate.parts(gameData);
+            const newParts = Generate.parts(gameData);            
             if (newParts[0] ) {                
                 gameData.partsStorage = newParts[1];
                 gameData.lastGen = Date.now();

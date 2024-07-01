@@ -20,13 +20,16 @@ export default class Generate{
 
         const timeSince = Date.now() - lastGen;
         
-        const timeBetween = (30 * stats.zone) - stats.gathSpd;
+        const timeBetween = (30 * stats.zone) - (1*(stats.gathSpd/100));
+        
         let partsToGen = Math.floor((timeSince / 1000) / timeBetween);
         
         
-        if (partsToGen == 0) { return [false, gameData.partsStorage]; }
+        
+        if (partsToGen <= 0) { return [false, gameData.partsStorage]; }
 
         const parts = this.#generateParts(gameData, partsToGen);
+        
         
 
         return [true, parts];
@@ -73,6 +76,8 @@ export default class Generate{
         inventory.scrap = scrapLeft;
         inventory.ground = groundLeft;        
         inventory.t1Metal += totalSmelt / 10;
+
+
 
         return [true, inventory];
 

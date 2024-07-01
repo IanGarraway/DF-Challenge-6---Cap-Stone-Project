@@ -6,34 +6,45 @@ import DetailedPart from './DetailedPart';
 import GameService from '../../service/Game.Service';
 import Storage from './Storage';
 
+const placeHolderPart = {
+    name: "empty",
+    manufacturer: "empty",
+    type: "clawHydrolics",
+    mlogo: "placeholder.png"
+};
+
 function Inventory({ gameData, focus, getData }) {
-    const [inv, setInv] = useState(gameData.partsStorage);
+    const [inv, setInv] = useState([placeHolderPart]);
     const [selected, setSelected] = useState(0);
     const [disableButtons, setDisableButtons] = useState(false)
     let equipped;
+
+    console.log(gameData, `ps`);
     
 
     useEffect(() => {
-        if (gameData.partsStorage.length === 0) {
+        let invItems = [];        
+        if (focus !== "none") {
+            const items = InventoryFocus.onType(gameData.partsStorage, focus)
+            invItems = items;
+        } else {
+            invItems = gameData.partsStorage;
+        }
+
+        if (invItems.length === 0) {
             setDisableButtons(true);
-            setInv([
+            invItems = [
                 {
                     name: "empty",
                     manufacturer: "empty",
-                    type: "clawHydrolics",
+                    type: focus === "none" ? "clawHydrolics" : focus,
                     mlogo: "placeholder.png"
                 }
-            ])
+            ];
             
-        } else {
-            setDisableButtons(false);
-            if (focus !== "none") {
-                const items = InventoryFocus.onType(gameData.partsStorage, focus)
-                setInv(items)
-            } else {
-                setInv(gameData.partsStorage);
-            }
-        }
+        } else { setDisableButtons(false)}
+        
+        setInv(invItems);
     }, [gameData, focus]);  
 
     const partBoxes = inv.map((part, i) => {
@@ -48,9 +59,11 @@ function Inventory({ gameData, focus, getData }) {
             
         );
     });
-    const options =["grinderMotor", "grinderGear", "smelterHeater", "smelterControl" ]
-    if (options.includes(inv[selected].type)) { equipped = gameData.fabrication[inv[selected].type]; }
-    else { equipped = gameData.equipment[inv[selected].type] }
+    const options = ["grinderMotor", "grinderGear", "smelterHeater", "smelterControl"]
+    console.log(inv);
+    let invType = inv[selected].type || "clawHydrolics";
+    if (options.includes(invType)) { equipped = gameData.fabrication[invType]; }
+    else { equipped = gameData.equipment[invType] }
     
     const equipItemHandler = async() => {
         try {
