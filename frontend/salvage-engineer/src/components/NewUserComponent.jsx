@@ -9,7 +9,7 @@ import * as formik from 'formik';
 import * as Yup from 'yup'
 
 import AccountService from '../service/Account.Service';
-import Terms from './Terms';
+
 
 
 

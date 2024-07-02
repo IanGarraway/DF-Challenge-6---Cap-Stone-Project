@@ -9,12 +9,14 @@ import Login from "../../pages/Login";
 // Missing axios mocking tests
 describe('Tests for Login page', () => {
     const mockSetUser = vi.fn();
+    const mockBackGround = vi.fn();
     
     
     test('it should render username and password', () => {
         render(
             <Login
-                setUser={mockSetUser}                
+                setUser={mockSetUser}   
+                setBackGroundImg={mockBackGround}
             />,
             { wrapper: MemoryRouter }
         )
@@ -27,7 +29,8 @@ describe('Tests for Login page', () => {
     test('it should render username, password, email address, password and terms', () => {
         render(
             <Login
-                setUser={mockSetUser}                
+                setUser={mockSetUser}  
+                setBackGroundImg={mockBackGround}
             />,
             { wrapper: MemoryRouter }
         )
@@ -43,7 +46,8 @@ describe('Tests for Login page', () => {
         //Arrange
         render(
             <Login
-                setUser={mockSetUser}                
+                setUser={mockSetUser} 
+                setBackGroundImg={mockBackGround}
             />,
             { wrapper: MemoryRouter }
         )
@@ -72,6 +76,7 @@ describe('Tests for Login page', () => {
         render(
             <Login
                 setUser={mockSetUser}
+                setBackGroundImg={mockBackGround}
             />,
             { wrapper: MemoryRouter }
         )

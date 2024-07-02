@@ -7,17 +7,21 @@ import { describe, expect } from "vitest";
 
 import AccountManagement from "../../pages/AccountManagement";
 
+const mockBackGround = vi.fn();
+
 describe("Account Management page tests", () => {
     describe("Change Password tests", () => {
         test('it should render original and new password boxes', () => {
             render(
-                <AccountManagement
+                <AccountManagement 
+                    setBackGroundImg={mockBackGround}
                 />,
                 { wrapper: MemoryRouter }
             )
 
             expect(screen.getByTestId("oldPassword")).toBeInTheDocument();
             expect(screen.getByTestId("newPassword")).toBeInTheDocument();
+            expect(mockBackGround).toBeCalled(`url("backgrounds/background2.png`)
         
         });
     
@@ -25,6 +29,7 @@ describe("Account Management page tests", () => {
             //Arrange
             render(
                 <AccountManagement
+                    setBackGroundImg={mockBackGround}
                 />,
                 { wrapper: MemoryRouter }
             )
@@ -47,6 +52,7 @@ describe("Account Management page tests", () => {
             //Arrange
             render(
                 <AccountManagement
+                    setBackGroundImg={mockBackGround}
                 />,
                 { wrapper: MemoryRouter }
             )
@@ -75,6 +81,7 @@ describe("Account Management page tests", () => {
             //Arrange
             render(
                 <AccountManagement
+                    setBackGroundImg={mockBackGround}
                 />,
                 { wrapper: MemoryRouter }
             )
@@ -103,6 +110,7 @@ describe("Account Management page tests", () => {
             //Arrange
             render(
                 <AccountManagement
+                    setBackGroundImg={mockBackGround}
                 />,
                 { wrapper: MemoryRouter }
             )
@@ -134,6 +142,7 @@ describe("Account Management page tests", () => {
             //Arrange
             render(
                 <AccountManagement
+                    setBackGroundImg={mockBackGround}
                 />,
                 { wrapper: MemoryRouter }
             )
@@ -164,6 +173,7 @@ describe("Account Management page tests", () => {
             //Arrange
             render(
                 <AccountManagement
+                    setBackGroundImg={mockBackGround}
                 />,
                 { wrapper: MemoryRouter }
             )
@@ -194,6 +204,7 @@ describe("Account Management page tests", () => {
             //Arrange
             render(
                 <AccountManagement
+                    setBackGroundImg={mockBackGround}
                 />,
                 { wrapper: MemoryRouter }
             )
@@ -226,6 +237,7 @@ describe("Account Management page tests", () => {
         test('it should render a switch a password box and a delete account button', () => {
             render(
                 <AccountManagement
+                    setBackGroundImg={mockBackGround}
                 />,
                 { wrapper: MemoryRouter }
             )
@@ -240,6 +252,7 @@ describe("Account Management page tests", () => {
             //Arrange
             render(
                 <AccountManagement
+                    setBackGroundImg={mockBackGround}
                 />,
                 { wrapper: MemoryRouter }
             )
@@ -256,6 +269,7 @@ describe("Account Management page tests", () => {
             //Arrange
             render(
                 <AccountManagement
+                    setBackGroundImg={mockBackGround}
                 />,
                 { wrapper: MemoryRouter }
             )

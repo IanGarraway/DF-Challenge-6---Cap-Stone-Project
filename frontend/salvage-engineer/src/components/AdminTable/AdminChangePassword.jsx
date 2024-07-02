@@ -8,7 +8,7 @@ function AdminChangePassword({account, getAccounts, setActiveTab}) {
 
   const [confirmChange, setConfirmChange] = useState(false);  
   const [errorText, setErrorText] = useState("");
-  const password = useRef();
+  const passwordRef = useRef();
   
 
   const handleChange = (target) => {
@@ -19,8 +19,9 @@ function AdminChangePassword({account, getAccounts, setActiveTab}) {
   const handleSubmit = async (target) => {
     target.preventDefault();    
     try {
-      
-      const response = await AdminService.changePassword(account._id, password.target.value);
+            
+      const newPassword = passwordRef.current.value;
+      const response = await AdminService.changePassword(account._id, newPassword);
 
       if (response.status === 200) {
         
@@ -52,7 +53,7 @@ function AdminChangePassword({account, getAccounts, setActiveTab}) {
             <Form.Control
               type="password"
               placeholder="Enter new password"
-              ref={password}
+              ref={passwordRef}
               data-testid={"adminChangePassword"}
               key={account._id}
             />
@@ -64,7 +65,7 @@ function AdminChangePassword({account, getAccounts, setActiveTab}) {
           {errorText}
         </div>
         <div className='d-grid gap-2'>
-          <Button variant='warning' type='submit' size="lg" disabled={!(confirmChange)} data-testid={"changeButton"} key={account._id} >
+          <Button  variant='warning' type='submit' size="lg" disabled={!(confirmChange)} data-testid={"changeButton"} key={account._id} >
             Change the password
           </Button>
         </div>

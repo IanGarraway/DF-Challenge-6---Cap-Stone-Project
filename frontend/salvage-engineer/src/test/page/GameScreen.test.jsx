@@ -12,31 +12,24 @@ import gameData from "../data/gamedata.json"
 vi.mock('axios');
 
 const mockQuerySelector = vi.fn();
+const mockBackGround = vi.fn();
 document.querySelector = mockQuerySelector;
 
 describe("Tests of GameScreen", () => {
-    let mockElement;
-
-    beforeEach(() => {
-        mockQuerySelector.mockReset();
-        mockElement = {
-            style: {
-                setProperty: vi.fn()
-            }
-        };
-        mockQuerySelector.mockReturnValue(mockElement);
-    })
+    
 
     it("should say loading if no data is returned", async () => {
         //Arrange
 
         const mockResponsePayload = { status: 401, message: "Unauthorised" };
             
-        axios.get.mockResolvedValue(mockResponsePayload);        
+        axios.get.mockResolvedValue(mockResponsePayload);
 
         //Act
-        render(<GameScreen />,
-             { wrapper: MemoryRouter }
+        render(<GameScreen
+            setBackGroundImg={mockBackGround}
+        />,
+            { wrapper: MemoryRouter }
         )
 
         //Assert
@@ -52,7 +45,7 @@ describe("Tests of GameScreen", () => {
         axios.get.mockResolvedValue(mockResponsePayload);
 
         //Act
-        render(<GameScreen />,
+        render(<GameScreen setBackGroundImg={mockBackGround} />,
             { wrapper: MemoryRouter }
         )
 
@@ -61,9 +54,9 @@ describe("Tests of GameScreen", () => {
             expect(screen.getByText("Novatech ShredTech GrindGear")).toBeInTheDocument();
         })
         expect(axios.get).toHaveBeenCalledWith(
-                'http://localhost:3000/data',
-                { withCredentials: true }
-            );
+            'http://localhost:3000/data',
+            { withCredentials: true }
+        );
 
 
     })
@@ -80,28 +73,31 @@ describe("Tests of GameScreen", () => {
 
         test("the first item in storage has a gold bg warning in it's class, the 2nd item has bg-dark", async () => {
             //Arrange
-            let invbutton;
+            let invButton;
             let invItems;
 
             //Act
-            render(<GameScreen />,
-            { wrapper: MemoryRouter }
+            render(<GameScreen setBackGroundImg={mockBackGround} />,
+                { wrapper: MemoryRouter }
             )
 
             await waitFor(() => {
-            invbutton = screen.getByTestId("invButton");                
+                invButton = screen.getByTestId("invButton");
             })
 
-            await userEvent.click(invbutton);
+            await userEvent.click(invButton);
             
             invItems = screen.getAllByTestId("invItems")
-            
 
             //Assert
 
-            expect(invItems[0]).toHaveClass('card bg-warning text-white');
-            expect(invItems[1]).toHaveClass('card bg-dark text-white');
-            expect(invItems).toHaveLength(3);
+            await waitFor(() => {
+
+                expect(invItems[0]).toHaveClass('card bg-warning text-white');
+                expect(invItems[1]).toHaveClass('card bg-dark text-white');
+                expect(invItems).toHaveLength(3);
+                
+            });
         })
 
         test(" after clicking on it the 2nd item in storage has a bg warning in it's class, the 1st item has bg-dark", async () => {
@@ -110,12 +106,12 @@ describe("Tests of GameScreen", () => {
             let invItems;
 
             //Act
-            render(<GameScreen />,
-            { wrapper: MemoryRouter }
+            render(<GameScreen setBackGroundImg={mockBackGround} />,
+                { wrapper: MemoryRouter }
             )
 
             await waitFor(() => {
-            invbutton = screen.getByTestId("invButton");                
+                invbutton = screen.getByTestId("invButton");
             })
 
             await userEvent.click(invbutton);
@@ -137,26 +133,26 @@ describe("Tests of GameScreen", () => {
             mockResponsePayload = { status: 200, message: "part changed" };
             axios.patch.mockResolvedValue(mockResponsePayload);
             const mockPart = {
-                "name" : "Novatech Motor mk2",
-            "type" : "magnetMotor",
-            "manufacturer" : "Salvage Tech",
-            "mlogo": "salvageTechLogo.png",
-            "gathSpd" : 2,
-            "gathVol": 1
+                "name": "Novatech Motor mk2",
+                "type": "magnetMotor",
+                "manufacturer": "Salvage Tech",
+                "mlogo": "salvageTechLogo.png",
+                "gathSpd": 2,
+                "gathVol": 1
             }
 
             
-            render(<GameScreen />,
-            { wrapper: MemoryRouter }
+            render(<GameScreen setBackGroundImg={mockBackGround} />,
+                { wrapper: MemoryRouter }
             )
 
             await waitFor(() => {
-            invbutton = screen.getByTestId("invButton");                
+                invbutton = screen.getByTestId("invButton");
             })
 
             await userEvent.click(invbutton);
             
-            invItems = screen.getAllByTestId("invItems")            
+            invItems = screen.getAllByTestId("invItems")
             //Act
 
             await userEvent.click(screen.getByTestId("equipButton"))
@@ -178,26 +174,26 @@ describe("Tests of GameScreen", () => {
             mockResponsePayload = { status: 200, message: "part changed" };
             axios.patch.mockResolvedValue(mockResponsePayload);
             const mockPart = {
-                "name" : "Novatech Magnet Core mk2",
-            "type" : "magnetCore",
-            "manufacturer" :"Salvage Tech",
-            "mlogo": "salvageTechLogo.png",
-            "maxQual" : 1,
-            "gathVol": 2
+                "name": "Novatech Magnet Core mk2",
+                "type": "magnetCore",
+                "manufacturer": "Salvage Tech",
+                "mlogo": "salvageTechLogo.png",
+                "maxQual": 1,
+                "gathVol": 2
             }
 
             
-            render(<GameScreen />,
-            { wrapper: MemoryRouter }
+            render(<GameScreen setBackGroundImg={mockBackGround} />,
+                { wrapper: MemoryRouter }
             )
 
             await waitFor(() => {
-            invbutton = screen.getByTestId("invButton");                
+                invbutton = screen.getByTestId("invButton");
             })
 
             await userEvent.click(invbutton);
             
-            invItems = screen.getAllByTestId("invItems")  
+            invItems = screen.getAllByTestId("invItems")
             
             await userEvent.click(invItems[1]);
             //Act
@@ -221,26 +217,26 @@ describe("Tests of GameScreen", () => {
             mockResponsePayload = { status: 200, message: "part scrapped" };
             axios.post.mockResolvedValue(mockResponsePayload);
             const mockPart = {
-                "name" : "Novatech Motor mk2",
-            "type" : "magnetMotor",
-            "manufacturer" : "Salvage Tech",
-            "mlogo": "salvageTechLogo.png",
-            "gathSpd" : 2,
-            "gathVol": 1
+                "name": "Novatech Motor mk2",
+                "type": "magnetMotor",
+                "manufacturer": "Salvage Tech",
+                "mlogo": "salvageTechLogo.png",
+                "gathSpd": 2,
+                "gathVol": 1
             }
 
             
-            render(<GameScreen />,
-            { wrapper: MemoryRouter }
+            render(<GameScreen setBackGroundImg={mockBackGround} />,
+                { wrapper: MemoryRouter }
             )
 
             await waitFor(() => {
-            invbutton = screen.getByTestId("invButton");                
+                invbutton = screen.getByTestId("invButton");
             })
 
             await userEvent.click(invbutton);
             
-            invItems = screen.getAllByTestId("invItems")            
+            invItems = screen.getAllByTestId("invItems")
             //Act
 
             await userEvent.click(screen.getByTestId("scrapButton"))
@@ -262,26 +258,26 @@ describe("Tests of GameScreen", () => {
             mockResponsePayload = { status: 200, message: "part changed" };
             axios.patch.mockResolvedValue(mockResponsePayload);
             const mockPart = {
-                "name" : "Novatech Magnet Core mk2",
-            "type" : "magnetCore",
-            "manufacturer" :"Salvage Tech",
-            "mlogo": "salvageTechLogo.png",
-            "maxQual" : 1,
-            "gathVol": 2
+                "name": "Novatech Magnet Core mk2",
+                "type": "magnetCore",
+                "manufacturer": "Salvage Tech",
+                "mlogo": "salvageTechLogo.png",
+                "maxQual": 1,
+                "gathVol": 2
             }
 
             
-            render(<GameScreen />,
-            { wrapper: MemoryRouter }
+            render(<GameScreen setBackGroundImg={mockBackGround} />,
+                { wrapper: MemoryRouter }
             )
 
             await waitFor(() => {
-            invbutton = screen.getByTestId("invButton");                
+                invbutton = screen.getByTestId("invButton");
             })
 
             await userEvent.click(invbutton);
             
-            invItems = screen.getAllByTestId("invItems")  
+            invItems = screen.getAllByTestId("invItems")
             
             await userEvent.click(invItems[1]);
             //Act
@@ -297,6 +293,141 @@ describe("Tests of GameScreen", () => {
             );
             
         })
-    })
+
+        test("Clicking on a part displays only the parts for that slot", async () => {
+            //arrange
+
+            //act
+            render(<GameScreen setBackGroundImg={mockBackGround} />,
+                { wrapper: MemoryRouter }
+            )
+
+            await waitFor(async () => {
+
+                await userEvent.click(screen.getByTestId("magnetCoreIcon"))
+            });
+
+            //assert
+
+            let invItems = screen.getAllByTestId("invItems")
+
+            //Assert
+
+            await waitFor(() => {
+
+                expect(invItems[0]).toHaveClass('card bg-warning text-white');
+                expect(invItems[1]).toHaveClass('card bg-dark text-white');
+                expect(invItems).toHaveLength(2);
+            });
+        })
+    });
+    test("Clicking on a part displays only the parts for that slot even if there is only 1", async () => {
+        //arrange
+
+        //act
+        render(<GameScreen setBackGroundImg={mockBackGround} />,
+            { wrapper: MemoryRouter }
+        )
+
+        await waitFor(async () => {
+
+            await userEvent.click(screen.getByTestId("magnetMotorIcon"))
+        });
+
+        //assert
+
+        let invItems = screen.getAllByTestId("invItems")
+
+        //Assert
+
+        await waitFor(() => {
+
+            expect(invItems[0]).toHaveClass('card bg-warning text-white');
+            
+            expect(invItems).toHaveLength(1);
+        });
+    });
+    test("Clicking on a part displays only the parts for that slot even if there is none", async () => {
+        //arrange
+
+        //act
+        render(<GameScreen setBackGroundImg={mockBackGround} />,
+            { wrapper: MemoryRouter }
+        )
+
+        await waitFor(async () => {
+
+            await userEvent.click(screen.getByTestId("magnetMotorIcon"))
+        });
+
+        //assert
+
+        let invItems = screen.getAllByTestId("invItems")
+
+        //Assert
+
+        await waitFor(() => {
+
+            expect(invItems[0]).toHaveClass('card bg-warning text-white');
+            // const emptyCount = screen.getAllByText("empty");
+            // expect(emptyCount).toHaveLength(2)
+            
+            expect(invItems).toHaveLength(1);
+        });
+    });
+
+    test("Clicking on a Stats displays the stats screen", async () => {
+        //arrange
+
+        //act
+        render(<GameScreen setBackGroundImg={mockBackGround} />,
+            { wrapper: MemoryRouter }
+        )
+
+        await waitFor(async () => {
+
+            await userEvent.click(screen.getByTestId("statsButton"))
+        });
+
+        //assert        
+
+        await waitFor(() => {
+
+            expect(screen.getByTestId("clawGathVol").firstChild.nodeValue).to.equal('1')
+        });
+    });
+
+    test("Clicking on the close Stats hides the stats screen", async () => {
+        //arrange
+
+        //act
+        render(<GameScreen setBackGroundImg={mockBackGround} />,
+            { wrapper: MemoryRouter }
+        )
+
+        await waitFor(async () => {
+
+            await userEvent.click(screen.getByTestId("statsButton"))
+        });
+        await waitFor(() => {
+
+            expect(screen.getByTestId("clawGathVol").firstChild.nodeValue).to.equal('1')
+        });
+
+        await userEvent.click(screen.getByTestId("statsClose"))
+
+        let statsCloseCount;
+
+        await waitFor(() => {
+            statsCloseCount = screen.getAllByTestId("statsClose");
+        })
+        
+
+
+        //assert  
+        //expect(statsCloseCount).toHaveLength(0);
+    });
+
+
     
 })

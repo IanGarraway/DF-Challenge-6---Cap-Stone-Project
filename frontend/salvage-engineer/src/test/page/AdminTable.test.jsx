@@ -2,11 +2,18 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 import { MemoryRouter  } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
-import { describe, expect } from "vitest";
+import { beforeEach, describe, expect } from "vitest";
+
+import axios from "axios";
 
 import AdminTable from "../../components/AdminTable";
 
 import accountData from '../data/users.json'
+
+const mockBackGround = vi.fn();
+const mockGetAccounts = vi.fn();
+
+vi.mock('axios');
 
 
 describe("Admin page tests", () => {
@@ -15,7 +22,9 @@ describe("Admin page tests", () => {
             //Arrange
 
             //Act
-            render(<AdminTable accounts={[]} />,
+            render(<AdminTable accounts={[]}
+                setBackGroundImg={mockBackGround}
+            />,
                 { wrapper: MemoryRouter }
                        
             )
@@ -193,6 +202,131 @@ describe("Admin page tests", () => {
             //Assert
             expect(changeButton).not.toBeDisabled();
         })
+
+        
+    })
+
+    describe("Admin axios trigger tests", () => {
+
+        
+
+        beforeEach(() => {
+            axios.get.mockReset()
+            axios.post.mockReset()
+        })
+
+        test("adding a password and clicking the change password triggers an axios post", async () => {
+            //Arrange
+            const testData = [{
+                "_id": "2",
+                "userName": "user2",
+                "email": "user2@example.com",
+                "name": "User 2",
+                "admin": false
+            }];
+
+            const mockAccountId = "2";
+            const mockNewPassword = "Test123!"
+            const mockResponsePayload = { status: 200, body: { message: "Password changed" } }
+
+            axios.post.mockResolvedValue(mockResponsePayload);
+
+            //Act
+            render(<AdminTable
+                accounts={testData}
+                getAccounts={mockGetAccounts}
+            
+            />,
+                { wrapper: MemoryRouter }
+                       
+            )
+
+            const changeSwitch = screen.getByTestId("changeSwitch");
+            const changeButton = screen.getByTestId("changeButton");
+            const adminChangePassword = screen.getByTestId("adminChangePassword")
+
+            expect(changeSwitch).toBeInTheDocument();
+            expect(adminChangePassword).toBeInTheDocument();
+            expect(changeButton).toBeDisabled();
+
+            await userEvent.click(changeSwitch);
+            expect(changeButton).not.toBeDisabled();
+            fireEvent.change(adminChangePassword, { target: { value: mockNewPassword } });
+
+            await userEvent.click(changeButton);
+
+            //Assert
+            
+            await waitFor(() => {
+            
+                expect(axios.post).toHaveBeenCalledWith(
+                    'http://localhost:3000/admin/changepassword',
+                    {
+                        "accountId": mockAccountId,
+                        "newpassword": mockNewPassword
+                    },
+                    { withCredentials: true }
+                );
+            });
+        })
+
+        test("adding a password and clicking the change password triggers an axios post and it can handle a bad event", async () => {
+            //Arrange
+            const testData = [{
+                "_id": "2",
+                "userName": "user2",
+                "email": "user2@example.com",
+                "name": "User 2",
+                "admin": false
+            }];
+
+            const mockAccountId = "2";
+            const mockNewPassword = "Test123!"
+            const mockResponsePayload = { status: 500, body: { message: "invalid account" } }
+
+            axios.post.mockResolvedValue(mockResponsePayload);
+
+            //Act
+            render(<AdminTable
+                accounts={testData}
+                getAccounts={mockGetAccounts}
+            
+            />,
+                { wrapper: MemoryRouter }
+                       
+            )
+
+            const changeSwitch = screen.getByTestId("changeSwitch");
+            const changeButton = screen.getByTestId("changeButton");
+            const adminChangePassword = screen.getByTestId("adminChangePassword")
+
+            expect(changeSwitch).toBeInTheDocument();
+            expect(adminChangePassword).toBeInTheDocument();
+            expect(changeButton).toBeDisabled();
+
+            await userEvent.click(changeSwitch);
+            expect(changeButton).not.toBeDisabled();
+            fireEvent.change(adminChangePassword, { target: { value: mockNewPassword } });
+
+            await userEvent.click(changeButton);
+
+            //Assert
+            
+            await waitFor(() => {
+            
+                expect(axios.post).toHaveBeenCalledWith(
+                    'http://localhost:3000/admin/changepassword',
+                    {
+                        "accountId": mockAccountId,
+                        "newpassword": mockNewPassword
+                    },
+                    { withCredentials: true }
+                );
+
+                expect(screen.getByText("invalid account")).toBeInTheDocument();
+            });
+        })
+        
     })
 
 

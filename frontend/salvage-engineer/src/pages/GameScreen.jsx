@@ -75,15 +75,15 @@ const GameScreen = ({setBackGroundImg}) => {
       <div className='gameScreen' style={{backgroundImage: `url("rig/salvageRig.jpg`}}>
           <Container fluid>
               <Row>
-                  <Col onClick={()=>handleInvShow("magnetMotor")} style={{cursor: "pointer"}}><Part part={equipment.magnetMotor} symbol={"magnetCraneIcon.png"} slot={"magnetMotor"} role={"Magnet Motor"}   /></Col>                  
-                  <Col onClick={()=>handleInvShow("grinderMotor")} style={{cursor: "pointer"}}><Part part={fabrication.grinderMotor} symbol={"grinderIcon.png"} slot={"grinderMotor"} role={"Grinder Motor"} /></Col>
+                  <Col onClick={()=>handleInvShow("magnetMotor")} style={{cursor: "pointer"}} data-testid={"magnetMotorIcon"}><Part part={equipment.magnetMotor} symbol={"magnetCraneIcon.png"} slot={"magnetMotor"} role={"Magnet Motor"}   /></Col>                  
+                  <Col onClick={()=>handleInvShow("grinderMotor")} style={{cursor: "pointer"}} data-testid={"grinderMotorIcon"}><Part part={fabrication.grinderMotor} symbol={"grinderIcon.png"} slot={"grinderMotor"} role={"Grinder Motor"} /></Col>
                   <Col></Col>
                   <Col onClick={()=>handleInvShow("grinderGear")} style={{cursor: "pointer"}}><Part part={fabrication.grinderGear} symbol={"grinderIcon.png"} slot={"grinderGear" } role={"Grinder Gears"}/></Col>
                   <Col onClick={()=>handleInvShow("smelterHeater")} style={{cursor: "pointer"}}><Part part={fabrication.smelterHeater} symbol={"smelteryIcon.png"} slot={"smelterHeater" } role={"Smelter Heater"}/></Col>
                   
               </Row>
               <Row>
-                  <Col onClick={()=>handleInvShow("magnetCore")} style={{cursor: "pointer"}}><Part part={equipment.magnetCore} symbol={"magnetCraneIcon.png"} slot={"magnetCore" } role={"Magnet Core"}/></Col>
+                  <Col onClick={()=>handleInvShow("magnetCore")} style={{cursor: "pointer"}} data-testid={"magnetCoreIcon"}><Part part={equipment.magnetCore} symbol={"magnetCraneIcon.png"} slot={"magnetCore" } role={"Magnet Core"} /></Col>
                   <Col></Col>
                  <Col></Col>
                   <Col></Col>
@@ -92,7 +92,7 @@ const GameScreen = ({setBackGroundImg}) => {
               <Row>
                   <Col></Col>
                   <Col></Col>
-                 <Col></Col>
+                  <Col></Col>
                   <Col></Col>
                   <Col></Col>
               </Row>
@@ -120,7 +120,7 @@ const GameScreen = ({setBackGroundImg}) => {
               </Button>
 
               <Modal show={showInv} onHide={handleInvClose} size='xl'  >
-                  <Modal.Header closeButton style={{backgroundImage: 'url("backgrounds/rustymetal.avif")'}}>
+                  <Modal.Header data-testid={"invClose"} closeButton style={{backgroundImage: 'url("backgrounds/rustymetal.avif")'}}>
                       <Modal.Title >Parts Storage</Modal.Title>
                   </Modal.Header>
                   <Modal.Body style={{backgroundImage: 'url("backgrounds/rustymetal.avif")'}}>
@@ -129,6 +129,7 @@ const GameScreen = ({setBackGroundImg}) => {
               </Modal>
               <Modal
                   show={showStats}
+                  data-testid={"statsClose"}
                   onHide={handleStatsClose}
                   style={{
                       backgroundImage: 'url("backgrounds/rustyScreen.png")',

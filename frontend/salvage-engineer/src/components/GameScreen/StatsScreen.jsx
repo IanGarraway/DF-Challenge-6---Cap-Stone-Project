@@ -14,17 +14,17 @@ function StatsScreen({stats, equipment, upgrades}) {
                   
                   <tr>
                       <td>Claw </td>
-                      <td className='cellValue'>{equipment.clawHydrolics.gathVol }</td>
+                      <td className='cellValue' data-testid={"clawGathVol"}>{equipment.clawHydrolics.gathVol }</td>
                   </tr>
                   
                   <tr>
                       <td>Magnet </td>
-                      <td className='cellValue'>{equipment.magnetMotor.gathVol + equipment.magnetCore.gathVol }</td>
+                      <td className='cellValue' data-testid={"magnetGathVol"}>{equipment.magnetMotor.gathVol + equipment.magnetCore.gathVol }</td>
                   </tr>
                   
                   <tr>
                       <td>Scoop </td>
-                      <td className='cellValue'>{equipment.magnetMotor.gathVol + equipment.magnetCore.gathVol }</td>
+                      <td className='cellValue' data-testid={"scoopGathVol"}>{equipment.magnetMotor.gathVol + equipment.magnetCore.gathVol }</td>
                   </tr>
               </tbody>
                             
@@ -36,11 +36,11 @@ function StatsScreen({stats, equipment, upgrades}) {
               <tbody>
                   <tr>
                       <td>Grinder</td>
-                      <td className='cellValue'>{stats.grinderVol }</td>
+                      <td className='cellValue' data-testid={"grinderVol"}>{stats.grinderVol }</td>
                   </tr>
                   <tr>
                       <td>Smelter</td>
-                      <td className='cellValue'>{upgrades.smelter * 10 ||10 }</td>
+                      <td className='cellValue' data-testid={"smelterVol"}>{upgrades.smelter * 10 ||10 }</td>
                   </tr>
                   
                   
