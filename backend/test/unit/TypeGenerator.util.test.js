@@ -67,7 +67,7 @@ describe("TypeGenerator", () => {
             //Arrange
             getRandomStub.onCall(0).returns(3);
             getRandomStub.onCall(1).returns(1);
-            getRandomStub.onCall(2).returns(2);
+            
 
             //Act
 
@@ -75,7 +75,7 @@ describe("TypeGenerator", () => {
 
             //Assert
             expect(result.type).to.equal("clawScanner");            
-            expect(result.maxQual).to.equal(3);            
+            expect(result.maxQual).to.equal(1);            
                         
         });
         it("should generate a scoopMotor part", () => {
@@ -169,7 +169,7 @@ describe("TypeGenerator", () => {
             //Assert
             expect(result.type).to.equal("smelterHeater");            
             expect(result.smeltSpd).to.equal(1);            
-            expect(result.smeltTier).to.equal(2);            
+            expect(result.smeltTier).to.equal(3);            
         });
 
         it("should generate a smelterControl part", () => {
@@ -185,7 +185,7 @@ describe("TypeGenerator", () => {
             //Assert
             expect(result.type).to.equal("smelterControl");            
             expect(result.smeltSpd).to.equal(1);            
-            expect(result.smeltTier).to.equal(2);            
+            expect(result.smeltTier).to.equal(3);            
         });
 
 

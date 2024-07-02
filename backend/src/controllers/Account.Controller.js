@@ -28,7 +28,7 @@ export default class AccountController{
             const user = new User({
                 userName: req.body.username.toLowerCase(),
                 userPassword: bcrypt.hashSync(req.body.password, 10),
-                email: req.body.email,
+                email: req.body.email.toLowerCase(),
                 name: req.body.name,
                 admin: false
             });

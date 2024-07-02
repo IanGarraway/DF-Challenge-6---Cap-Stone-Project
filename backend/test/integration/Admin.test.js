@@ -79,7 +79,7 @@ describe("Tests of Admin routes", () => {
 
         await request.post("/auth/newuser").send(adminTestUser);
 
-        const user = await User.findOne({ userName: "TestAdmin" });
+        const user = await User.findOne({ userName: "testadmin" });
         user.admin = true;
         user.save();
 

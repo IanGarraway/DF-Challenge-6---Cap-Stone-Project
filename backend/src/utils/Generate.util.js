@@ -20,7 +20,7 @@ export default class Generate{
 
         const timeSince = Date.now() - lastGen;
         
-        const timeBetween = (30 * stats.zone) - (1*(stats.gathSpd/100));
+        const timeBetween = (30 * stats.zone) - (1*(stats.gathSpd/3000));
         
         let partsToGen = Math.floor((timeSince / 1000) / timeBetween);
         

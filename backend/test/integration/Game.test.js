@@ -80,7 +80,7 @@ describe("Tests of Game routes", () => {
 
         await request.post("/auth/newuser").send(adminTestUser);
 
-        const user = await User.findOne({ userName: "TestAdmin" });
+        const user = await User.findOne({ userName: "testadmin" });
         user.admin = true;
         userId = user._id;
         user.save();

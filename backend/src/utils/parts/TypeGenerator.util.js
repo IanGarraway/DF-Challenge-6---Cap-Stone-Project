@@ -52,67 +52,67 @@ export default class TypeGenerator{
 
     static #magnetMotor = (part, maxQual, zone) => {
         part.type = "magnetMotor";
-        part.gathSpd = GetRandom.int(1 + maxQual + zone)
-        part.gathVol = GetRandom.int(1 + maxQual + zone)
+        part.gathSpd = GetRandom.int(1 + maxQual + (zone*zone))
+        part.gathVol = GetRandom.int(1 + maxQual + (zone*zone))
         return part;
     }
     
     static #magnetCore = (part, maxQual, zone) => {
         part.type = "magnetCore";
-        part.gathVol = GetRandom.int(1 + maxQual + zone) + GetRandom.int(1 + maxQual + zone);
+        part.gathVol = GetRandom.int(1 + maxQual + (zone*zone)) + GetRandom.int(1 + maxQual + zone);
         return part;
     };
     static #clawHydrolics = (part, maxQual, zone) => {
         part.type = "clawHydrolics";
-        part.gathSpd = GetRandom.int(1 + maxQual + zone)
-        part.gathVol = GetRandom.int(1 + maxQual + zone)
+        part.gathSpd = GetRandom.int(1 + maxQual + (zone*zone))
+        part.gathVol = GetRandom.int(1 + maxQual + (zone*zone))
         return part;
     }
     static #clawScanner = (part, maxQual, zone) => {
         part.type = "clawScanner";
-        part.maxQual = GetRandom.int(1 + maxQual + zone) + GetRandom.int(1 + maxQual + zone);
+        part.maxQual = GetRandom.int(1 + maxQual + (zone*zone))
         return part;
     }
     static #scoopMotor = (part, maxQual, zone) => {
         part.type = "scoopMotor";
-        part.speed = GetRandom.int(1 + maxQual + zone)
-        part.gathVol = GetRandom.int(1 + maxQual + zone)
+        part.speed = GetRandom.int(1 + maxQual + (zone*zone))
+        part.gathVol = GetRandom.int(1 + maxQual + (zone*zone))
         return part;
     }
     static #scoopSensor = (part, maxQual, zone) => {
         part.type = "scoopSensor";
-        part.gathSpd = GetRandom.int(1 + maxQual + zone)
-        part.gathVol = GetRandom.int(1 + maxQual + zone)
+        part.gathSpd = GetRandom.int(1 + maxQual + (zone*zone))
+        part.gathVol = GetRandom.int(1 + maxQual + (zone*zone))
         return part;
     }
     static #sensor = (part, maxQual, zone) => {
         part.type = "sensor";
-        part.maxQual = GetRandom.int(1 + maxQual + zone);
-        part.findTime = GetRandom.int(1 + maxQual + zone);
+        part.maxQual = GetRandom.int(1 + maxQual + (zone*zone));
+        part.findTime = GetRandom.int(1 + maxQual + (zone*zone));
         return part;
     }
     static #grinderMotor = (part, maxQual, zone) => {
         part.type = "grinderMotor";
-        part.grindSpeed = GetRandom.int(1 + maxQual + zone)
-        part.grindStr = GetRandom.int(1 + maxQual + zone)
+        part.grindSpeed = GetRandom.int(1 + maxQual + (zone*zone))
+        part.grindStr = GetRandom.int(1 + maxQual + (zone*zone))
         return part;
     }
     static #grinderGear = (part, maxQual, zone) => {
         part.type = "grinderGear";
-        part.grindSpeed = GetRandom.int(1 + maxQual + zone)
-        part.grindVol = GetRandom.int(1 + maxQual + zone)
+        part.grindSpeed = GetRandom.int(1 + maxQual + (zone*zone))
+        part.grindVol = GetRandom.int(1 + maxQual + (zone*zone))
         return part;
     }
     static #smelterHeater = (part, maxQual, zone) => {
         part.type = "smelterHeater";
-        part.smeltSpd = GetRandom.int(1 + maxQual + zone)
-        part.smeltTier = GetRandom.int(1 + zone)
+        part.smeltSpd = GetRandom.int(1 + maxQual + (zone*zone))
+        part.smeltTier = GetRandom.int(1 + (zone*zone))+1
         return part;
     }
     static #smelterControl = (part, maxQual, zone) => {
         part.type = "smelterControl";
-        part.smeltSpd = GetRandom.int(1 + maxQual + zone)
-        part.smeltTier = GetRandom.int(1 + zone)
+        part.smeltSpd = GetRandom.int(1 + maxQual + (zone*zone))
+        part.smeltTier = GetRandom.int(1 + (zone*zone))+1
         return part;
     }
     
