@@ -1,6 +1,4 @@
 import httpService from "./httpService.js";
-import data from "../../../data/gamedata.json" with{type: "json"};
-
 
 const apiURL = import.meta.env.VITE_API_URL;
     
