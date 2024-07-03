@@ -85,7 +85,4 @@ export default class Recalc {
         return value       
             
         }
-    
-
-    
 };

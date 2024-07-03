@@ -10,31 +10,20 @@ export default class Generate{
         let newPart = TypeGenerator.getType(maxQual, zone);
         newPart = NameGenerator.getName(newPart);
 
-        return newPart;
-
-        
+        return newPart;        
     }
 
     static parts = (gameData) => {
-        const { stats, lastGen } = gameData;        
-
-        const timeSince = Date.now() - lastGen;
-        
+        const { stats, lastGen } = gameData; 
+        const timeSince = Date.now() - lastGen;        
         const timeBetween = (30 * stats.zone) - (1*(stats.gathSpd/3000));
         
-        let partsToGen = Math.floor((timeSince / 1000) / timeBetween);
-        
-        
-        
+        let partsToGen = Math.floor((timeSince / 1000) / timeBetween);        
         if (partsToGen <= 0) { return [false, gameData.partsStorage]; }
 
         const parts = this.#generateParts(gameData, partsToGen);
-        
-        
 
-        return [true, parts];
-
-        
+        return [true, parts];        
     }
 
     static #generateParts = (gameData, partsToGen) => {
@@ -45,10 +34,8 @@ export default class Generate{
         
         for (let i = 0; i < partsToGen; i++) {            
             partsStorage.push(this.part(stats.maxQual, stats.zone));            
-        }
-        
-        return partsStorage;
-            
+        }        
+        return partsStorage;            
     };
 
     static resources = (gameData) => {
@@ -77,16 +64,6 @@ export default class Generate{
         inventory.ground = groundLeft;        
         inventory.t1Metal += totalSmelt / 10;
 
-
-
-        return [true, inventory];
-
-
-
-        
-    }
-
-        
- 
-    
+        return [true, inventory];        
+    }   
 }

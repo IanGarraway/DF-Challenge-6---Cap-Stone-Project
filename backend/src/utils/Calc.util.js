@@ -3,8 +3,7 @@
 export default class Calc{
 
     static scrappage(part) {
-        part = part.toObject();
-        
+        part = part.toObject();        
         let total = 1;
 
         const options = ["name", "type", "manufacturer", "mlogo"];
@@ -15,17 +14,16 @@ export default class Calc{
                 total += part[key];
             }
         }
-
         return total / 10;
-
     }
 
     static totalPower(power) {
         let totalPowerUsage = 0;
-    if (power.fabricator) totalPowerUsage++;
-    if (power.claw) totalPowerUsage++;
-    if (power.magnet) totalPowerUsage++;
-    if (power.scoop) totalPowerUsage++;
-    return totalPowerUsage;
+        if (power.fabricator) totalPowerUsage++;
+        if (power.claw) totalPowerUsage++;
+        if (power.magnet) totalPowerUsage++;
+        if (power.scoop) totalPowerUsage++;
+        
+        return totalPowerUsage;        
     }
 }

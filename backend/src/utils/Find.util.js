@@ -3,12 +3,7 @@
 export default class Find{
 
     static index(items, item) {
-
-        
-
-        const itemKeys = Object.keys(item);
-
-        
+        const itemKeys = Object.keys(item);        
 
         outerloop: for (let i = 0; i < items.length; i++){
             for (let key of itemKeys) {
