@@ -14,7 +14,7 @@ const AccountManagement = ({ user, setUser,setBackGroundImg}) => {
 
     return (
         <>
-            <div className='accountManagement' style={{backgroundImage: `url("backgrounds/background2.png`}}>
+            <div className='accountManagement'>
                 <h1>Account Management</h1>
                 <hr />
                 <ChangePassword />

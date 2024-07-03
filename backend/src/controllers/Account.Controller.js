@@ -97,7 +97,7 @@ export default class AccountController{
                 .cookie('token', "logout", {
                     httpOnly: true,
                     secure: SECURE, //needs to be true if on https
-                    sameSite: 'Strict',
+                    sameSite: 'None',
                     maxAge: 0 
                 })
                 .send({ message: "User has logged out" });
