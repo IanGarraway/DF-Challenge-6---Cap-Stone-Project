@@ -65,7 +65,7 @@ function PowerManagement({power, caps}) {
                     
                 </Col>
                 <Col style={{display: 'flex', justifyContent: 'end'}}>
-                    <img src={clawLight} style={{ width: '8vh', height: '8vh', padding: '1vh' }} onClick={()=>handleSelectButton("claw")}/>
+                    <img data-testid={"clawLight"} src={clawLight} style={{ width: '8vh', height: '8vh', padding: '1vh' }} onClick={()=>handleSelectButton("claw")}/>
                 </Col>
                 <Col>
                     <img src={brokenLight} style={{ width: '8vh', height: '8vh', padding: '1vh' }} />
@@ -83,7 +83,7 @@ function PowerManagement({power, caps}) {
                     </div>
                 </Col>
                 <Col style={{display: 'flex', justifyContent: 'end'}}>
-                    <img src={magnetLight} style={{ width: '8vh', height: '8vh', padding: '1vh' }} onClick={()=>handleSelectButton("magnet")} />
+                    <img data-testid={"magnetLight"} src={magnetLight} style={{ width: '8vh', height: '8vh', padding: '1vh' }} onClick={()=>handleSelectButton("magnet")} />
                 </Col>
                 <Col>
                     <img src={brokenLight} style={{ width: '8vh', height: '8vh', padding: '1vh' }} />
@@ -98,7 +98,7 @@ function PowerManagement({power, caps}) {
                     Scoop System
                 </Col>
                 <Col style={{display: 'flex', justifyContent: 'end'}}>
-                    <img src={scoopLight} style={{ width: '8vh', height: '8vh', padding: '1vh' }} onClick={()=>handleSelectButton("scoop")}/>
+                    <img data-testid={"scoopLight"} src={scoopLight} style={{ width: '8vh', height: '8vh', padding: '1vh' }} onClick={()=>handleSelectButton("scoop")}/>
                 </Col>
                 <Col>
                     <img src={brokenLight} style={{ width: '8vh', height: '8vh', padding: '1vh' }} />
@@ -113,7 +113,7 @@ function PowerManagement({power, caps}) {
                     Fabrication System
                 </Col>
                 <Col style={{display: 'flex', justifyContent: 'end', alignContent: 'center'}}>
-                    <img src={fabricatorLight} style={{ width: '8vh', height: '8vh', padding: '1vh' }} onClick={()=>handleSelectButton("fabricator")}/>
+                    <img data-testid={"fabricatorLight"} src={fabricatorLight} style={{ width: '8vh', height: '8vh', padding: '1vh' }} onClick={()=>handleSelectButton("fabricator")}/>
                 </Col>
                 <Col>
                     <img src={brokenLight} style={{ width: '8vh', height: '8vh', padding: '1vh' }} />

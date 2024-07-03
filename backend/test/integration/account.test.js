@@ -19,7 +19,7 @@ import GameRoutes from "../../src/routes/Game.Routes.js";
 import GameService from "../../src/services/Game.Service.js";
 
 import User from "../../src/models/User.model.js";
-import GameData from "../../src/models/gamedata.model.js";
+import GameData from "../../src/models/GameData.model.js";
 
 import jwt from "jsonwebtoken";
 import { response } from "express";

@@ -279,10 +279,10 @@ done:
 
 done:
 
-- [ ] front end reflects the users power choices
-- [ ] back end logic ensure only powered components contribute to resource generation
-- [ ] testing front end
-- [ ] testing back end
+- [x] front end reflects the users power choices
+- [x] back end logic ensure only powered components contribute to resource generation
+- [x] testing front end
+- [x] testing back end
 
 ### User story 22
 
