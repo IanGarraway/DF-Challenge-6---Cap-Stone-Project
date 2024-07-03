@@ -10,7 +10,7 @@ function Storage({ inv }) {
     const t3Value = inv.t3Metal !== undefined && inv.t3Metal !== null ? inv.t3Metal.toFixed(2) : "0.00";
     return (
         <div>
-            <Card style={{ width: '40vh', height: '40vh' }}>
+            <Card style={{ width: '30vh', height: '30vh' }}>
                 <Card.Header>Storage</Card.Header>
                 <Card.Body>
         

@@ -247,6 +247,19 @@ done:
 - [x] Selecting a slot on the front end, displays all the parts which could be equipped
 - [ ] front end testing
 
+### User story 20
+
+"As a player I would like a power management system, to control which parts of the salvage rig are active"
+
+done:
+
+- [x] add power management tools to the interface
+- [x] power management service (front end user service)
+- [x] power management route (back end user service)
+- [x] logic to verify users choice is valid
+- [ ] testing front end
+- [x] testing back end  
+
 ### User story 19
 
 "As a player, I would like to be able to upgrade my part storage, so I can have more parts in storage before having to scrap them"
@@ -259,19 +272,6 @@ done:
 - [ ] logic to ensure user meets the requirements
 - [ ] front end testing
 - [ ] back end testing
-
-### User story 20
-
-"As a player I would like a power management system, to control which parts of the salvage rig are active"
-
-done:
-
-- [ ] add power management tools to the interface
-- [ ] power management service (front end user service)
-- [ ] power management route (back end user service)
-- [ ] logic to verify users choice is valid
-- [ ] testing front end
-- [ ] testing back end  
 
 ### User story 21
 

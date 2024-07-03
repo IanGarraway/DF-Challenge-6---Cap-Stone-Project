@@ -39,6 +39,10 @@ export default class GameRoutes{
             LoginValidator.verifyToken
         ], this.#controller.changePart);
 
+        this.#router.patch('/power', [
+            LoginValidator.verifyToken
+        ], this.#controller.powerManagement)
+
         this.#router.post('/scrappart', [
             LoginValidator.verifyToken
         ], this.#controller.scrapPart);

@@ -64,4 +64,24 @@ export default class GameService{
         }
     }
 
+    static async changePower(power) {
+        try {
+            const response = await httpService.patch(`${apiURL}/power`, {
+                power: power
+            }, {
+                withCredentials: true
+            });
+
+            if (response.status === 200) {
+                return response;
+            } else {
+                throw new Error(response.message);
+            }
+        }catch (e) {
+            console.error(`Error getting data`, e);
+            throw e;
+        }
+    
+    }
+
 }

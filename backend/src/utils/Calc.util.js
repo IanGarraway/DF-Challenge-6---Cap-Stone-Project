@@ -19,4 +19,13 @@ export default class Calc{
         return total / 10;
 
     }
+
+    static totalPower(power) {
+        let totalPowerUsage = 0;
+    if (power.fabricator) totalPowerUsage++;
+    if (power.claw) totalPowerUsage++;
+    if (power.magnet) totalPowerUsage++;
+    if (power.scoop) totalPowerUsage++;
+    return totalPowerUsage;
+    }
 }

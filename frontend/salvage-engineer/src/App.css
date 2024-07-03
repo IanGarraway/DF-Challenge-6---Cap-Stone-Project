@@ -173,3 +173,29 @@
 .controls{
   display: flex;
 }
+
+.labelText {
+  font-family: 'Courier New', Courier, monospace;
+  /* Monospaced font */
+  background-color: #fff;
+  /* White background */
+  border: 2px solid #000;
+  /* Black border */
+  color: #000;
+  /* Black text color */
+  padding: 5px 10px;
+  /* Padding around the text */
+  display: inline-block;
+  /* Inline-block display */
+  border-radius: 10px;
+  /* Rounded corners */
+  letter-spacing: 1px;
+  /* Letter spacing */
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+  /* Text shadow */
+  font-size: 1.5vh;
+  height: 10vh;
+  width: 20vh;
+  margin: 5px;
+  align-content: center;
+}

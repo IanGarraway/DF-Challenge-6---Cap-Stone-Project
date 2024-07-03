@@ -9,7 +9,7 @@ function DetailedPart({ part }) {
    logoPath = part && `logos/${part.mlogo}`;
   
   return (
-    <Card style={{ width: '40vh', height: '40vh' }}>
+    <Card style={{ width: '30vh', height: '30vh' }}>
       <Card.Header>{part.name}</Card.Header>
       <Card.Body>
         
@@ -18,9 +18,9 @@ function DetailedPart({ part }) {
           <div>
             <Card.Title style={{ fontSize: '1.5vh' }}>Type: {typeNames[part.type]}</Card.Title>
             Manufacturer:
-            {part.manufacturer}
+            <br />{part.manufacturer}
           </div>
-          <CardImg src={logoPath} style={{ width: '10vh', height: '10vh' }} />
+          <CardImg src={logoPath} style={{ width: '8vh', height: '8vh' }} />
         </div>
         <ListGroup variant='flush' >
           {part.grindSpeed>-1 && <ListGroupItem>Grind Speed: {part.grindSpeed}</ListGroupItem>}

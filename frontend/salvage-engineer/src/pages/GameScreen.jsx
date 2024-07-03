@@ -5,6 +5,7 @@ import Part from '../components/GameScreen/Part.jsx';
 import GameService from '../service/Game.Service.js';
 import Inventory from '../components/GameScreen/Inventory.jsx';
 import StatsScreen from '../components/GameScreen/StatsScreen.jsx';
+import PowerManagement from '../components/GameScreen/PowerManagement.jsx';
 
 
 const GameScreen = ({setBackGroundImg}) => {
@@ -21,6 +22,7 @@ const GameScreen = ({setBackGroundImg}) => {
     const [gameData, setGameData] = useState();
     const [showInv, setShowInv] = useState(false);
     const [showStats, setShowStats] = useState(false);
+    const [showPower, setShowPower] = useState(false);
     const [itemFocus, setItemFocus] = useState("none");
 
     const handleInvClose = () => setShowInv(false);
@@ -30,6 +32,9 @@ const GameScreen = ({setBackGroundImg}) => {
     }
     const handleStatsClose = () => setShowStats(false);
     const handleStatsShow = () => setShowStats(true);
+
+    const handlePowerClose = () => setShowPower(false);
+    const handlePowerShow = () => setShowPower(true);
 
     
 
@@ -118,6 +123,9 @@ const GameScreen = ({setBackGroundImg}) => {
               <Button variant="dark" onClick={handleStatsShow} data-testid={"statsButton"}>
                   Stats
               </Button>
+              <Button variant="dark" onClick={handlePowerShow} data-testid={"powerButton"}>
+                  Power Management
+              </Button>
 
               <Modal show={showInv} onHide={handleInvClose} size='xl'  >
                   <Modal.Header data-testid={"invClose"} closeButton style={{backgroundImage: 'url("backgrounds/rustymetal.avif")'}}>
@@ -133,17 +141,34 @@ const GameScreen = ({setBackGroundImg}) => {
                   onHide={handleStatsClose}
                   style={{
                       backgroundImage: 'url("backgrounds/rustyScreen.png")',
-                      backgroundSize: "contain",
+                      backgroundSize: "80%",
                       backgroundRepeat: 'no-repeat',
                       backgroundPosition: 'center',
                       alignContent: 'center',
-                      justifyItems: 'start'
+                      justifyItems: 'start',
                   }}
               data-backdrop="false">
-                  
-                  
-                      <StatsScreen stats ={gameData.stats} equipment={gameData.equipment} upgrades={gameData.upgrades}  />
-                  
+                  <StatsScreen stats={gameData.stats} equipment={gameData.equipment} upgrades={gameData.upgrades}
+                      style={{
+                          overflow: 'hidden',
+                          offset: 'relative',
+                          top: '10px'
+                      }} />                  
+              </Modal>
+              <Modal show={showPower} onHide={handlePowerClose} style={{width: '100%'}}  >
+                  <Modal.Header data-testid={"invClose"} closeButton style={{backgroundColor: 'grey'}}>
+                      <Modal.Title >Power Management</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body style={{
+                      backgroundImage: 'url("backgrounds/powerbox.png")',
+                      backgroundSize: "contain",
+                      backgroundRepeat: 'no-repeat',
+                      backgroundPosition: 'center',
+                      
+
+                  }}>
+                      <PowerManagement power={gameData.power} caps={gameData.caps} />
+                  </Modal.Body>
               </Modal>
           </Container>
           

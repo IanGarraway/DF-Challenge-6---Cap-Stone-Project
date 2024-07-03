@@ -3,7 +3,7 @@ import { Table } from 'react-bootstrap'
 
 function StatsScreen({stats, equipment, upgrades}) {
   return (
-      <div className='statTable' style={{ width: '30vw' }} >
+      <div className='statTable' style={{ width: '100%' }} >
           <Table  variant='dark'>
               <thead className='statTableFont'>
                   <th >Gathering per cycle</th>

@@ -17,7 +17,7 @@ import GameController from "../../src/controllers/Game.Controller.js";
 import GameRoutes from "../../src/routes/Game.Routes.js";
 import GameService from "../../src/services/Game.Service.js";
 
-import GameData from "../../src/models/gamedata.model.js";
+import GameData from "../../src/models/GameData.model.js";
 import User from "../../src/models/User.model.js";
 
 import jwt from "jsonwebtoken";
@@ -25,6 +25,7 @@ import { response } from "express";
 
 
 import userData from "../data/users.json" assert { type: "json" }
+import CalculatePower from "../../../frontend/salvage-engineer/src/util/calculatePower.util.js";
 
 
 describe("Tests of Game routes", () => {
@@ -183,7 +184,7 @@ describe("Tests of Game routes", () => {
                 mockGameData.partsStorage = [];
                 
                 await mockGameData.save();
-                await new Promise(resolve => setTimeout(resolve, 500));
+                
             })
             it("should give two parts", async() => {                
                 //arrange
@@ -436,8 +437,16 @@ describe("Tests of Game routes", () => {
                 "gathSpd": 0,
                 "gathVol": 0,
                 "speed": 0,
-                "zone": 0
+                "zone": 1
             };
+            mockGameData.power ={
+                fabricator : true,
+                claw : true,
+                magnet : true,
+                scoop : true
+            }
+
+            await mockGameData.save()
 
             const payload = { part: mockParts[1] };
 
@@ -447,8 +456,8 @@ describe("Tests of Game routes", () => {
             const response = await request.patch("/changepart").send(payload).set('Cookie', `token=${token}`);
             const getResponse = await request.get("/data").set('Cookie', `token=${token}`);
             //Assert
-            
-            let { stats } = getResponse.body;            
+            // console.log(getResponse, `getRes`);
+            let { stats } = getResponse.body;              
 
             expect(response.status).to.be.equal(200);
             expect(getResponse.body.equipment.magnetCore.name).to.equal(mockParts[1].name);
@@ -467,7 +476,7 @@ describe("Tests of Game routes", () => {
         
     })
 
-    describe('tests of the scrappart route', () => { 
+    describe('tests of the scrappart route', () => {
         let mockGameData;
         let mockParts = [{
             "name": "Novatech Motor mk2",
@@ -513,13 +522,13 @@ describe("Tests of Game routes", () => {
             mockGameData.lastGen = Date.now();
             mockGameData.lastResourceGen = Date.now();
 
-            await mockGameData.save();       
+            await mockGameData.save();
             
         });
 
         it("should respond with 200 and the partsStorage should not contain the mock part", async () => {
             //Arrange
-            const payload = { part: mockParts[2] };                        
+            const payload = { part: mockParts[2] };
 
             //Act
             let response = await request.get("/data").set('Cookie', `token=${token}`);
@@ -546,7 +555,7 @@ describe("Tests of Game routes", () => {
             //Arrange            
 
             const mockBadPart = {
-                part:{
+                part: {
                     "name": "Novatech Salvage Scam mk1",
                     "type": "magnetCore",
                     "manufacturer": "Salvage Tech",
@@ -565,11 +574,11 @@ describe("Tests of Game routes", () => {
             //Assert
             
 
-            expect(response.status).to.be.equal(422);            
+            expect(response.status).to.be.equal(422);
         });
 
         
-        it("should respond with 401 if no cookie is sent", async() => {
+        it("should respond with 401 if no cookie is sent", async () => {
             //Arrange
 
 
@@ -583,7 +592,7 @@ describe("Tests of Game routes", () => {
             
         })
 
-        it("should respond with 401 if no expired cookie is sent", async() => {
+        it("should respond with 401 if no expired cookie is sent", async () => {
             //Arrange
             const payload = { part: mockParts[0] };
 
@@ -597,5 +606,283 @@ describe("Tests of Game routes", () => {
             
         })
 
-     })
+    });
+
+    describe('Tests of the power management route', () => {
+        let mockGameData;
+
+        before(async () => {
+            mockGameData = await GameData.findOne({ userID: userId });
+
+        })
+        it("It should set the powermanagement to claw true and everything else false", async () => {
+            //Arrange
+            const mockPower = {
+                fabricator: false,
+                claw: true,
+                magnet: false,
+                scoop: false
+            }
+
+            const payload = { power: mockPower };
+
+            //Act
+            const response = await request.patch("/power").send(payload).set('Cookie', `token=${token}`);
+
+            const getResponse = await request.get("/data").set('Cookie', `token=${token}`);            
+
+            //Assert
+
+            expect(response.status).to.equal(200);
+
+            const { power } = getResponse.body;
+
+            expect(power.claw).to.equal(true);
+            expect(power.magnet).to.equal(false);
+            expect(power.scoop).to.equal(false);
+            expect(power.fabricator).to.equal(false);
+        })
+
+        it("should show fabricators on and gathers off", async () => {
+
+            //Arrange
+            const mockPower = {
+                fabricator: true,
+                claw: false,
+                magnet: false,
+                scoop: false
+            }
+
+            const payload = { power: mockPower };
+
+            //Act
+            const response = await request.patch("/power").send(payload).set('Cookie', `token=${token}`);
+
+            const getResponse = await request.get("/data").set('Cookie', `token=${token}`);
+
+            //Assert
+
+            expect(response.status).to.equal(200);
+
+            const { stats } = getResponse.body;
+            
+            expect(stats.grinderSpd).to.equal(1);
+            expect(stats.grinderVol).to.equal(1);
+            expect(stats.grinderStr).to.equal(1);
+            expect(stats.smeltSpd).to.equal(1);
+            expect(stats.smeltTier).to.equal(1);
+            expect(stats.maxQual).to.equal(1);
+            expect(stats.gathVol).to.equal(0);
+            expect(stats.gathSpd).to.equal(0);
+            expect(stats.speed).to.equal(0);
+            expect(stats.zone).to.equal(1);
+        })
+        it("should show fabricators off and gathers off", async () => {
+
+            //Arrange
+            const mockPower = {
+                fabricator: false,
+                claw: false,
+                magnet: false,
+                scoop: false
+            }
+
+            const payload = { power: mockPower };
+
+            //Act
+            const response = await request.patch("/power").send(payload).set('Cookie', `token=${token}`);
+
+            const getResponse = await request.get("/data").set('Cookie', `token=${token}`);
+
+            //Assert
+
+            expect(response.status).to.equal(200);
+
+            const { stats } = getResponse.body;
+            
+            expect(stats.grinderSpd).to.equal(0);
+            expect(stats.grinderVol).to.equal(0);
+            expect(stats.grinderStr).to.equal(0);
+            expect(stats.smeltSpd).to.equal(0);
+            expect(stats.smeltTier).to.equal(0);
+            expect(stats.maxQual).to.equal(1);
+            expect(stats.gathVol).to.equal(0);
+            expect(stats.gathSpd).to.equal(0);
+            expect(stats.speed).to.equal(0);
+            expect(stats.zone).to.equal(1);
+        })
+
+        it("should show magnet on, everything else off", async () => {
+
+            //Arrange
+            const mockPower = {
+                fabricator: false,
+                claw: false,
+                magnet: true,
+                scoop: false
+            }
+
+            const payload = { power: mockPower };
+
+            //Act
+            const response = await request.patch("/power").send(payload).set('Cookie', `token=${token}`);
+
+            const getResponse = await request.get("/data").set('Cookie', `token=${token}`);
+
+            //Assert
+
+            expect(response.status).to.equal(200);
+
+            const { stats } = getResponse.body;
+            
+            expect(stats.grinderSpd).to.equal(0);
+            expect(stats.grinderVol).to.equal(0);
+            expect(stats.grinderStr).to.equal(0);
+            expect(stats.smeltSpd).to.equal(0);
+            expect(stats.smeltTier).to.equal(0);
+            expect(stats.maxQual).to.equal(1);
+            expect(stats.gathVol).to.equal(3);
+            expect(stats.gathSpd).to.equal(2);
+            expect(stats.speed).to.equal(0);
+            expect(stats.zone).to.equal(1);
+        })
+
+        it("should show magnet on, everything else off", async () => {
+
+            //Arrange
+            const mockPower = {
+                fabricator: false,
+                claw: false,
+                magnet: false,
+                scoop: true
+            }
+
+            const payload = { power: mockPower };
+
+            //Act
+            const response = await request.patch("/power").send(payload).set('Cookie', `token=${token}`);
+
+            const getResponse = await request.get("/data").set('Cookie', `token=${token}`);
+
+
+            //Assert
+
+            expect(response.status).to.equal(200);
+
+            const { stats } = getResponse.body;
+            
+            expect(stats.grinderSpd).to.equal(0);
+            expect(stats.grinderVol).to.equal(0);
+            expect(stats.grinderStr).to.equal(0);
+            expect(stats.smeltSpd).to.equal(0);
+            expect(stats.smeltTier).to.equal(0);
+            expect(stats.maxQual).to.equal(1);
+            expect(stats.gathVol).to.equal(3);
+            expect(stats.gathSpd).to.equal(0);
+            expect(stats.speed).to.equal(1);
+            expect(stats.zone).to.equal(1);
+        });
+
+        it("rejects applying more power than the cap allows", async () => {
+
+            //Arrange
+            const mockPower = {
+                fabricator: true,
+                claw: false,
+                magnet: false,
+                scoop: true
+            }
+
+            const payload = { power: mockPower };
+
+            //Act
+            const response = await request.patch("/power").send(payload).set('Cookie', `token=${token}`);
+
+            //Assert
+
+            expect(response.status).to.equal(422);
+            
+        });
+
+        it("accepts applying more power if the cap is higher", async () => {
+
+            console.log(mockGameData.caps, `caps`);
+            
+            mockGameData.caps.maxPower = 2;
+            mockGameData.caps.maxDist = 2;
+
+            await mockGameData.save();
+
+            //Arrange
+            const mockPower = {
+                fabricator: true,
+                claw: false,
+                magnet: false,
+                scoop: true
+            }
+
+            const payload = { power: mockPower };
+
+            //Act
+            const response = await request.patch("/power").send(payload).set('Cookie', `token=${token}`);    
+
+            const getResponse = await request.get("/data").set('Cookie', `token=${token}`);            
+
+            //Assert
+
+            expect(response.status).to.equal(200);
+
+            const { power } = getResponse.body;
+
+            expect(power.claw).to.equal(false);
+            expect(power.magnet).to.equal(false);
+            expect(power.scoop).to.equal(true);
+            expect(power.fabricator).to.equal(true);
+            
+        });
+
+        it("should reject with no token", async () => {
+            
+            //Arrange
+            const mockPower = {
+                fabricator: true,
+                claw: false,
+                magnet: false,
+                scoop: false
+            }
+
+            const payload = { power: mockPower };
+
+            //Act
+            const response = await request.patch("/power").send(payload);       
+
+            //Assert
+
+            expect(response.status).to.equal(401);
+            
+            
+        });
+
+        it("should reject with an expired token", async () => {
+            
+            //Arrange
+            const mockPower = {
+                fabricator: true,
+                claw: false,
+                magnet: false,
+                scoop: false
+            }
+
+            const payload = { power: mockPower };
+
+            //Act
+            const response = await request.patch("/power").send(payload).set('Cookie', `token=${expiredToken}`);       
+
+            //Assert
+
+            expect(response.status).to.equal(401);
+            
+            
+        });
+    });
 });

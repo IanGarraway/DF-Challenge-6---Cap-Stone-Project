@@ -44,5 +44,18 @@ export default class GameController{
             return res.status(500).send({ message: e.message });
         }
     }
-    
+
+    powerManagement = async (req, res) => {
+        try {            
+            const response = await this.#gameService.powerManagement(req);
+        
+            if (response === 422) { return res.status(422).send({ message: "invalid data" }); }
+            
+            return res.status(200).send({ message: "part scrapped" });
+        } catch (e) { 
+            return res.status(500).send({ message: e.message });
+        }
+    } 
+        
 }
+    

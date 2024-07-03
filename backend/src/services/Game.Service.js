@@ -1,4 +1,4 @@
-import GameData from "../models/gamedata.model.js";
+import GameData from "../models/GameData.model.js";
 import Generate from "../utils/Generate.util.js";
 
 import newPlayerData from "../data/NewPlayerGameData.json" assert { type: "json" };
@@ -106,10 +106,42 @@ export default class GameService{
             return 200;
             
         }catch (e) {
-            console.log(e, `<--error`);
+            
             throw new Error(e.message)
         }
         
+    }
+
+    powerManagement = async (req) => {
+        try {
+
+            
+            let gameData = await GameData.findOne({ userID: req.userId });          
+                
+            if (!gameData) { throw new Error("Invalid account data"); } 
+            let { power, caps } = gameData;
+
+            const totalPowerUsage = Calc.totalPower(req.body.power);
+
+            if (totalPowerUsage > (Math.min(caps.maxDist, caps.maxPower))) { return 422; }
+            
+            gameData.power = req.body.power;
+
+
+            gameData = Recalc.stats(gameData);
+
+            console.log(`power: ${gameData.power} stats: ${gameData.stats}`);
+
+            await gameData.save();
+
+            return 200;
+
+        } catch (e) {
+            
+            throw new Error(e.message);
+        }
+        
+
     }
     
 }
