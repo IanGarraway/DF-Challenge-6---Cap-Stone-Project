@@ -39,14 +39,11 @@ const GameScreen = ({setBackGroundImg}) => {
     
 
     const getData = async (trys = 0) => {
-        let response;
+        let response;        
         try {
             response = await GameService.getData();
             if (response.status === 200) {
-                setGameData(response.data);
-
-                await new Promise(resolve => setTimeout(resolve, 5000));
-                getData();
+                setGameData(response.data);                
             }
             if (response === 500) {
                 if (trys < 10) {
@@ -61,11 +58,18 @@ const GameScreen = ({setBackGroundImg}) => {
         } catch (e) {
             console.error(e.message);
         }
-    }    
+    }
+    
+    const loopEffect = async () => {
+        getData();
+        await new Promise(resolve => setTimeout(resolve, 3000));
+        
+        loopEffect();                
+    }
 
     useEffect(() => {
         
-        getData();
+       loopEffect();
     }, []);
 
     if (!gameData) {
