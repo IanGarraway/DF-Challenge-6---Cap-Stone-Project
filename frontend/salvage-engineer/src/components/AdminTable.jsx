@@ -9,7 +9,9 @@ const AdminTable = ({accounts, getAccounts}) => {
     let accountLines = [];
 
     accounts.forEach(account => {
-        accountLines.push(<AdminTableLine key={account._id} account={account} getAccounts={getAccounts} />)
+        accountLines.push(<AdminTableLine key={account._id}
+            account={account}
+            getAccounts={getAccounts} />)
         
     });
 

@@ -173,6 +173,8 @@ describe("Admin page tests", () => {
             expect(deleteButton).not.toBeDisabled();
         })
 
+        
+
         test("change passwords button exists enabled by clicking the switch", async () => {
             //Arrange
             const testData = [{
@@ -267,6 +269,7 @@ describe("Admin page tests", () => {
                     },
                     { withCredentials: true }
                 );
+                expect(screen.getByTestId('infoTab')).toHaveClass('active');
             });
         })
 
@@ -325,9 +328,103 @@ describe("Admin page tests", () => {
 
                 expect(screen.getByText("invalid account")).toBeInTheDocument();
             });
+        });
+
+        test("Delete button sends a request to the admin delete route and on a 200 ", async () => {
+            //Arrange
+            const testData = [{
+                "_id": 2,
+                "userName": "user2",
+                "email": "user2@example.com",
+                "name": "User 2",
+                "admin": false
+            }];
+
+            const mockAccountId = 2
+
+            const mockResponsePayload = { status: 200, body: { message: "account deleted" } }
+
+            axios.post.mockResolvedValue(mockResponsePayload);
+
+            //Act
+            render(<AdminTable accounts={testData} />,
+                { wrapper: MemoryRouter }
+                       
+            )
+
+            const deleteSwitch = screen.getByTestId("adminDeleteSwitch");
+            const deleteButton = screen.getByTestId("adminDeleteButton");
+
+            expect(deleteButton).toBeDisabled();
+
+            await userEvent.click(deleteSwitch);
+            expect(deleteButton).not.toBeDisabled();
+
+            await userEvent.click(deleteButton);
+            
+            //Assert
+
+            await waitFor(() => {
+            
+                expect(axios.post).toHaveBeenCalledWith(
+                    'http://localhost:3000/admin/delete',
+                    {
+                        "accountId": mockAccountId,                        
+                    },
+                    { withCredentials: true }
+                );
+                expect(screen.getByTestId('infoTab')).toHaveClass('active');
+            });
+        })
+
+        test("Delete button sends a request to the admin delete route and on a 200 ", async () => {
+            //Arrange
+            const testData = [{
+                "_id": 2,
+                "userName": "user2",
+                "email": "user2@example.com",
+                "name": "User 2",
+                "admin": false
+            }];
+
+            const mockAccountId = 2
+
+            const mockResponsePayload = { status: 200, body: { message: "account promoted" } }
+
+            axios.post.mockResolvedValue(mockResponsePayload);
+
+            //Act
+            render(<AdminTable accounts={testData} />,
+                { wrapper: MemoryRouter }
+                       
+            )
+
+            const promoteSwitch = screen.getByTestId("promoteSwitch");
+            const promoteButton = screen.getByTestId("promoteButton");
+
+            expect(promoteButton).toBeDisabled();
+
+            await userEvent.click(promoteSwitch);
+            expect(promoteButton).not.toBeDisabled();
+
+            await userEvent.click(promoteButton);
+            
+            //Assert
+
+            await waitFor(() => {
+            
+                expect(axios.post).toHaveBeenCalledWith(
+                    'http://localhost:3000/admin/promote',
+                    {
+                        "accountId": mockAccountId,                        
+                    },
+                    { withCredentials: true }
+                );
+                expect(screen.getByTestId('infoTab')).toHaveClass('active');
+            });
         })
         
     })
 
 
-});
+})

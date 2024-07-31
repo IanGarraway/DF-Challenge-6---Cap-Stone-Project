@@ -25,14 +25,14 @@ const AdminTableLine = ({ account, getAccounts }) => {
                   className='mb-3'
                   onSelect={(selectedTab)=> setActiveTab(selectedTab)}
               >
-                  <Tab eventKey="info" title="Info">
+                  <Tab eventKey="info" title="Info" data-testid={"infoTab"}>
                       <AdminTableInfo account={account} />
                   </Tab>
                   <Tab eventKey="delete" title="Delete" >
-                      <AdminDelete key={account._id} account={account} getAccounts={getAccounts} setActiveTab={setActiveTab} />
+                      <AdminDelete key={account._id} account={account} getAccounts={getAccounts} setActiveTab={setActiveTab}  />
                   </Tab>
                   <Tab eventKey="promote" title="Promote" disabled={account.admin} data-testid={"promoteTab"} >
-                      <AdminPromote key={account._id} account={account} getAccounts={getAccounts} setActiveTab={setActiveTab} />
+                      <AdminPromote key={account._id} account={account} getAccounts={getAccounts} setActiveTab={setActiveTab}  />
                   </Tab>
                   <Tab eventKey="change" title="Change" data-testid={"changeTab"} >
                       <AdminChangePassword key={account._id} account={account} getAccounts={getAccounts} setActiveTab={setActiveTab} />

@@ -1,6 +1,4 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/nadfrmGX)
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-718a45dd9cf7e7f842a935f5ebbe5719a5e09af4491e668f4dbf3b35d5cca122.svg)](https://classroom.github.com/online_ide?assignment_repo_id=15250725&assignment_repo_type=AssignmentRepo)
-# Challenge 6 - Full-Stack Capstone Project
+# Challenge 6 - Full-Stack Capstone Project - Salvage Engineer
 
 ```ascii
   ..,.oooE777999V(;
@@ -34,11 +32,13 @@
 
 ## Introduction
 
-The Full-Stack Capstone Project is in 2 parts.  First you must submit a proposal for your project idea.  Once your proposal is approved, you will build your project, submit the code and present your project to an audience on the final day of the Academy.  The context of the project is for you to decide and the ultimate scope of it is also up to you.  However, there are some requirements that your proposal and project must meet to be approved and to pass this final assessment.
+In this repo you will find the code developed for the final challenge on the Digital Futures Software Engineering program. In this readme file you will find the requirements set for the project, an overview of the project I designed and built to meet those requirements, an overview of the technology I used, and a breakdown of where I intend to take this project post academy.
 
-## Non-negotiable Requirements
+The Full-Stack Capstone Project was in 2 parts.  First I needed to submit a proposal for my project idea.  Once this proposal was approved, I built the project and submitted the code to a hand in before presenting the project to an audience on the final day of the Academy.  The context of the project was for me to decide and the ultimate scope of it was also up to me.  However, there were some requirements that my proposal and project had to meet to be approved and to allow me to pass this final assessment.
 
-The following requirements must be met by your full-stack application and your proposal should clearly demonstrate how the project will meet them:
+### Non-negotiable Requirements
+
+The following requirements had to be met by my full-stack application and my proposal should clearly demonstrate how the project will meet them:
 
 1) **N-Tier Architecture:** Your application must have a clear separation of concerns between the client, server and database.  This means that you should have a client-side application that communicates with a server-side application that communicates with a database.  You may choose to implement a Microservice Architecture if your application requires more that one server-side application.
 2) **RESTful API:** Your server-side application must expose a *RESTful API* that the client-side application can consume.  This should be made in the *Model-Controller-Service* pattern.  This should be a ***Node.js/Express*** application.  You may also use your services to proxy other third-party APIs if you wish.
@@ -54,47 +54,88 @@ The following requirements must be met by your full-stack application and your p
 
 ---
 
-## Part 1: Proposal
+## Project Overview
 
-### Proposal Requirements
+One of the instructions was to pick something we could be passionate about, and one of my hobbies is gaming. Mobile gaming has created a few new genres, and one of which is the Idle Game, something I thought would fit quite well with a RESTful API. I've played a few fantasy ones with friends and thought a scifi based one would make for an interesting project.
 
-Your proposal should be a markdown file called `proposal` that is added to the `documentation/proposal` folder in this repository.  It should include the following sections:
+### The initial approach
 
-1) **Title:** The title of your project.
-2) **Description:** A brief description of your project (the **WHAT!**)
-3) **Context:** The context of your project.  This should include the problem that your project is solving (the **WHY!**) and the intended users of your project (the **WHO!**).
-4) **Features**: A list of features that your project will have (the **HOW!**).  This should include the CRUD operations that your project will implement.
-5) **User Interface**: A description of the user interface of your project.  This should include a wireframe of your project.
-6) **Architecture**: A description of the architecture of your project.  This should include a diagram of the architecture of your project.
-7) **RESTful Routing**: A list of the RESTful routes that your project will have, including the HTTP method, any headers and payloads expected in the request and the response that will be sent.
-8) **Technologies**: A list of the technologies that you will use in your project, including external dependencies and testing tools.
-9) **Deployment**: A description of how you will deploy your project, including the cloud service(s) that you will use and any environment variables needed.
+From the requirements, I knew the application needed to have a database, needed to have a single page application, and use a RESTful API in it's design. With clear separation between these three things. This meant that while I had considered creating the front end as an APP in android studio, that it would have to be a React website. I also considered using C# to develop the backend server, but lack of experience in using the language as a server would impact what I would be able to create in the window before it needed to be submitted. This led me to decide that the tech stack I would use for this project would be:
 
-### Proposal Submission
+- Front End: React website, hosted on Netlify
+- Back End: NodeJS Express server, hosted on Render
+- Database: MongoDB, hosted on Mongo's Atlas Service
 
-Your proposal should be submitted as a pull request to the repository titled `[Your Initials]-Proposal: [Your Project Title]`.  In addition to this, you should submit a link to the pull request in Noodle.  You must not start work on the actual code for your project until your proposal has been approved by your trainer. This will be done through a short 1-2-1 with your trainer where you will discuss your proposal and answer any questions that they may have.
+Once this was decided, I started off thinking about what features I wanted the application to have. I knew I would need account creation, log in, log out, change password, and account deletion. I used Miro to start breaking down what the game would have in it.
 
----
+eventually those ideas would look like this:
 
-## Part 2: Application
+![Features](docs/images/features.png)
 
-### Application Requirements
+which formed the basis for this list:
+- users to be able to move equipment from storage to a Slot
+- users able to move equipment from a slot to storage
+- equipment will have a type that will only fit in one slot
+- equipment will generated randomly, with the quality determined by the equipment, upgrades and player position
+- Players will be able to break down equipment for the raw resources
+- Players will be able to assign themselves to a role to upgrade the effectiveness of that location
+- Players will be able to Craft upgrades which give improvements to aspects, upgrading the claw for example will allow more resources to fit into the hopper. upgrading the scanner will mean salvageable parts would get picked up earlier, so they are less damaged and therefore better quality. etc. upgrade the storage area to store more components
 
-You should produce the application as per the proposal you have made, sticking to the agreed scope.  However, it may become apparent during the development of the application that the actual features of the application may need to be adjusted.  THIS IS FINE!  Your project needs to stay within the scope of technology and outlined requirements, but as long as you document the changes that you have made and, more importantly, WHY you have made them, then this is acceptable.  For example, if you find that you need a different service or route within a service to increase the scalability or readability of your code, then plan out the changes by producing the relevant routing diagrams, domain models and test plan and implement them.  Similarly, for any User Interface changes, produce the wireframes and update the component hierarchy and state diagrams.
-
-Your application should be housed in this Mono-repo - you can deploy specific folders to different cloud services through appropriate configuration.  The User Interface should be a single React application in its own folder, any services should be created in their own folders.  Remember that the deployment service used should be ***free*** and should be able to accept sensitive information such as *API keys* and database URI and user information.
-
-### Application Submission
-
-Your application should be submitted as a pull request to the repository titled `[Your Initials]-Application: [Your Project Title]`.  In addition to this, you should submit a link to the pull request in Noodle.  You should also provide a link to your deployed application in the Noodle submission.  You must also provide a link to your documentation in the pull request.
+from these I was able to create the wireframes and initial routes which fed into the proposal.
 
 ---
 
-## Assessment
+### Part 1: Proposal
 
-Unlike the previous challenges, you will present your project for assessment in the final days of the Academy.  During this you will be expected to run a "Sprint Review" where you will demonstrate the project working in the cloud.  You will also be expected to run a "Sprint Retrospective" where you will discuss what went well, what didn't go well and what you would do differently next time.  You should demonstrate the testing of your application and show the coverage reports.  To conclude your presentation you should discuss the future development of the project and how you would improve it given more time.  
+you can find a copy of the proposal [here](/docs/proposal/proposal.md)
 
-You will be given 10 minutes for your presentation, with a 5 minute buffer for questions from your trainer, other stakeholders and your peers.  You will be assessed on the following criteria:
+---
+
+### Part 2: Developing the Application
+
+Once my proposal had been accepted, my next step was to break down the problem into the user stories I would need.
+
+![Kanban Board](docs/planning/Images/KanbanBoardStart.png)
+
+which then fed into creating the routing diagrams for the routes I knew I would need.
+
+![Routing diagram example](docs/planning/Images/routing%20getdata.png)
+
+Next I applied thinking in react to break down my wireframe diagrams into component hierarchies, though in hindsight these only really scratched the surface of what i would need.
+
+![Admin wireframe](docs/planning/Images/component%20admin%20wireframe.png)
+![Component hierarchy example](docs/planning/Images/component%20admin.png)
+
+#### Accounts Routes
+
+Once I had these down, I next turned to prioritising the order of development.  I decided to create my application in slices, starting with the front end components, and service and then the back end service and route. To meet the requirements of authentication and authorisation, as well as saving the users data, I first started with the Accounts routes. Account creation initially, and then logging in. In research for a previous challenge, I had learnt how to use HTTP only cookies as a securer way to handle authentication tokens than to write the code to store them in local storage and transmit them. As this seemed like a pretty strong and reliable method to use, I chose to reuse this system. When the user logs in, a JsonWebToken is created and stored in a http only cookie and sent to the user. Both cookie and Token have a life of only 24 hours. There are a few ways which could strengthen this, such as recording the origin of the user in the cookie, but I felt were unnecessary given the nature of the application.
+
+For security purposes, I also from the get go used Bcrypt to hash the passwords, so nothing was being stored in a plain text format.
+
+Once users had the ability to create an account and Log into it, the next step was to create the account management page. Giving users the chance to change their password, or if they so desire delete their accounts.
+
+#### Admin Routes
+
+After creating the basic account routes, I moved onto the admin routes. Creating the page and then the routes themselves to allow an admin user to delete accounts, change passwords, and promote them to admin.
+
+#### Game Routes
+
+Once the account and admin routes were complete, I then started to work on the actual game itself. The first part of this was the creation of the get game data route. This route doesn't just get the players data from the database, it also checks how much time it has been since the last time parts and resources have been generated, and generates them based on that time frame. It then updates the database and send the data to the player, which could then be displayed on the front end.  In my original idea for the game, there was going to be a database of parts which could be drawn from, when I started thinking about how to actually implement this, I thought it would be more interesting if these parts could be randomly generated, with the same part potentially being better or worse to simulate what finding these parts on a scrap planet might resemble. In hindsight, this was a mistake. The code for this generation takes up around a 1/4 of the server code, and resulted in several issues.
+
+- The first generation of the code resulted in exponential growth in the components to the point the numbers were the hundreds of thousands within a relatively small time period.
+- I also made the mistake of not considering that an object passed in from the user couldn't be directly compared to an object sent by the database. This resulted in me having to write a custom linear search which also compared the property fields to make sure what the user had sent matched what the database said they had.
+- There was no easy way to differentiate between the different categories of part.
+- This method of generation won't be as easily scaled. Short of making the potential numbers bigger, moving into different zones doesn't offer an easy way to change the nature of the parts being generated...at least not without a large overhaul of the generation code.
+  
+The routes for swapping parts and setting power settings followed relatively quickly after the get data one, I made the decision to not trust the data from the user, in part swapping and destruction, it is used only to locate the part in the players part storage, if a matching part is not located then it can't be swapped into the slot. This should stop players from sending fake parts. The power management route also confirms the players power selection choice are valid before applying it to the game data and allowing it's values to impact on resource generation.  
+
+### Reflection
+
+In truth, I was somewhat naive in how much I would be able to achieve in the time period we had set for this project. My initial 22 stories needed to be expanded to 26 to cover some of the things I had missed in my initial deliberations but needed to be included to meet my intended minimum viable product. Of these I was able to complete 24 of them, but required a lot more time than I had originally envisioned it taking. I am glad though I took the approach to slice my project up and work on the front end to back end and make sure each part was working before moving onto the next one.
+
+#### Testing
+
+I tried to apply a test driven approach to my development, though i did find it a lot easier to do with the back end than the front. Front end testing is an area I need to apply growth to. It took me some time before I was able to get my head around some of the concepts behind testing interfaces, but by the end of the project I was starting to get the hang of it.
 
 1) **Proposal:** Did you meet the requirements of the proposal?  Did you stick to the agreed scope of the project?
 2) **Architecture:** Did you implement a clear separation of concerns between the client, server and database?  Did you use the Model-Controller-Service pattern for your server-side application?

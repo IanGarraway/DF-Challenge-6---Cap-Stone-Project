@@ -12,7 +12,7 @@ function AdminDelete({account, getAccounts, setActiveTab}) {
   if (deleted) {
     return (
       <div className='d-grid gap-2'>
-        Promoted
+        Deleted
       </div>
     )
   }
