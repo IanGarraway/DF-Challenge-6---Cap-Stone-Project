@@ -101,18 +101,22 @@ which then fed into creating the routing diagrams for the routes I knew I would 
 
 ![Routing diagram example](docs/planning/Images/routing%20getdata.png)
 
+routing diagrams can be found in [here](/docs/planning/routingdiagrams.md)
+
 Next I applied thinking in react to break down my wireframe diagrams into component hierarchies, though in hindsight these only really scratched the surface of what i would need.
 
 ![Admin wireframe](docs/planning/Images/component%20admin%20wireframe.png)
 ![Component hierarchy example](docs/planning/Images/component%20admin.png)
 
+[Wireframes](/docs/planning/wireframes.md) and [Component Hierarchies](/docs/planning/component%20diagrams.md)
+
 #### Accounts Routes
 
-Once I had these down, I next turned to prioritising the order of development.  I decided to create my application in slices, starting with the front end components, and service and then the back end service and route. To meet the requirements of authentication and authorisation, as well as saving the users data, I first started with the Accounts routes. Account creation initially, and then logging in. In research for a previous challenge, I had learnt how to use HTTP only cookies as a securer way to handle authentication tokens than to write the code to store them in local storage and transmit them. As this seemed like a pretty strong and reliable method to use, I chose to reuse this system. When the user logs in, a JsonWebToken is created and stored in a http only cookie and sent to the user. Both cookie and Token have a life of only 24 hours. There are a few ways which could strengthen this, such as recording the origin of the user in the cookie, but I felt were unnecessary given the nature of the application.
+Once I had these down, I next turned to prioritising the order of development.  I decided to create my application in slices, starting with the front end components and front end service and then the back end Route and service. To meet the requirements of authentication and authorisation, as well as saving the users data, I first started with the Accounts routes. Account creation initially, and then logging in. In research for a previous challenge, I had learnt how to use HTTP only cookies as a securer way to handle authentication tokens than to write the code to store them in local storage and transmit them. As this seemed like a pretty strong and reliable method to use, I chose to reuse this system. When the user logs in, a JsonWebToken is created and stored in a http only cookie and sent to the user. Both cookie and Token have a life of only 24 hours. There are a few ways which could strengthen this, such as recording the origin of the user in the cookie, but I felt were unnecessary given the nature of the application.
 
-For security purposes, I also from the get go used Bcrypt to hash the passwords, so nothing was being stored in a plain text format.
+For security purposes, I also, from the get go, used Bcrypt to hash the passwords, so nothing was being stored in a plain text format on the database.
 
-Once users had the ability to create an account and Log into it, the next step was to create the account management page. Giving users the chance to change their password, or if they so desire delete their accounts.
+Once users had the ability to create an account and Log into it, the next step was to create the account management page. Giving users the chance to change their password, or if they so desire, delete their accounts.
 
 #### Admin Routes
 
@@ -129,31 +133,28 @@ Once the account and admin routes were complete, I then started to work on the a
   
 The routes for swapping parts and setting power settings followed relatively quickly after the get data one, I made the decision to not trust the data from the user, in part swapping and destruction, it is used only to locate the part in the players part storage, if a matching part is not located then it can't be swapped into the slot. This should stop players from sending fake parts. The power management route also confirms the players power selection choice are valid before applying it to the game data and allowing it's values to impact on resource generation.  
 
-### Reflection
+### Testing
 
-In truth, I was somewhat naive in how much I would be able to achieve in the time period we had set for this project. My initial 22 stories needed to be expanded to 26 to cover some of the things I had missed in my initial deliberations but needed to be included to meet my intended minimum viable product. Of these I was able to complete 24 of them, but required a lot more time than I had originally envisioned it taking. I am glad though I took the approach to slice my project up and work on the front end to back end and make sure each part was working before moving onto the next one.
+I tried to apply a test driven approach to my development. I did find it a lot easier to do this with the back end than the front. Front end testing is an area I need to work on before it comes naturally to my way of thinking. It took me some time before I was able to get my head around some of the concepts behind testing interfaces, but by the end of the project I believe I was starting to get the hang of it.
 
-#### Testing
+On the back end, I used a combination of Chai, Sinon and Supertest to test and mock aspects of my program. My biggest challenge came from trying to successfully mock the random number generator to ensure the part generation algorithm worked as intended. my testing coverage indicates a 98.49% coverage.
 
-I tried to apply a test driven approach to my development, though i did find it a lot easier to do with the back end than the front. Front end testing is an area I need to apply growth to. It took me some time before I was able to get my head around some of the concepts behind testing interfaces, but by the end of the project I was starting to get the hang of it.
+On the front end, Vitest was combined with Jest and Testing library to mock user inputs and axios responses, resulting in a 94.41% coverage. While I am becoming more familiar with testing front ends, I found having a development version running on my second screen more beneficial for testing that components are in the right places, it did allow me to ensure changes to data were being handled as I intended them to be.
 
-1) **Proposal:** Did you meet the requirements of the proposal?  Did you stick to the agreed scope of the project?
-2) **Architecture:** Did you implement a clear separation of concerns between the client, server and database?  Did you use the Model-Controller-Service pattern for your server-side application?
-3) **RESTful API:** Did you expose a RESTful API that the client-side application could consume?  Did you implement CRUD operations?
-4) **Client-Side Application:** Did you build a Single Page Application that consumed the RESTful API?  Did you use React and build your own components?
-5) **User Interface:** Did you build a user interface that was easy to use and navigate?  Did you use a CSS framework to style your application?
-6) **Authentication:** Did you have a way for users to sign up, log in and log out?  Did you have a way to verify that a user was logged in?
-7) **Authorization:** Did you have a way to restrict access to certain parts of your application to only certain users?  Did you have at least 2 roles in your application?
-8) **Testing:** Did you have tests for the server-side and client-side applications?  Did you have at least 80% test coverage for both the server-side and client-side applications?
-9) **Deployment:** Did you deploy your application to a cloud service?  Did you provide a link to your deployed application in your proposal?
-10) **Documentation:** Did you produce documentation for your project that covered the design of the application, how to set up the application, how to run the tests and how to deploy the application?
-11) **Presentation:** Did you run a "Sprint Review" and "Sprint Retrospective" during your presentation?  Did you discuss the future development of the project?
-12) **Code Quality:** Did you write clean, readable and maintainable code?  Did you follow the best practices of the technologies you used?
-13) **Communication:** Did you communicate effectively with your trainer and other stakeholders?  Did you ask for help when you needed it?
-14) **Problem Solving:** Did you solve problems effectively and efficiently?  Did you use the resources available to you to solve problems?
-15) **Time Management:** Did you manage your time effectively?  Did you deliver the project on time and to the agreed scope?
-16) **Scope Management:** Did you manage the scope of the project effectively?  Did you make changes to the project that were necessary and documented them effectively?
+## Reflection
 
-These assessment points are broadly in-line with the Digital Futures Progression Management Frameworks used in previous challenges.
+In truth, I was somewhat naiv in how much I would be able to achieve in the time period we had set for this project. My initial 22 stories needed to be expanded to 26 to cover some of the things I had missed in my initial deliberations but needed to be included to meet my intended minimum viable product. Of these I was able to complete 24 of them, but required a lot more time than I had originally envisioned it taking. I am glad though I took the approach to slice my project up and work on the front end to back end and make sure each part was working before moving onto the next one.
 
----
+### Deployment
+
+In my proposal I had chosen to stick with the suggested deployment methods of Netlify for the front end and render for the back end. Largely because these offer a free service that seems to be quite stable. One of my largest problems would arise from this decision as it would make my authentication system not work. When I was running it locally the host and the client were both running on the same host. It didn't occur to me that I wouldn't just be able to just indicate who the front end and back end were located and it would be happy with that. The cookies I was using for authentication weren't being included, and so while a user could log in, none of the features behind the login were working correctly. The solution for this ended up with loosening the cookies same site restriction down from strict. A problem which should be fixed by ensuring the site and the back end are on the same domain.
+
+### Where to next?
+
+My original plan had some upgrade systems still outstanding and the routes to support them. The next stage after that was to start looking into having different zones for the player to travel to, with their own parts. I would also like to start adding more the game mechanics to it. Right now there is no challenges or risks for the player to overcome. A lot of this genre of game typically have some kind of enemy to fight. So it would be nice to look into some kind of weapon system which would give the player somewhere else to apply power as they level up. This would give them the challenge of judging how they wish to apply their power to maximise their progress. Failure might have them reverting to a different zone...maybe they need to overcome a boss to unlock a new place to scavenge from with different resources only available in certain places.
+
+An area I most need to improve upon in the existing code is a result of my largest mistake, the development of the part generation algorithm. At the moment, they system generates completely random parts based on the player's stats. I intend to change this to each zone having a list of parts which the stats will give varying access to. This was my original idea for the system, but i changed my mind when I started to think about how to implement it and thought the present system would give more variety and less predictability to the player. In hindsight though it will make scaling up the game and expanding the zones more complicated. It also would require a lot more code to give different zones their own parts lists.
+
+At the moment the admin tools are a part of the normal webpage, whose access is controlled by a user state and as part of the authorisation token on the back end. I have plans to create a Windows Application using C# which uses a login and offers access to the admin controls as a standalone program. As part of this I intend to expand the admin controls to give admins more control over the player accounts and review player data.
+
+Tutorials, there is no explanation or guide to assist a new user in their experience, and nothing which informs the player of the games narrative to explain why they do the thing they are doing. Introductory story and tracking if the player has completed it will need to be added to account log in. This could potentially be put on it's own page to allow players to re-experience any of the games narrative and review the tutorial if they come back to the game after an absence. 
