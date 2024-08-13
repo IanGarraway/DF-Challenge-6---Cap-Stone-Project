@@ -139,11 +139,11 @@ I tried to apply a test driven approach to my development. I did find it a lot e
 
 On the back end, I used a combination of Chai, Sinon and Supertest to test and mock aspects of my program. My biggest challenge came from trying to successfully mock the random number generator to ensure the part generation algorithm worked as intended. my testing coverage indicates a 98.49% coverage.
 
-On the front end, Vitest was combined with Jest and Testing library to mock user inputs and axios responses, resulting in a 94.41% coverage. While I am becoming more familiar with testing front ends, I found having a development version running on my second screen more beneficial for testing that components are in the right places, it did allow me to ensure changes to data were being handled as I intended them to be.
+On the front end, Vitest was combined with Jest and Testing library to mock user inputs and axios responses, resulting in a 94.41% coverage. While I am becoming more familiar with testing front ends, I found having a development version running on my second screen more beneficial for testing that components are in the right places. The automated testing did allow me to ensure changes to data were being handled as I intended them to be faster than my manual testing would have allowed.
 
 ## Reflection
 
-In truth, I was somewhat naiv in how much I would be able to achieve in the time period we had set for this project. My initial 22 stories needed to be expanded to 26 to cover some of the things I had missed in my initial deliberations but needed to be included to meet my intended minimum viable product. Of these I was able to complete 24 of them, but required a lot more time than I had originally envisioned it taking. I am glad though I took the approach to slice my project up and work on the front end to back end and make sure each part was working before moving onto the next one.
+In truth, I was somewhat naive in how much I would be able to achieve in the time period we had set for this project. My initial 22 stories needed to be expanded to 26 to cover some of the things I had missed in my initial deliberations but needed to be included to meet my intended minimum viable product. Of these I was able to complete 24 of them, but required a lot more time than I had originally envisioned it taking. I am glad though I took the approach to slice my project up and work on the front end to back end and make sure each part was working before moving onto the next one.
 
 ### Deployment
 
