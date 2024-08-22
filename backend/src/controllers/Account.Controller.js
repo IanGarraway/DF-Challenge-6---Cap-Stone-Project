@@ -43,7 +43,7 @@ export default class AccountController{
         }
     }
 
-    login = async (req, res) => {        
+    login = async (req, res) => { 
         try {
             
             let user = await this.#accountService.login(req.body);           

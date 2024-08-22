@@ -28,12 +28,44 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            welcomeMessage = new Label();
+            allAccountsButton = new Button();
+            SuspendLayout();
+            // 
+            // welcomeMessage
+            // 
+            welcomeMessage.Location = new Point(134, 9);
+            welcomeMessage.Name = "welcomeMessage";
+            welcomeMessage.Size = new Size(553, 56);
+            welcomeMessage.TabIndex = 0;
+            welcomeMessage.Text = "Welcome User";
+            welcomeMessage.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // allAccountsButton
+            // 
+            allAccountsButton.Location = new Point(77, 121);
+            allAccountsButton.Name = "allAccountsButton";
+            allAccountsButton.Size = new Size(210, 102);
+            allAccountsButton.TabIndex = 1;
+            allAccountsButton.Text = "See All Accounts";
+            allAccountsButton.UseVisualStyleBackColor = true;
+            // 
+            // Form1
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(allAccountsButton);
+            Controls.Add(welcomeMessage);
+            Enabled = false;
+            Name = "Form1";
+            Text = "Salvage Engineer Admin Tool";
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private Label welcomeMessage;
+        private Button allAccountsButton;
     }
 }
