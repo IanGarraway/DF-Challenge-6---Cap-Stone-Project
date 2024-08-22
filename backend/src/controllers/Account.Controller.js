@@ -51,7 +51,7 @@ export default class AccountController{
             return res.status(200)
                 .cookie('token', user.Token, {
                     httpOnly: true,
-                    secure: SECURE, //needs to be true if on https
+                    //secure: SECURE, //needs to be true if on https
                     sameSite: 'Strict',
                     maxAge: 86400000 //24 hours in milliseconds 
                 })

@@ -14,7 +14,7 @@ namespace SE_Admin_App
 
             user = loginBox.GetUser();
 
-            welcomeMessage.Text = "Welcome "+ user.GetUserName();
+            welcomeMessage.Text = "Welcome " + user.GetUserName();
         }
        
     }

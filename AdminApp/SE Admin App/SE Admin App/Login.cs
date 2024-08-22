@@ -62,7 +62,7 @@ namespace SE_Admin_App
                             {
                                 if (cookie.Name == "token")
                                 {
-                                    // Access the token here
+                                    // Access the token here                                    
                                     token = cookie.Value;
                                     // Store token securely or use it for future API requests
                                 }

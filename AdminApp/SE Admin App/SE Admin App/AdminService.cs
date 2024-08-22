@@ -12,9 +12,10 @@ namespace SE_Admin_App
 {
     internal static class AdminService
     {
-        static HttpClient client = new HttpClient();
+        
         static CookieContainer cookieContainer = new CookieContainer();
         static HttpClientHandler handler = new HttpClientHandler() { CookieContainer = cookieContainer };
+        static HttpClient client = new HttpClient(handler);
 
         public static async Task<HttpResponseMessage> Login (string username, string password)
         {
@@ -40,7 +41,7 @@ namespace SE_Admin_App
         }
 
         public static IEnumerable<Cookie> GetCookies(Uri uri)
-        {
+        {            
             return cookieContainer.GetCookies(uri).Cast<Cookie>();
         }
     }
