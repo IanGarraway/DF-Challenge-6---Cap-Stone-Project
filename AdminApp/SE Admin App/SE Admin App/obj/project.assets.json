@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\DF SE course code\\software-engineering-fundamentals\\Challenges\\Challenge 6\\challenge-6-full-stack-capstone-project-IanGarraway\\AdminApp\\SE Admin App\\SE Admin App\\SE Admin App.csproj",
+      "projectUniqueName": "E:\\programming\\challenge-6-full-stack-capstone-project-IanGarraway\\AdminApp\\SE Admin App\\SE Admin App\\SE Admin App.csproj",
       "projectName": "SE Admin App",
-      "projectPath": "E:\\DF SE course code\\software-engineering-fundamentals\\Challenges\\Challenge 6\\challenge-6-full-stack-capstone-project-IanGarraway\\AdminApp\\SE Admin App\\SE Admin App\\SE Admin App.csproj",
+      "projectPath": "E:\\programming\\challenge-6-full-stack-capstone-project-IanGarraway\\AdminApp\\SE Admin App\\SE Admin App\\SE Admin App.csproj",
       "packagesPath": "C:\\Users\\debbi\\.nuget\\packages\\",
-      "outputPath": "E:\\DF SE course code\\software-engineering-fundamentals\\Challenges\\Challenge 6\\challenge-6-full-stack-capstone-project-IanGarraway\\AdminApp\\SE Admin App\\SE Admin App\\obj\\",
+      "outputPath": "E:\\programming\\challenge-6-full-stack-capstone-project-IanGarraway\\AdminApp\\SE Admin App\\SE Admin App\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "SE Admin App/1.0.0": {
+        "runtime": {
+          "SE Admin App.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "SE Admin App/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

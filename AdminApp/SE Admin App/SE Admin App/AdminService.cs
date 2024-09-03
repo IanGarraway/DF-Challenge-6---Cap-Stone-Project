@@ -3,19 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http.Json;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
+
+
 namespace SE_Admin_App
 {
-    internal static class AdminService
+
+    public static class AdminService 
     {
         
-        static CookieContainer cookieContainer = new CookieContainer();
-        static HttpClientHandler handler = new HttpClientHandler() { CookieContainer = cookieContainer };
-        static HttpClient client = new HttpClient(handler);
+        static CookieContainer _cookieContainer = new CookieContainer();
+        static HttpClientHandler _handler = new HttpClientHandler() { CookieContainer = _cookieContainer };
+        static HttpClient _client = new HttpClient(_handler);
+
+        
+        //internal override methods for testing
+        public static void ConfigureForTesting(HttpClient client, CookieContainer cookieContainer)
+        {
+            _client = client;
+            _cookieContainer = cookieContainer;
+        }
 
         public static async Task<HttpResponseMessage> Login (string username, string password)
         {
@@ -28,7 +40,7 @@ namespace SE_Admin_App
             try
             {
 
-                HttpResponseMessage response = await client.PostAsync("http://127.0.0.1:4000/auth/login",
+                HttpResponseMessage response = await _client.PostAsync("http://127.0.0.1:4000/auth/login",
                     content);
 
                 return response;
@@ -42,7 +54,7 @@ namespace SE_Admin_App
 
         public static IEnumerable<Cookie> GetCookies(Uri uri)
         {            
-            return cookieContainer.GetCookies(uri).Cast<Cookie>();
+            return _cookieContainer.GetCookies(uri).Cast<Cookie>();
         }
     }
 }
