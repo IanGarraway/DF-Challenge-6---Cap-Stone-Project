@@ -157,4 +157,8 @@ An area I most need to improve upon in the existing code is a result of my large
 
 At the moment the admin tools are a part of the normal webpage, whose access is controlled by a user state and as part of the authorisation token on the back end. I have plans to create a Windows Application using C# which uses a login and offers access to the admin controls as a standalone program. As part of this I intend to expand the admin controls to give admins more control over the player accounts and review player data.
 
-Tutorials, there is no explanation or guide to assist a new user in their experience, and nothing which informs the player of the games narrative to explain why they do the thing they are doing. Introductory story and tracking if the player has completed it will need to be added to account log in. This could potentially be put on it's own page to allow players to re-experience any of the games narrative and review the tutorial if they come back to the game after an absence. 
+Tutorials, there is no explanation or guide to assist a new user in their experience, and nothing which informs the player of the games narrative to explain why they do the thing they are doing. Introductory story and tracking if the player has completed it will need to be added to account log in. This could potentially be put on it's own page to allow players to re-experience any of the games narrative and review the tutorial if they come back to the game after an absence.
+
+## Caution
+
+There are now some high severity vulnerabilities in the bcrypt module and mocha module. While the mocha module is testing and low priority, the bcrypt one needs updating and then fully testing before using this project.
